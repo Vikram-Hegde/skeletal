@@ -1,6 +1,6 @@
 # Elemental
 
-A design system.
+My design system.
 
 ## Development
 
