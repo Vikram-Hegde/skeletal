@@ -5,6 +5,7 @@ import "@fontsource-variable/geist";
 import "@fontsource-variable/jetbrains-mono";
 import { router } from "@/router";
 import { ThemeProvider } from "@/theme";
+import "@skeletal/index.css";
 import "@/docs.css";
 
 const rootElement = document.querySelector("#app");

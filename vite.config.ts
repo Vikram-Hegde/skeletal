@@ -16,6 +16,9 @@ export default defineConfig({
     }),
     react(),
   ],
+  build: {
+    cssTarget: "chrome130",
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./playground/src", import.meta.url)),
