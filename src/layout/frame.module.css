@@ -1,0 +1,22 @@
+@layer skeletal {
+  .frame {
+    aspect-ratio: var(--_frame-ratio, 16 / 9);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+
+  .frame > img,
+  .frame > video,
+  .frame > iframe {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .frame > * {
+    max-inline-size: 100%;
+    max-block-size: 100%;
+    overflow: auto;
+  }
+}

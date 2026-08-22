@@ -1,0 +1,21 @@
+@layer skeletal {
+  .box {
+    --_box-padding: 1.5rem;
+    --_box-border: 0;
+    --_box-bg: transparent;
+    --_box-color: inherit;
+    padding: var(--_box-padding);
+    border: var(--_box-border);
+    background-color: var(--_box-bg);
+    color: var(--_box-color);
+  }
+
+  .box[data-invert] {
+    --_box-bg: var(--sk-foreground);
+    --_box-color: var(--sk-background);
+    --_box-padding: 1.25rem;
+    background-color: var(--_box-bg);
+    color: var(--_box-color);
+    padding: var(--_box-padding);
+  }
+}

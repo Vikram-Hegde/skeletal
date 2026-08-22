@@ -1,0 +1,34 @@
+@layer skeletal {
+  .sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--_sidebar-space, 1rem);
+    align-items: var(--_sidebar-align, stretch);
+  }
+
+  .sidebar > :first-child {
+    flex-basis: var(--_sidebar-width, auto);
+    flex-grow: 1;
+  }
+
+  .sidebar > :last-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: var(--_sidebar-content-min, 50%);
+  }
+
+  .sidebar[data-side="right"] > :first-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: var(--_sidebar-content-min, 50%);
+  }
+
+  .sidebar[data-side="right"] > :last-child {
+    flex-basis: var(--_sidebar-width, auto);
+    flex-grow: 1;
+  }
+
+  .sidebar[data-no-stretch] {
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,24 @@
+@layer skeletal {
+  .cover {
+    display: flex;
+    flex-direction: column;
+    min-block-size: var(--_cover-min, 100svh);
+    padding: var(--_cover-space, 1rem);
+  }
+
+  .cover > * {
+    margin-block: var(--_cover-space, 1rem);
+  }
+
+  .cover > [data-cover-center] {
+    margin-block: auto;
+  }
+
+  .cover > :first-child:not([data-cover-center]) {
+    margin-block-start: 0;
+  }
+
+  .cover > :last-child:not([data-cover-center]) {
+    margin-block-end: 0;
+  }
+}

@@ -1,0 +1,7 @@
+@layer skeletal {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--_grid-min, 16rem), 1fr));
+    gap: var(--_grid-gap, 1rem);
+  }
+}

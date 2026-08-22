@@ -1,0 +1,149 @@
+@layer skeletal {
+  .dialog__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background-color: light-dark(oklch(0 0 0 / 40%), oklch(0 0 0 / 60%));
+    transition: opacity 200ms ease-out;
+
+    @supports (-webkit-touch-callout: none) {
+      position: absolute;
+    }
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .dialog__content {
+    position: relative;
+    margin: auto;
+    width: min(32rem, 100%);
+    max-height: calc(100dvh - 3rem);
+    overflow-y: auto;
+    padding: 1.5rem;
+    border: 1px solid var(--sk-border);
+    border-radius: var(--sk-radius);
+    background-color: var(--sk-popover);
+    color: var(--sk-popover-foreground);
+    box-shadow: var(--sk-shadow-md);
+    transition:
+      scale 200ms ease-out,
+      opacity 200ms ease-out;
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      scale: 0.98;
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    /* Below 48rem the dialog renders as a full-width bottom sheet: pinned to the
+     bottom edge, sliding up on open. Size modifiers are listed explicitly so
+     their width never wins over the sheet's 100%. */
+    @media (width < 48rem) {
+      &,
+      &.dialog__content--sm,
+      &.dialog__content--lg {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        max-height: min(85dvh, calc(100dvh - 2rem));
+        border-radius: calc(var(--sk-radius) + 0.5rem * (var(--sk-radius) / var(--sk-radius)))
+          calc(var(--sk-radius) + 0.5rem * (var(--sk-radius) / var(--sk-radius))) 0 0;
+        padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+        transform: translateY(0);
+        transition:
+          transform 220ms ease-out,
+          opacity 220ms ease-out;
+        will-change: transform;
+
+        &[data-starting-style],
+        &[data-ending-style] {
+          transform: translateY(100%);
+          opacity: 1;
+          scale: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
+      }
+    }
+  }
+
+  .dialog__content--sm {
+    width: min(24rem, 100%);
+  }
+
+  .dialog__content--lg {
+    width: min(44rem, 100%);
+  }
+
+  .dialog__title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--sk-foreground);
+  }
+
+  .dialog__description {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--sk-muted-foreground);
+  }
+
+  .dialog__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-inline: -1.5rem;
+    margin-bottom: -1.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--sk-muted);
+    border-top: 1px solid var(--sk-border);
+    border-radius: 0 0 var(--sk-radius) var(--sk-radius);
+
+    /* Bottom sheet: the sheet is full width but its content still carries the
+     `1.5rem` horizontal padding, so keep the horizontal bleed and only adjust
+     the vertical one — flush to the screen's bottom edge, extending the muted
+     surface into the safe area. */
+    @media (width < 48rem) {
+      margin-bottom: calc(-1.5rem - env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+      border-radius: 0;
+    }
+  }
+
+  .dialog__portal {
+    display: contents;
+  }
+
+  .dialog__viewport {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    overflow-y: auto;
+    padding: 1.5rem;
+
+    /* Below 48rem the dialog becomes a bottom sheet: pin the content to the
+     bottom edge instead of centering it. */
+    @media (width < 48rem) {
+      align-items: flex-end;
+      padding: 0;
+    }
+  }
+}

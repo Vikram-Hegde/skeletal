@@ -1,0 +1,178 @@
+@layer skeletal {
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0 1.25rem;
+    border: 1px solid var(--_button-border, transparent);
+    border-radius: var(--sk-radius);
+    background-color: var(--_button-bg);
+    color: var(--_button-fg);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color 150ms ease-out,
+      border-color 150ms ease-out,
+      color 150ms ease-out,
+      transform 150ms ease-out;
+
+    @media (hover: hover) {
+      &:hover:not([data-disabled]) {
+        background-color: var(--_button-hover-bg);
+      }
+    }
+
+    &:active:not([data-disabled]) {
+      transform: translateY(0.5px);
+    }
+
+    &[data-disabled],
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &.button--loading {
+      position: relative;
+      overflow: hidden;
+      cursor: progress;
+      opacity: 0.65;
+      pointer-events: auto;
+    }
+
+    /* Faint full-width track along the bottom edge. */
+    &.button--loading::before {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      inset-block-end: 0;
+      block-size: 0.1875rem;
+      background-color: var(--_button-fg);
+      opacity: 0.15;
+    }
+
+    /* Indeterminate progress "comet" sweeping along the bottom edge. The label
+     * and icons stay fully visible — the bar is the loading indicator, so
+     * nothing is hidden or swapped.
+     *
+     * Seamless-loop technique: the pseudo-element is 200% of the button width
+     * and its repeating gradient has a period of exactly one button width, so
+     * translating it by -50% (one full period) lands on a visually identical
+     * state. The loop point is therefore invisible — no snap. `linear` timing
+     * keeps the speed constant, and moving via `transform` keeps the animation
+     * on the compositor (no per-frame repaint). */
+    &.button--loading::after {
+      content: "";
+      position: absolute;
+      inset-block-end: 0;
+      block-size: 0.1875rem;
+      inline-size: 200%;
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 55%,
+        var(--_button-fg) 75%,
+        var(--_button-fg) 80%,
+        transparent 80%,
+        transparent 100%
+      );
+      background-size: 50% 100%;
+      animation: skeletal-button-progress var(--_button-progress-duration, 1.4s) linear infinite;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--sk-ring);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  /* One period of the repeating gradient = 50% of the element = 100% of the
+   * button, so shifting by +50% loops seamlessly (start state == end state).
+   * The direction sweeps left-to-right to read as forward progress. */
+  @keyframes skeletal-button-progress {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button.button--loading::after {
+      animation: none;
+      opacity: 0.4;
+    }
+  }
+
+  .button--primary {
+    --_button-bg: var(--sk-primary);
+    --_button-fg: var(--sk-primary-foreground);
+    --_button-border: transparent;
+    --_button-hover-bg: light-dark(
+      oklch(from var(--sk-primary) calc(l - 0.08) c h),
+      oklch(from var(--sk-primary) calc(l + 0.08) c h)
+    );
+  }
+
+  .button--secondary {
+    --_button-bg: var(--sk-secondary);
+    --_button-fg: var(--sk-secondary-foreground);
+    --_button-border: transparent;
+    --_button-hover-bg: light-dark(
+      oklch(from var(--sk-secondary) calc(l - 0.08) c h),
+      oklch(from var(--sk-secondary) calc(l + 0.08) c h)
+    );
+  }
+
+  .button--outline {
+    --_button-bg: transparent;
+    --_button-fg: var(--sk-foreground);
+    --_button-border: var(--sk-border);
+    --_button-hover-bg: var(--sk-muted);
+  }
+
+  .button--ghost {
+    --_button-bg: transparent;
+    --_button-fg: var(--sk-foreground);
+    --_button-border: transparent;
+    --_button-hover-bg: var(--sk-muted);
+  }
+
+  .button--destructive {
+    --_button-bg: var(--sk-destructive);
+    --_button-fg: var(--sk-destructive-foreground);
+    --_button-border: transparent;
+    --_button-hover-bg: light-dark(
+      oklch(from var(--sk-destructive) calc(l - 0.08) c h),
+      oklch(from var(--sk-destructive) calc(l + 0.08) c h)
+    );
+  }
+
+  .button--sm {
+    min-height: 2rem;
+    padding: 0 0.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .button--lg {
+    min-height: 3rem;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+  }
+
+  .button--full {
+    width: 100%;
+  }
+}

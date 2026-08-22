@@ -1,0 +1,12 @@
+@layer skeletal {
+  .stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--_stack-space, 1.5rem);
+  }
+
+  .stack--fill {
+    height: 100%;
+  }
+}

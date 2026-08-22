@@ -1,0 +1,9 @@
+@layer skeletal {
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: var(--_cluster-justify, flex-start);
+    align-items: var(--_cluster-align, center);
+    gap: var(--_cluster-gap, 1rem);
+  }
+}

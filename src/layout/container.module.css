@@ -1,0 +1,7 @@
+@layer skeletal {
+  .container {
+    max-inline-size: var(--_container-max, 60rem);
+    margin-inline: auto;
+    padding-inline: var(--_container-padding, 1rem);
+  }
+}

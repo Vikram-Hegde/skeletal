@@ -1,0 +1,54 @@
+@layer skeletal {
+  .spinner {
+    --_spinner-size: 1em;
+    --_spinner-ring: 0.1875em;
+
+    inline-size: var(--_spinner-size);
+    block-size: var(--_spinner-size);
+    flex-shrink: 0;
+    display: inline-block;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 90deg,
+      transparent 0deg,
+      transparent 140deg,
+      currentColor 140deg,
+      currentColor 360deg
+    );
+    -webkit-mask: radial-gradient(
+      farthest-side,
+      transparent calc(100% - var(--_spinner-ring)),
+      #000 calc(100% - var(--_spinner-ring))
+    );
+    mask: radial-gradient(
+      farthest-side,
+      transparent calc(100% - var(--_spinner-ring)),
+      #000 calc(100% - var(--_spinner-ring))
+    );
+    animation: skeletal-spinner-rotate 700ms linear infinite;
+  }
+
+  .spinner__label {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @keyframes skeletal-spinner-rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spinner {
+      animation-duration: 1.5s;
+    }
+  }
+}

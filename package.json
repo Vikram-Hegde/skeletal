@@ -1,0 +1,66 @@
+{
+  "name": "@vikram-hegde/elemental",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Elemental — a design system (forked from Skeletal)",
+  "author": "Vikram Hegde <vikramhegde1440@gmail.com>",
+  "license": "MIT",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json",
+    "./index.css": "./dist/index.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "gen:docs": "tsx scripts/gen-docs-api.mts",
+    "build": "pnpm run css:types && tsdown",
+    "dev": "tsdown --watch",
+    "play": "pnpm run gen:docs && vite",
+    "test": "vitest",
+    "typecheck": "pnpm run css:types && tsc --noEmit && tsc --noEmit -p playground/tsconfig.json",
+    "css:types": "tcm -p '**/*.module.css' src",
+    "css:types:watch": "tcm -p '**/*.module.css' src --watch",
+    "release": "bumpp",
+    "prepublishOnly": "pnpm run build"
+  },
+  "peerDependencies": {
+    "@phosphor-icons/react": "^2.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@tanstack/react-router": "^1.170.25",
+    "@tanstack/router-plugin": "^1.168.29",
+    "@tsconfig/strictest": "^2.0.8",
+    "@tsdown/css": "^0.22.14",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "@vitest/browser-playwright": "^4.1.10",
+    "bumpp": "^11.1.0",
+    "rangi": "^2.2.0",
+    "tsdown": "^0.22.5",
+    "tsx": "^4.19.0",
+    "typed-css-modules": "^0.9.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.4",
+    "vitest": "^4.1.10",
+    "vitest-browser-react": "^2.2.0"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.7.0",
+    "clsx": "^2.1.1"
+  },
+  "packageManager": "pnpm@11.17.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

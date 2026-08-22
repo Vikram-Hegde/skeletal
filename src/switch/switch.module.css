@@ -1,0 +1,88 @@
+@layer skeletal {
+  .switch__root {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    width: 2.25rem;
+    height: 1.25rem;
+    padding: 0.125rem;
+    margin: 0;
+    border: 1px solid var(--sk-border);
+    border-radius: var(--sk-radius);
+    background-color: var(--sk-background);
+    cursor: pointer;
+    transition:
+      background-color 150ms ease-out,
+      border-color 150ms ease-out;
+
+    &[data-checked] {
+      border-color: var(--sk-primary);
+      background-color: var(--sk-primary);
+    }
+
+    &[data-unchecked]:hover:not([data-disabled]) {
+      border-color: var(--sk-ring);
+    }
+
+    &[data-disabled] {
+      cursor: default;
+      opacity: 0.5;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--sk-ring);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .switch__thumb {
+    width: 0.875rem;
+    height: 0.875rem;
+    background-color: var(--sk-foreground);
+    transition:
+      translate 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color 150ms ease-out,
+      scale 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    &[data-unchecked] {
+      transform-origin: left center;
+    }
+
+    &[data-checked] {
+      translate: 1rem 0;
+      background-color: var(--sk-primary-foreground);
+      transform-origin: right center;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  /* Elastic hover affinity — only on devices with a fine pointer.
+     On hover the thumb stretches via scaleX toward the state it will
+     move to (rubber-band anticipation). Uses scale rather than width
+     so layout doesn't reflow. Origin is set per-state above so
+     hover-out doesn't snap. Respects reduced-motion. */
+  @media (hover: hover) and (pointer: fine) {
+    .switch__root:not([data-disabled]):hover .switch__thumb[data-unchecked],
+    .switch__root:not([data-disabled]):hover .switch__thumb[data-checked] {
+      scale: 1.12 1;
+    }
+
+    .switch__root:not([data-disabled]):active .switch__thumb[data-unchecked],
+    .switch__root:not([data-disabled]):active .switch__thumb[data-checked] {
+      scale: 1.22 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .switch__thumb {
+      transition: none;
+    }
+  }
+}

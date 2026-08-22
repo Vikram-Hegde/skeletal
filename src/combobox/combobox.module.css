@@ -1,0 +1,414 @@
+@layer skeletal {
+  .combobox__label {
+    margin-bottom: 0.5rem;
+    padding: 0.125rem 0;
+    color: var(--sk-foreground);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.25;
+    user-select: none;
+
+    &[data-disabled] {
+      color: var(--sk-muted-foreground);
+    }
+  }
+
+  /* Standalone (input-inside-popup) trigger: lays out the value left and the
+     disclosure icon right, like a Select trigger. Inside an input group the
+     trigger compacts to a centered icon button (see `.combobox__input-group`). */
+  .combobox__trigger {
+    justify-content: space-between;
+    padding-inline: 0.75rem;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .combobox__input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0 0.25rem 0 0.75rem;
+    border: 1px solid var(--sk-input);
+    border-radius: var(--sk-radius);
+    background-color: var(--sk-background);
+    color: var(--sk-foreground);
+    cursor: text;
+    transition:
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out;
+
+    /* Ring on keyboard-driven focus only: text inputs always match
+       `:focus-visible` (even pointer-focused), while the embedded Clear /
+       Trigger buttons match only via keyboard — pointer clicks on them don't
+       leave a phantom ring on the field. */
+    &:has(:focus-visible) {
+      border-color: var(--sk-ring);
+      box-shadow: 0 0 0 3px oklch(from var(--sk-ring) l c h / 30%);
+    }
+
+    &[data-disabled] {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    /* The trigger and clear are composed from `Button`; shrink them into
+       compact icon-sized controls that sit flush against the input's trailing
+       edge. Scoped to the group so a standalone trigger (input-inside-popup
+       pattern) keeps its normal `Button` sizing. */
+    & .combobox__trigger,
+    & .combobox__clear {
+      flex-shrink: 0;
+      justify-content: center;
+      min-height: 1.75rem;
+      width: 1.75rem;
+      padding: 0;
+      border-radius: var(--sk-radius);
+    }
+    /* The group already insets the leading edge (0.75rem); the input only pads
+       its trailing edge so text clears the clear/trigger buttons without
+       doubling up the left inset. */
+    & .combobox__input {
+      padding: 0.5rem 0.375rem 0.5rem 0;
+      /* The group's flex layout sizes the input; reset the standalone input's
+         full-width so it grows to fill the remaining space, not the popup. */
+      width: auto;
+      /* Undo the standalone (input-inside-popup) breakout — the negative
+         margins and divider rule belong to the popup pattern only. */
+      margin: 0;
+      border-bottom: none;
+    }
+  }
+
+  .combobox__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    /* Full inline gutter for the input-inside-popup (searchable select) pattern
+       so the text lines up with the list's content gutter; the input group
+       overrides this above since it owns the leading gutter itself. */
+    padding: 0.5rem 0.625rem;
+    /* The standalone (input-inside-popup) input must span the popup; browsers
+       otherwise size it to its placeholder (`size` default), leaving a narrow
+       field floating in a wide popup. The input group resets to `auto` since
+       its flex layout sizes it. */
+    width: 100%;
+    /* Span the popup end-to-end: cancel the popup's uniform `0.25rem` padding
+       on the top and sides (the same breakout `.combobox__separator` uses) so
+       the bottom rule reads as a true divider across the full popup width.
+       Text keeps its `0.625rem` gutter above, so it still aligns with items. */
+    margin: -0.25rem -0.25rem 0;
+    border: none;
+    border-bottom: 1px solid var(--sk-border);
+    background: transparent;
+    color: var(--sk-foreground);
+    font-family: inherit;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    outline: none;
+
+    &::placeholder {
+      color: var(--sk-muted-foreground);
+    }
+
+    @media (any-pointer: coarse) {
+      font-size: 1rem;
+    }
+  }
+
+  .combobox__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sk-muted-foreground);
+    transition: transform 150ms ease-out;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .combobox__trigger[data-popup-open] .combobox__icon {
+    transform: rotate(180deg);
+  }
+
+  .combobox__chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+  }
+
+  .combobox__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.25rem 0.125rem 0.5rem;
+    border-radius: var(--sk-radius);
+    background-color: var(--sk-secondary);
+    color: var(--sk-secondary-foreground);
+    font-size: 0.8125rem;
+    line-height: 1.25;
+    cursor: default;
+    user-select: none;
+    outline: none;
+
+    &[data-disabled] {
+      opacity: 0.5;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--sk-ring);
+      outline-offset: -2px;
+    }
+  }
+
+  .combobox__chip-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    padding: 0;
+    border: none;
+    border-radius: var(--sk-radius);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 100ms ease-out;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .combobox__portal {
+    display: contents;
+  }
+
+  .combobox__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background-color: light-dark(oklch(0 0 0 / 25%), oklch(0 0 0 / 50%));
+    transition: opacity 200ms ease-out;
+
+    @supports (-webkit-touch-callout: none) {
+      position: absolute;
+    }
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .combobox__positioner {
+    z-index: 50;
+    outline: none;
+  }
+
+  .combobox__popup {
+    position: relative;
+    z-index: 50;
+    min-width: var(--anchor-width);
+    padding: 0.25rem;
+    border: 1px solid var(--sk-border);
+    border-radius: var(--sk-radius);
+    background-color: var(--sk-popover);
+    color: var(--sk-popover-foreground);
+    box-shadow: var(--sk-shadow-md);
+    transform-origin: var(--transform-origin);
+    transition:
+      scale 150ms ease-out,
+      opacity 150ms ease-out;
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      scale: 0.98;
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  /* The list defines the shared two-column template: track 1 (1.25rem)
+     reserves the checkmark column for every row and track 2 (1fr) holds the
+     label. Items span both columns and restate the template explicitly (rather
+     than inheriting it via `subgrid`, which some engines don't honour when the
+     label is an anonymous grid item), so every row stays aligned whether or not
+     an indicator is mounted. Like Menu/Select, items own the inline gutter and
+     the popup's uniform `0.25rem` padding is the only inset — adding block
+     padding here would make the vertical gutter double the horizontal one. */
+  .combobox__list {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.25rem 1fr;
+    max-height: var(--available-height);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scroll-padding-block: 0.25rem;
+    outline: 0;
+  }
+
+  .combobox__item {
+    grid-column: 1 / -1;
+    display: grid;
+    /* Mirrors the list's template (see `.combobox__list`) so track 1 stays a
+       fixed checkmark gutter in every browser without depending on subgrid. */
+    grid-template-columns: 1.25rem 1fr;
+    column-gap: 0.5rem;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0.375rem 0.625rem;
+    border: none;
+    border-radius: var(--sk-radius);
+    background: transparent;
+    color: var(--sk-foreground);
+    font-family: inherit;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+
+    &[data-highlighted] {
+      background: var(--sk-accent);
+      color: var(--sk-accent-foreground);
+    }
+
+    &[data-disabled] {
+      color: var(--sk-muted-foreground);
+      cursor: default;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--sk-ring);
+      outline-offset: -2px;
+    }
+
+    /* The indicator only mounts on the selected item, so pin an empty spacer
+       into track 1; this keeps the label's auto-placement on track 2 for every
+       row, reserving the checkmark column even when nothing is selected. The
+       spacer shares the indicator's exact cell (`1 / 1`) — if it merely shared
+       the column, a mounted indicator would be auto-placed into a second,
+       phantom row and push the label below it. */
+    &::before {
+      content: "";
+      grid-area: 1 / 1;
+    }
+  }
+
+  .combobox__item-indicator {
+    grid-area: 1 / 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      scale 100ms ease-out,
+      opacity 100ms ease-out;
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      scale: 0.5;
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .combobox__status,
+  .combobox__empty {
+    /* No-op when rendered outside the list grid (e.g. in the popup), but spans
+       both tracks when placed inside it. */
+    grid-column: 1 / -1;
+    padding: 0.75rem 0.625rem;
+    color: var(--sk-muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+
+  .combobox__empty:empty {
+    padding: 0;
+  }
+
+  .combobox__group,
+  .combobox__row {
+    display: contents;
+  }
+
+  .combobox__group-label {
+    grid-column: 1 / -1;
+    padding: 0.5rem 0.625rem 0.25rem;
+    color: var(--sk-muted-foreground);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.25;
+    user-select: none;
+  }
+
+  .combobox__separator {
+    grid-column: 1 / -1;
+    height: 1px;
+    margin: 0.375rem -0.25rem;
+    background-color: var(--sk-border);
+  }
+
+  .combobox__arrow {
+    position: absolute;
+    display: block;
+    width: 12px;
+    height: 6px;
+    overflow: clip;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 8.49px;
+      height: 8.49px;
+      border: 1px solid var(--sk-border);
+      background-color: var(--sk-popover);
+      transform: translate(-50%, 50%) rotate(45deg);
+    }
+
+    &[data-side="bottom"] {
+      top: -6px;
+    }
+
+    &[data-side="left"] {
+      right: -9px;
+      transform: rotate(90deg);
+    }
+
+    &[data-side="right"] {
+      left: -9px;
+      transform: rotate(-90deg);
+    }
+
+    &[data-side="top"] {
+      bottom: -6px;
+      transform: rotate(180deg);
+    }
+  }
+}

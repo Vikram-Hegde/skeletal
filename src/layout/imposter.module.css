@@ -1,0 +1,20 @@
+@layer skeletal {
+  .imposter {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .imposter[data-fixed] {
+    position: fixed;
+  }
+
+  .imposter[data-margin] {
+    margin: var(--_imposter-margin, 1rem);
+  }
+
+  .imposter[data-breakout] {
+    inline-size: calc(100% + (var(--_imposter-breakout, 1rem) * 2));
+  }
+}

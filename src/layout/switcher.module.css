@@ -1,0 +1,12 @@
+@layer skeletal {
+  .switcher {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--_switcher-space, 1rem);
+  }
+
+  .switcher > * {
+    flex-grow: 1;
+    flex-basis: calc((var(--_switcher-threshold, 30rem) - 100%) * 999);
+  }
+}

@@ -1,0 +1,23 @@
+@layer skeletal {
+  .reel {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: var(--_reel-space, 1rem);
+    padding-block-end: var(--_reel-bar-space, 0.75rem);
+  }
+
+  .reel > * {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .reel[data-no-bar] {
+    scrollbar-width: none;
+  }
+
+  .reel[data-no-bar]::-webkit-scrollbar {
+    display: none;
+  }
+}

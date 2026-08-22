@@ -1,0 +1,1418 @@
+/* The docs' own cascade layer. The `@layer skeletal, docs;` statement pins the
+   layer order (docs after the design system's `skeletal` layer) regardless of
+   how the bundled CSS is ordered, so docs styles override the design system
+   without specificity or source-order fights. */
+@layer skeletal, docs;
+
+@layer docs {
+  /* Docs palette — every surface/ink derives from the design system's `--sk-*`
+     tokens via relative oklch() adjustments, so the docs is a genuine first
+     consumer: re-theming `:root` (or overriding a token in a consumer layer)
+     cascades into the docs automatically. Each delta below is the docs'
+     hand-tuned departure from its base token; flipping the token re-tints the
+     docs along with it. The one exception is `--docs-shadow`, a theme-aware
+     edge overlay with no token, which stays a literal `light-dark()` pair. */
+  :root {
+    /* Chrome (header + sidebar share one borderless surface): the app
+       background, deepened slightly so the framed page reads as raised. */
+    --docs-bg: light-dark(
+      oklch(from var(--sk-background) calc(l - 0.0125) c h),
+      oklch(from var(--sk-background) calc(l - 0.045) c h)
+    );
+    /* Content "page" surface: the card surface, sunk a touch in dark. */
+    --docs-panel: light-dark(
+      oklch(from var(--sk-card) l c h),
+      oklch(from var(--sk-card) calc(l - 0.065) c h)
+    );
+    /* Hairlines: the muted surface tone, nudged a touch more visible in
+       light so dividers read against the near-white page. */
+    --docs-border: light-dark(
+      oklch(from var(--sk-muted) calc(l - 0.035) c h),
+      oklch(from var(--sk-muted) l c h)
+    );
+    /* Body text: the foreground, softened for long-form reading. */
+    --docs-text: light-dark(
+      oklch(from var(--sk-foreground) calc(l + 0.06) c h),
+      oklch(from var(--sk-foreground) calc(l - 0.015) c h)
+    );
+    /* Secondary text: the muted foreground, dimmed a little further. */
+    --docs-muted: light-dark(
+      oklch(from var(--sk-muted-foreground) calc(l - 0.056) c h),
+      oklch(from var(--sk-muted-foreground) calc(l - 0.108) c h)
+    );
+    /* Monochrome accent — exactly the design system's ink primary. */
+    --docs-accent: var(--sk-primary);
+    /* Soft accent fill (active nav, avatars): the accent surface, muted. */
+    --docs-accent-soft: light-dark(
+      oklch(from var(--sk-accent) calc(l - 0.015) c h),
+      oklch(from var(--sk-accent) calc(l - 0.059) c h)
+    );
+    /* Hover fill: the muted surface, slightly deeper in dark. */
+    --docs-hover: light-dark(
+      oklch(from var(--sk-muted) calc(l - 0.015) c h),
+      oklch(from var(--sk-muted) calc(l - 0.099) c h)
+    );
+    /* Code block surface: the background, sunk near-black in dark. */
+    --docs-code-bg: light-dark(
+      oklch(from var(--sk-background) calc(l - 0.038) c h),
+      oklch(from var(--sk-background) calc(l - 0.082) c h)
+    );
+    /* Code text: the foreground, tuned for the sunken code surface. */
+    --docs-code-text: light-dark(
+      oklch(from var(--sk-foreground) calc(l + 0.06) c h),
+      oklch(from var(--sk-foreground) calc(l - 0.085) c h)
+    );
+    /* Sidebar edge-shadow band: a theme-aware overlay with no token (black in
+       light, a lighter grey in dark where pure black would vanish against the
+       near-black chrome). */
+    --docs-shadow: light-dark(oklch(0 0 0 / 0.15), oklch(0.22 0 0));
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family:
+      "Geist Variable", Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background: var(--docs-bg);
+    color: var(--docs-text);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+  }
+
+  .docs-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    height: 3.25rem;
+    padding: 0 1.25rem;
+    /* No bottom border: the header and sidebar share one borderless docs-bg
+     chrome surface. The content "page" (`.docs-main`) carries its own top and
+     left borders, which is what separates it from the chrome. */
+    background: color-mix(in oklab, var(--docs-bg) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(1.4);
+    view-transition-name: docs-header;
+  }
+
+  .docs-brand {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    color: inherit;
+    text-decoration: none;
+    border-radius: var(--sk-radius);
+  }
+
+  .docs-brand__mark {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 1.625rem;
+    height: 1.625rem;
+    border: 1px solid color-mix(in oklab, var(--docs-accent) 30%, transparent);
+    border-radius: var(--sk-radius);
+    background: var(--docs-accent-soft);
+    color: var(--docs-accent);
+    transition:
+      border-color 150ms ease-out,
+      transform 150ms ease-out;
+  }
+
+  .docs-brand__mark svg {
+    display: block;
+    transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .docs-brand:hover .docs-brand__mark {
+    border-color: color-mix(in oklab, var(--docs-accent) 55%, transparent);
+  }
+
+  .docs-brand:hover .docs-brand__mark svg {
+    transform: rotate(-8deg) scale(1.08);
+  }
+
+  .docs-brand:hover {
+    color: var(--docs-accent);
+  }
+
+  .docs-brand:focus-visible {
+    outline: 2px solid var(--docs-accent);
+    outline-offset: 2px;
+  }
+
+  /* Skip link: hidden off the top of the header until it receives keyboard
+     focus, then it drops into view. It sits immediately after the brand in
+     the tab order so keyboard users can jump straight to the content. */
+  .docs-skip {
+    position: absolute;
+    top: 0.625rem;
+    left: 1.25rem;
+    z-index: 40;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    color: var(--docs-text);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-decoration: none;
+    transform: translateY(-150%);
+    transition: transform 150ms ease-out;
+  }
+
+  .docs-skip:focus-visible {
+    outline: 2px solid var(--docs-accent);
+    outline-offset: 2px;
+    transform: none;
+  }
+
+  .docs-header__actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .docs-header__start {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  /* The hamburger that opens the mobile nav drawer. Hidden on desktop, where
+   the sidebar is always visible; shown below 48rem when the sidebar is hidden. */
+  .docs-menu-button {
+    display: none;
+  }
+
+  .docs-search {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.25rem;
+    width: min(24rem, 34vw);
+    padding: 0 0.5rem 0 0.875rem;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    box-shadow: 0 1px 2px light-dark(oklch(0 0 0 / 5%), oklch(0 0 0 / 30%));
+    color: var(--docs-muted);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition:
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out,
+      background-color 150ms ease-out;
+  }
+
+  .docs-search:hover {
+    border-color: var(--docs-accent);
+    background: var(--docs-panel);
+    box-shadow:
+      0 1px 2px light-dark(oklch(0 0 0 / 5%), oklch(0 0 0 / 30%)),
+      0 0 0 3px color-mix(in oklab, var(--docs-accent) 14%, transparent);
+  }
+
+  .docs-search:focus-visible {
+    outline: none;
+    border-color: var(--docs-accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--docs-accent) 20%, transparent);
+  }
+
+  .docs-search > span {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .docs-search kbd {
+    display: inline-flex;
+    align-items: center;
+    height: 1.25rem;
+    padding: 0 0.375rem;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-bg);
+    box-shadow: 0 1px 0 var(--docs-border);
+    color: var(--docs-muted);
+    font-family: inherit;
+    font-size: 0.6875rem;
+  }
+
+  .docs-sidebar {
+    position: sticky;
+    top: 3.25rem;
+    align-self: start;
+    height: calc(100dvh - 3.25rem);
+    /* Borderless (matching the header) so the two read as one chrome; the
+     content page's left border provides the divider. */
+    view-transition-name: docs-sidebar;
+  }
+
+  .docs-sidebar__scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0;
+  }
+
+  /* Breathing room around the nav list. It lives on the content (not the
+   scroll container) so the sticky edge shadows span the full width and can
+   reach the fold — a sticky element can't cross the container's padding. */
+  .docs-sidebar__nav {
+    padding: 1rem 0.75rem 3rem;
+  }
+
+  /* Scrolling edge shadows. The classic `background-attachment: local`
+   masking trick and `animation-timeline: scroll()` both render unreliably in
+   Chromium once the nav is composited (the background/timeline fails to track
+   the scroll position), so the shadows are `position: sticky` gradient bands
+   whose opacity is driven by `data-scrolled` / `data-at-end` attributes set
+   from a small scroll listener in `__root.tsx`. The top band fades in once you
+   scroll away from the top; the bottom band fades out as you reach the end.
+   The negative margins remove the bands from layout flow so the nav isn't
+   pushed. In dark mode the docs surface is near-black (`oklch(0.1)`, ~RGB 2),
+   where a black shadow is unreadable, so the band flips to a subtly lighter
+   grey (`--docs-shadow`). */
+  .docs-sidebar__shadow {
+    position: sticky;
+    height: 1.5rem;
+    margin-bottom: -1.5rem;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+
+  .docs-sidebar__shadow--top {
+    top: 0;
+    background: linear-gradient(to bottom, var(--docs-shadow), transparent);
+  }
+
+  .docs-sidebar__shadow--bottom {
+    bottom: 0;
+    margin-top: -1.5rem;
+    margin-bottom: 0;
+    background: linear-gradient(to top, var(--docs-shadow), transparent);
+  }
+
+  .docs-sidebar__scroll[data-scrolled] .docs-sidebar__shadow--top {
+    opacity: 1;
+  }
+
+  .docs-sidebar__scroll:not([data-at-end]) .docs-sidebar__shadow--bottom {
+    opacity: 1;
+  }
+
+  .docs-nav-title {
+    margin: 0;
+    padding: 0 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--docs-muted);
+  }
+
+  .docs-nav-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.5rem;
+    border: none;
+    border-radius: var(--sk-radius);
+    background: transparent;
+    color: var(--docs-text);
+    font-size: 0.875rem;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 150ms ease-out,
+      color 150ms ease-out;
+  }
+
+  .docs-nav-link--home {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .docs-nav-link:hover {
+    background: var(--docs-hover);
+  }
+
+  .docs-nav-link:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--docs-accent);
+  }
+
+  .docs-nav-link[data-active="true"] {
+    background: var(--docs-accent-soft);
+    color: var(--docs-accent);
+    font-weight: 500;
+  }
+
+  .docs-sidebar__footer {
+    padding: 0.75rem 0.5rem;
+    border-top: 1px solid var(--docs-border);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--docs-muted);
+  }
+
+  .docs-sidebar__footer strong {
+    font-weight: 600;
+    color: var(--docs-text);
+  }
+
+  .docs-sidebar__pkg {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .docs-sidebar__pkg-name {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .docs-sidebar__links {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin: 0;
+  }
+
+  .docs-sidebar__link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 150ms ease-out;
+  }
+
+  .docs-sidebar__link:hover {
+    color: var(--docs-accent);
+  }
+
+  .docs-sidebar__link:focus-visible {
+    outline: 2px solid var(--docs-accent);
+    outline-offset: 2px;
+    border-radius: var(--sk-radius);
+  }
+
+  /* Mobile navigation drawer: below 48rem the sidebar is hidden and the nav
+   moves into a left drawer opened from the header's menu button. The drawer's
+   Header/Content/Footer are the skeletal Drawer parts restyled to match the
+   docs chrome, so the drawer reads as the same nav, just on demand. */
+  .docs-menu__title {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    color: var(--docs-text);
+  }
+
+  .docs-menu__content {
+    padding: 0.5rem 1rem 1rem;
+  }
+
+  .docs-menu__nav {
+    padding: 0.25rem 0;
+  }
+
+  .docs-menu__footer {
+    justify-content: center;
+    color: var(--docs-muted);
+    font-size: 0.75rem;
+  }
+
+  /* The content is a framed "page" inset in the chrome: the header and
+     sidebar are one borderless docs-bg surface, and this panel's own top and
+     left borders — plus its sharp top-left corner — are what mark the
+     boundary between the chrome and the page. */
+  .docs-main {
+    /* The page alone scrolls: fixed height below the header with its own
+     scrollbar, so the header + sidebar chrome stays put while only the
+     content moves. */
+    height: calc(100dvh - 3.25rem);
+    overflow-y: auto;
+    padding: 1.5rem 2.5rem 6rem;
+    border-top: 1px solid var(--docs-border);
+    border-left: 1px solid var(--docs-border);
+    border-top-left-radius: 0;
+    background: var(--docs-panel);
+  }
+
+  /* Match the home page's vertical padding to its horizontal padding so the
+     page frame is evenly spaced on all sides. */
+  .docs-main.home {
+    padding: 2.5rem;
+  }
+
+  .docs-page {
+    width: min(46rem, 100%);
+    min-width: 0;
+  }
+
+  .home-group__title {
+    margin: 0 0 1rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--docs-muted);
+  }
+
+  /* Joined grid: the cards sit flush against each other (gap 0) and each
+     draws a 1px `outline`. Adjacent outlines coincide exactly — and overlap
+     the container's border at the outer edge — so the divider reads as one
+     continuous hairline between every card. The container's border frames
+     the whole group, and `overflow: hidden` clips the cards flush. */
+  .home-group .home-grid {
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    overflow: hidden;
+  }
+
+  .home-card {
+    /* Subgrid: each card spans the parent grid's two implicit rows (preview,
+     name) and exposes them as its own tracks, so name rows align across cards
+     in the same band instead of each card sizing them to its own content. */
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+    min-width: 0;
+    outline: 1px solid var(--docs-border);
+    color: inherit;
+    text-decoration: none;
+    overflow: hidden;
+    transition: background-color 150ms ease-out;
+  }
+
+  .home-card:hover {
+    background: var(--docs-accent-soft);
+  }
+
+  .home-card:focus-visible {
+    /* A negative-offset outline paints above the opaque child backgrounds
+       (preview/name-row), so the ring stays visible — an inset box-shadow
+       would sink underneath them and disappear. */
+    outline: 2px solid var(--docs-accent);
+    outline-offset: -2px;
+  }
+
+  .home-card__preview {
+    container-type: size;
+    container-name: pv;
+    display: grid;
+    place-items: center;
+    height: 9rem;
+    min-height: 9rem;
+    padding: 1.25rem;
+    overflow: hidden;
+    background: var(--docs-hover);
+  }
+
+  .pv-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5cqw;
+  }
+
+  .pv-row {
+    display: flex;
+    align-items: center;
+    gap: 2.5cqw;
+  }
+
+  .pv-surface {
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    overflow: hidden;
+  }
+
+  .pv-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.875cqw;
+    padding: 4.375cqw 5cqw;
+  }
+
+  .pv-card__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2.5cqw;
+    padding: 3.75cqw 5cqw;
+    border-top: 1px solid var(--docs-border);
+    background: var(--docs-hover);
+  }
+
+  .pv-search {
+    display: flex;
+    align-items: center;
+    gap: 2.5cqw;
+    padding: 3.125cqw 3.75cqw;
+    border-bottom: 1px solid var(--docs-border);
+  }
+
+  .pv-menu-item {
+    padding: 1.875cqw 2.5cqw;
+    border-radius: var(--sk-radius);
+    font-size: 3.75cqw;
+    color: var(--docs-text);
+  }
+
+  .pv-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5cqw;
+    width: 42.5cqw;
+    padding: 2.5cqw 3.125cqw;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    font-size: 3.75cqw;
+  }
+
+  .pv-tooltip {
+    padding: 1.25cqw 3.125cqw;
+    border-radius: var(--sk-radius);
+    background: var(--docs-text);
+    color: var(--docs-bg);
+    font-size: 3.44cqw;
+  }
+
+  .pv-bar {
+    height: 5.5cqh;
+    border-radius: var(--sk-radius);
+    background: var(--docs-border);
+  }
+
+  .pv-line {
+    height: 4.2cqh;
+    border-radius: var(--sk-radius);
+    background: var(--docs-border);
+  }
+
+  .pv-line--title {
+    height: 6.9cqh;
+    background: var(--docs-text);
+    opacity: 0.85;
+  }
+
+  .pv-chip {
+    height: 13.9cqh;
+    border-radius: var(--sk-radius);
+    background: var(--docs-border);
+  }
+
+  .pv-block {
+    border-radius: var(--sk-radius);
+    background: var(--docs-border);
+  }
+
+  .pv-dot {
+    width: 5cqw;
+    height: 5cqw;
+    border-radius: 999px;
+  }
+
+  @container pv (max-width: 21rem) {
+    .home-card__preview {
+      padding: 0.75rem;
+    }
+
+    .pv-row {
+      flex-wrap: wrap;
+    }
+  }
+
+  .home-card__name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.875rem 1rem;
+    border-top: 1px solid var(--docs-border);
+  }
+
+  .home-card__name {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .home-card__arrow {
+    color: var(--docs-muted);
+    transition:
+      color 150ms ease-out,
+      transform 150ms ease-out;
+  }
+
+  .home-card:hover .home-card__arrow {
+    color: var(--docs-accent);
+    transform: translate(2px, -2px);
+  }
+
+  /* View transitions between the homepage card grid and component pages.
+   Named elements (comp-card-*) morph; everything else gets a gentle
+   fade-and-rise so page changes feel soft rather than flashy. */
+  @keyframes docs-view-out {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+  }
+
+  @keyframes docs-view-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.375rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  ::view-transition-old(root) {
+    animation: docs-view-out 150ms ease-in both;
+  }
+
+  ::view-transition-new(root) {
+    animation: docs-view-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: 400ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* The browser defaults view-transition image pairs to `mix-blend-mode:
+   plus-lighter`, which brightens the crossfade and causes an HDR/white flash
+   during the transition. Blend normally instead. */
+  ::view-transition-image-pair(*) {
+    mix-blend-mode: normal;
+  }
+
+  /* The app chrome (header + sidebar) is shared across pages — swap it instantly
+   instead of crossfading. Hiding the old snapshot means only the new chrome is
+   visible, so an old nav highlight never lingers or ghosts during the
+   transition. Only the page content fades and rises. */
+  ::view-transition-group(docs-header),
+  ::view-transition-group(docs-sidebar) {
+    animation: none;
+  }
+
+  ::view-transition-old(docs-header),
+  ::view-transition-old(docs-sidebar) {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root),
+    ::view-transition-group(*) {
+      animation: none;
+    }
+  }
+
+  .docs-example,
+  .docs-section {
+    scroll-margin-top: 4.5rem;
+  }
+
+  .docs-page__title {
+    margin: 0 0 0.25rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    line-height: 2rem;
+    text-wrap: balance;
+  }
+
+  .docs-page__blurb {
+    margin: 0;
+    color: var(--docs-muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .docs-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .docs-section__title {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    line-height: 2rem;
+    text-wrap: balance;
+  }
+
+  .docs-example {
+    border-radius: var(--sk-radius);
+    overflow: hidden;
+  }
+
+  .docs-example__title {
+    margin: 0;
+    padding: 0.875rem 1rem 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  .docs-demo {
+    overflow: auto;
+  }
+
+  .docs-code {
+    position: relative;
+  }
+
+  .docs-code pre {
+    margin: 0;
+    padding: 1rem 3.25rem 1rem 1rem;
+    overflow: auto;
+  }
+
+  .docs-code code {
+    font-family:
+      "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+      "Liberation Mono", monospace;
+    font-size: 0.8125rem;
+    font-variant-ligatures: contextual;
+    line-height: 1.7;
+    color: var(--docs-code-text);
+  }
+
+  .docs-copy {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .docs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+  }
+
+  .docs-table th,
+  .docs-table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--docs-border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .docs-table th {
+    font-weight: 500;
+    color: var(--docs-muted);
+  }
+
+  /* Prop descriptions may carry newline-separated usage guidance (e.g. per
+     variant), so render line breaks instead of collapsing them. */
+  .docs-table td:last-child {
+    white-space: pre-line;
+  }
+
+  .docs-table code {
+    font-family:
+      "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+      "Liberation Mono", monospace;
+    font-size: 0.75rem;
+  }
+
+  .docs-table-scroll {
+    overflow-x: auto;
+  }
+
+  /* On phones the four-column API table compresses into a narrow, hard-to-read
+     strip. Reflow each row into a card: the prop name becomes a heading, the
+     description stretches to the full width (natural line wrapping instead of a
+     cramped column), and Type/Default sit beneath as labelled meta. */
+  @media (max-width: 48rem) {
+    .docs-table,
+    .docs-table tbody {
+      display: block;
+    }
+
+    .docs-table thead {
+      display: none;
+    }
+
+    .docs-table tr {
+      display: flex;
+      flex-direction: column;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid var(--docs-border);
+    }
+
+    .docs-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .docs-table td {
+      display: block;
+      padding: 0;
+      border-bottom: none;
+    }
+
+    .docs-table td:first-child {
+      order: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .docs-table td:first-child code {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--docs-accent);
+    }
+
+    .docs-table td:last-child {
+      order: 2;
+      margin-bottom: 0.375rem;
+    }
+
+    .docs-table td:nth-child(2),
+    .docs-table td:nth-child(3) {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .docs-table td:nth-child(2) {
+      order: 3;
+    }
+
+    .docs-table td:nth-child(3) {
+      order: 4;
+    }
+
+    .docs-table td:nth-child(2)::before,
+    .docs-table td:nth-child(3)::before {
+      content: attr(data-label);
+      flex-shrink: 0;
+      width: 4.5rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--docs-muted);
+    }
+  }
+
+  .docs-cell {
+    display: grid;
+    place-items: center;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    color: var(--docs-text);
+    text-align: center;
+    min-height: 2.5rem;
+    font-size: 0.875rem;
+  }
+
+  .docs-media {
+    width: 8rem;
+    height: 4.5rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-hover);
+    color: var(--docs-muted);
+    font-size: 0.75rem;
+  }
+
+  .docs-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    color: var(--docs-text);
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .docs-avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: var(--docs-accent-soft);
+    color: var(--docs-accent);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .docs-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--sk-radius);
+    color: var(--docs-text);
+    min-height: 7.5rem;
+  }
+
+  .docs-card__stack {
+    flex: 1;
+  }
+
+  .docs-card__title {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .docs-card__text {
+    margin: 0;
+    color: var(--docs-muted);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .docs-card__footer {
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--docs-border);
+    color: var(--docs-muted);
+    font-size: 0.75rem;
+  }
+
+  /* Skeleton page demo — a real post card whose content toggles into its own
+   shimmer. These sizes the bars read as a proper skeleton (varied line
+   heights) and style the raw buttons used so they become button-shaped
+   shimmer blocks while loading. */
+  .docs-skel-note {
+    margin: 0;
+    color: var(--docs-muted);
+    font-size: 0.8125rem;
+  }
+
+  .docs-skel-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .docs-skel-meta {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--docs-muted);
+  }
+
+  .docs-skel-body {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  .docs-skel-action {
+    padding: 0.625rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: var(--sk-radius);
+    background: var(--docs-accent);
+    color: var(--sk-primary-foreground);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 550;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+
+  .docs-skel-action--outline {
+    border-color: var(--docs-border);
+    background: transparent;
+    color: var(--docs-text);
+  }
+
+  .docs-toc {
+    width: 12rem;
+    flex-shrink: 0;
+    position: sticky;
+    top: 4.5rem;
+    display: none;
+  }
+
+  @media (min-width: 80rem) {
+    .docs-toc {
+      display: block;
+    }
+  }
+
+  .docs-toc__title {
+    margin: 0;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--docs-muted);
+  }
+
+  .docs-toc__link {
+    display: block;
+    padding: 0.2rem 0;
+    border: none;
+    background: transparent;
+    color: var(--docs-muted);
+    font-size: 0.8125rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .docs-toc__link:hover {
+    color: var(--docs-text);
+  }
+
+  .docs-toc__link:focus-visible {
+    outline: 2px solid var(--docs-accent);
+    outline-offset: 2px;
+    border-radius: var(--sk-radius);
+  }
+
+  .docs-toc__link[data-active="true"] {
+    color: var(--docs-accent);
+  }
+
+  @media (max-width: 48rem) {
+    .docs-body {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
+    /* The sidebar collapses entirely on phones — the nav moves into the left
+       drawer (`docs-menu-button`) instead of stacking above the content and
+       eating vertical space. */
+    .docs-sidebar {
+      display: none;
+    }
+
+    .docs-menu-button {
+      display: inline-flex;
+    }
+
+    .docs-main {
+      padding: 1.25rem 1rem 4rem;
+      border: none;
+      border-radius: var(--sk-radius);
+      height: auto;
+      overflow: visible;
+    }
+
+    .docs-header {
+      grid-template-columns: auto 1fr auto;
+      gap: 0.5rem;
+      padding: 0 0.75rem;
+    }
+
+    .docs-search {
+      justify-self: stretch;
+      width: auto;
+      min-width: 0;
+      min-height: 2.5rem;
+    }
+
+    .docs-nav-link {
+      min-height: 2.5rem;
+    }
+  }
+
+  @media (max-width: 28rem) {
+    .docs-brand__label {
+      display: none;
+    }
+  }
+
+  .docs-pagination {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--docs-border);
+  }
+
+  .docs-pagination__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    min-width: 12rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    color: var(--docs-text);
+    font-family: inherit;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 150ms ease-out;
+  }
+
+  .docs-pagination__item--next {
+    align-items: flex-end;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .docs-pagination__item:hover {
+    border-color: var(--docs-accent);
+  }
+
+  .docs-pagination__item:focus-visible {
+    outline: 2px solid var(--docs-accent);
+    outline-offset: 2px;
+  }
+
+  .docs-pagination__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--docs-muted);
+  }
+
+  .docs-pagination__name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 36rem) {
+    .docs-pagination__item {
+      min-width: 0;
+      flex: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .docs-pagination__item {
+      transition: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .docs-search,
+    .docs-nav-link {
+      transition: none;
+    }
+  }
+
+  /* 404 — a missing bone in the skeleton. The vertebra row leads the eye to the
+   empty slot (dashed, with a gently bobbing "?"), then the status and a path
+   back home. Renders inside the docs layout (header + sidebar stay intact).
+   Vertical centering + min-height come from the `Cover` primitive; `Stack`
+   and `Cluster` handle the column/wrap rhythm. Only the bespoke bits remain. */
+  .docs-404 {
+    align-items: center;
+    text-align: center;
+  }
+
+  .docs-404__inner {
+    align-items: center;
+    width: min(32rem, 100%);
+    padding-top: 2rem;
+    /* The inner is a `Stack` and the Cover's only child, so the Stack's
+     `:only-child { height: 100% }` (meant for dialog popups) would make it fill
+     the cover. Reset to content height so the Cover can center it via
+     `margin-block: auto`. The `docs` layer wins over `skeletal` regardless of
+     specificity, so a plain class selector is enough. */
+    height: auto;
+  }
+
+  .docs-404__spine {
+    width: min(24rem, 100%);
+    height: auto;
+    margin-bottom: 0.75rem;
+  }
+
+  .docs-404__question {
+    fill: var(--docs-accent);
+    font-size: 1.75rem;
+    font-weight: 650;
+    animation: docs-404-bob 2.6s ease-in-out infinite;
+  }
+
+  .docs-404__missing {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  @keyframes docs-404-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  .docs-404__status {
+    margin: 0;
+    font-size: clamp(4rem, 12vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--docs-text);
+  }
+
+  .docs-404__title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    color: var(--docs-text);
+    text-wrap: balance;
+  }
+
+  .docs-404__blurb {
+    margin: 0;
+    color: var(--docs-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .docs-404__slug {
+    font-family:
+      "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+      "Liberation Mono", monospace;
+    font-size: 0.8125rem;
+    padding: 0.125rem 0.375rem;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    color: var(--docs-text);
+  }
+
+  .docs-404__suggestions {
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+
+  .docs-404__suggestions-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--docs-muted);
+  }
+
+  .docs-404__suggestion {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--docs-border);
+    border-radius: var(--sk-radius);
+    background: var(--docs-panel);
+    color: var(--docs-text);
+    font-size: 0.8125rem;
+    text-decoration: none;
+    transition:
+      border-color 150ms ease-out,
+      color 150ms ease-out,
+      background-color 150ms ease-out;
+  }
+
+  .docs-404__suggestion:hover {
+    border-color: var(--docs-accent);
+    background: var(--docs-accent-soft);
+    color: var(--docs-accent);
+  }
+
+  .docs-404__suggestion:focus-visible {
+    outline: 2px solid var(--docs-accent);
+    outline-offset: 2px;
+  }
+
+  .docs-404__suggestion-group {
+    color: var(--docs-muted);
+    font-size: 0.6875rem;
+  }
+
+  .docs-404__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    margin-top: 0.75rem;
+    padding: 0 1.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--sk-radius);
+    background: var(--docs-accent);
+    color: var(--sk-primary-foreground);
+    font-size: 0.9375rem;
+    font-weight: 550;
+    text-decoration: none;
+    transition:
+      background-color 150ms ease-out,
+      transform 150ms ease-out;
+  }
+
+  .docs-404__action:hover {
+    background: light-dark(
+      oklch(from var(--docs-accent) calc(l - 0.08) c h),
+      oklch(from var(--docs-accent) calc(l + 0.08) c h)
+    );
+  }
+
+  .docs-404__action:active {
+    transform: translateY(0.5px);
+  }
+
+  .docs-404__action:focus-visible {
+    outline: 2px solid var(--docs-accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .docs-404__question {
+      animation: none;
+    }
+  }
+}

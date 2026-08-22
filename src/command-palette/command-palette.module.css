@@ -1,0 +1,178 @@
+@layer skeletal {
+  .command__content {
+    position: relative;
+    margin: auto;
+    width: min(32rem, 100%);
+    max-height: min(70dvh, 30rem);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--sk-border);
+    /* Popup rounding stays flexible: a fixed extra on top of --sk-radius, but
+       the `var(--sk-radius) / var(--sk-radius)` factor collapses it to 0 when
+       the token is 0 (sharp design language), so consumers can re-introduce
+       rounding via the token alone. */
+    border-radius: calc(var(--sk-radius) + 0.375rem * (var(--sk-radius) / var(--sk-radius)));
+    background-color: var(--sk-popover);
+    color: var(--sk-popover-foreground);
+    box-shadow: var(--sk-shadow-lg);
+    transition:
+      scale 200ms ease-out,
+      opacity 200ms ease-out;
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      scale: 0.98;
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    /* Below 48rem the palette renders as a full-width bottom sheet: pinned to
+     the bottom edge, sliding up on open. */
+    @media (width < 48rem) {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      max-height: min(80dvh, 40rem);
+      border-radius: calc(var(--sk-radius) + 0.5rem * (var(--sk-radius) / var(--sk-radius)))
+        calc(var(--sk-radius) + 0.5rem * (var(--sk-radius) / var(--sk-radius))) 0 0;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      transform: translateY(0);
+      transition:
+        transform 220ms ease-out,
+        opacity 220ms ease-out;
+      will-change: transform;
+
+      &[data-starting-style],
+      &[data-ending-style] {
+        transform: translateY(100%);
+        opacity: 1;
+        scale: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  }
+
+  .command__input-group {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--sk-border);
+    color: var(--sk-muted-foreground);
+  }
+
+  .command__input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: var(--sk-foreground);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    outline: none;
+
+    &::placeholder {
+      color: var(--sk-muted-foreground);
+    }
+  }
+
+  .command__list {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.375rem;
+    scroll-padding: 0.375rem;
+
+    /* Collapse when no results so the empty state owns the space below the
+       input instead of inheriting a residual bar of padding. */
+    &[data-empty] {
+      padding: 0;
+    }
+  }
+
+  .command__item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    width: 100%;
+    min-height: 2.25rem;
+    padding: 0.375rem 0.625rem;
+    border: none;
+    border-radius: var(--sk-radius);
+    background: transparent;
+    color: var(--sk-foreground);
+    font-family: inherit;
+    font-size: 0.875rem;
+    text-align: left;
+    cursor: pointer;
+
+    &[data-highlighted] {
+      background: var(--sk-muted);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--sk-ring);
+      outline-offset: -2px;
+    }
+  }
+
+  .command__item-hint {
+    margin-inline-start: auto;
+    color: var(--sk-muted-foreground);
+    font-size: 0.75rem;
+  }
+
+  .command__group {
+    display: contents;
+  }
+
+  .command__group-label {
+    padding: 0.75rem 0.625rem 0.25rem;
+    color: var(--sk-muted-foreground);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.25;
+    user-select: none;
+  }
+
+  .command__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--sk-muted-foreground);
+    font-size: 0.875rem;
+  }
+
+  /* Base UI keeps the empty element mounted (for aria-live); collapse it when it
+   has no message to show so it never reserves space. */
+  .command__empty:empty {
+    padding: 0;
+  }
+
+  .command__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--sk-muted);
+    border-top: 1px solid var(--sk-border);
+    color: var(--sk-muted-foreground);
+    font-size: 0.75rem;
+
+    /* Bottom sheet: bleed the footer into the safe area at the screen's bottom
+     edge (content provides the matching `padding-bottom`). */
+    @media (width < 48rem) {
+      margin-bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
+}

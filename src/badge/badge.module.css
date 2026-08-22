@@ -1,0 +1,52 @@
+@layer skeletal {
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 1.375rem;
+    padding: 0.125rem 0.625rem;
+    border: 1px solid var(--_badge-border, transparent);
+    border-radius: var(--sk-radius);
+    background-color: var(--_badge-bg);
+    color: var(--_badge-fg);
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .badge__dot {
+    inline-size: 0.4375rem;
+    block-size: 0.4375rem;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background-color: currentColor;
+    opacity: 0.75;
+  }
+
+  .badge--primary {
+    --_badge-bg: var(--sk-primary);
+    --_badge-fg: var(--sk-primary-foreground);
+    --_badge-border: transparent;
+  }
+
+  .badge--secondary {
+    --_badge-bg: var(--sk-secondary);
+    --_badge-fg: var(--sk-secondary-foreground);
+    --_badge-border: transparent;
+  }
+
+  .badge--outline {
+    --_badge-bg: transparent;
+    --_badge-fg: var(--sk-foreground);
+    --_badge-border: var(--sk-border);
+  }
+
+  .badge--destructive {
+    --_badge-bg: var(--sk-destructive);
+    --_badge-fg: var(--sk-destructive-foreground);
+    --_badge-border: transparent;
+  }
+}
