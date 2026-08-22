@@ -1,6 +1,6 @@
 import type { ComboboxLabelProps as BaseComboboxLabelProps } from "@base-ui/react/combobox";
 import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./combobox.module.css";
 
 /**

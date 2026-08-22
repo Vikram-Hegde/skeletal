@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Radio } from "@elemental";
+import { Radio } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 function ControlledRadioGroup() {

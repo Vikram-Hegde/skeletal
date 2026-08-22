@@ -1,4 +1,4 @@
-# Elemental
+# Skeletal
 
 My design system.
 
@@ -30,6 +30,6 @@ pnpm run build
 
 ## Package
 
-- Name: `@vikram-hegde/elemental`
-- Internal alias: `@elemental` → `src/*` (tsconfig, tsdown, vite)
-- Consumers: `import { Button } from "@vikram-hegde/elemental"` + `import "@vikram-hegde/elemental/index.css"`
+- Name: `@vikram-hegde/skeletal`
+- Internal alias: `@skeletal` → `src/*` (tsconfig, tsdown, vite)
+- Consumers: `import { Button } from "@vikram-hegde/skeletal"` + `import "@vikram-hegde/skeletal/index.css"`

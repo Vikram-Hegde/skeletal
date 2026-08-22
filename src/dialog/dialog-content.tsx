@@ -1,7 +1,7 @@
 import type { DialogPopupProps } from "@base-ui/react/dialog";
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
-import { Stack } from "@elemental/layout/stack";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { Stack } from "@skeletal/layout/stack";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import { clsx } from "clsx";
 import styles from "./dialog.module.css";
 

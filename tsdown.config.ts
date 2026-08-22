@@ -7,7 +7,7 @@ export default defineConfig({
   entry: ["src/index.ts", "src/*/index.ts"],
   exports: false,
   alias: {
-    "@elemental": fileURLToPath(new URL("./src", import.meta.url)),
+    "@skeletal": fileURLToPath(new URL("./src", import.meta.url)),
   },
   css: {
     fileName: "index.css",

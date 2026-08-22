@@ -1,4 +1,4 @@
-import { Box, Stack } from "@elemental";
+import { Box, Stack } from "@skeletal";
 import type { CSSProperties, ReactNode } from "react";
 
 export const cell = (label: string): ReactNode => <div className="docs-cell">{label}</div>;

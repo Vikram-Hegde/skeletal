@@ -1,6 +1,6 @@
 import type { DrawerViewportProps as BaseDrawerViewportProps } from "@base-ui/react/drawer";
 import { Drawer as BaseDrawer } from "@base-ui/react/drawer";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./drawer.module.css";
 
 /**

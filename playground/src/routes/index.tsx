@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "@phosphor-icons/react";
-import { Grid, Icon, Stack } from "@elemental";
+import { Grid, Icon, Stack } from "@skeletal";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { Doc } from "@/docs";
 import { DOC_GROUPS } from "@/docs";

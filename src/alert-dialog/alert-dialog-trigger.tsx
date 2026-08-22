@@ -1,7 +1,7 @@
 import type { AlertDialogTriggerProps as BaseAlertDialogTriggerProps } from "@base-ui/react/alert-dialog";
 import { AlertDialog as BaseAlertDialog } from "@base-ui/react/alert-dialog";
-import type { ButtonProps } from "@elemental/button/button";
-import { Button } from "@elemental/button/button";
+import type { ButtonProps } from "@skeletal/button/button";
+import { Button } from "@skeletal/button/button";
 
 /**
  * A button that opens the alert dialog. Renders a `<button>` element.

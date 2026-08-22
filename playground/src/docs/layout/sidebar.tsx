@@ -1,4 +1,4 @@
-import { Box, Sidebar } from "@elemental";
+import { Box, Sidebar } from "@skeletal";
 import { avatar } from "@/docs/helpers";
 import type { Doc } from "@/docs/types";
 

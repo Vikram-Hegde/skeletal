@@ -1,6 +1,6 @@
 import type { RadioIndicatorProps as BaseRadioIndicatorProps } from "@base-ui/react/radio";
 import { Radio as BaseRadio } from "@base-ui/react/radio";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./radio.module.css";
 
 /**

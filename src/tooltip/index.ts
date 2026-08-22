@@ -14,7 +14,7 @@ import { TooltipViewport } from "./tooltip-viewport";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Tooltip } from '@vikram-hegde/elemental'
+ * import { Tooltip } from '@vikram-hegde/skeletal'
  *
  * <Tooltip.Provider>
  *   <Tooltip.Root>

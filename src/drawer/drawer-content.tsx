@@ -1,7 +1,7 @@
 import type { DrawerContentProps as BaseDrawerContentProps } from "@base-ui/react/drawer";
 import { Drawer as BaseDrawer } from "@base-ui/react/drawer";
-import { Stack } from "@elemental/layout/stack";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { Stack } from "@skeletal/layout/stack";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./drawer.module.css";
 
 /**

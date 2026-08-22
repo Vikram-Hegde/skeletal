@@ -7,7 +7,7 @@ import { SwitchThumb } from "./switch-thumb";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Switch } from '@vikram-hegde/elemental'
+ * import { Switch } from '@vikram-hegde/skeletal'
  *
  * <label>
  *   <Switch.Root defaultChecked name="notifications" />

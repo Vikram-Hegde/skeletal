@@ -1,4 +1,4 @@
-import { Cluster, Spinner, Stack } from "@elemental";
+import { Cluster, Spinner, Stack } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const spinnerDoc: Doc = {

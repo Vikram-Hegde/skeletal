@@ -1,6 +1,6 @@
 import type { CheckboxGroupProps as BaseCheckboxGroupProps } from "@base-ui/react/checkbox-group";
 import { CheckboxGroup as BaseCheckboxGroup } from "@base-ui/react/checkbox-group";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./checkbox.module.css";
 
 /**

@@ -1,8 +1,8 @@
 import type { ButtonState } from "@base-ui/react/button";
 import type { TooltipTriggerProps as BaseTooltipTriggerProps } from "@base-ui/react/tooltip";
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
-import type { ButtonProps as SkeletalButtonProps } from "@elemental/button/button";
-import { Button } from "@elemental/button/button";
+import type { ButtonProps as SkeletalButtonProps } from "@skeletal/button/button";
+import { Button } from "@skeletal/button/button";
 import type { CSSProperties } from "react";
 
 /**

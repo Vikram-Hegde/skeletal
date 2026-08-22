@@ -1,4 +1,4 @@
-import { Box, Button, Cluster } from "@elemental";
+import { Box, Button, Cluster } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 const TAGS = [

@@ -32,7 +32,7 @@ import { ComboboxValue } from "./combobox-value";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Combobox } from '@vikram-hegde/elemental'
+ * import { Combobox } from '@vikram-hegde/skeletal'
  *
  * const fruits = [
  *   { value: 'apple', label: 'Apple' },

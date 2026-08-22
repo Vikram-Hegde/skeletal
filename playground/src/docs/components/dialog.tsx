@@ -1,4 +1,4 @@
-import { Cluster, Dialog } from "@elemental";
+import { Cluster, Dialog } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const dialogDoc: Doc = {
@@ -10,7 +10,7 @@ export const dialogDoc: Doc = {
   examples: [
     {
       title: "Basic",
-      code: `import { Dialog } from "@vikram-hegde/elemental";
+      code: `import { Dialog } from "@vikram-hegde/skeletal";
 
 <Dialog.Root>
   <Dialog.Trigger>View notifications</Dialog.Trigger>

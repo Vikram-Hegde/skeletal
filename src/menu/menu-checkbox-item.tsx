@@ -1,6 +1,6 @@
 import type { MenuCheckboxItemProps as BaseMenuCheckboxItemProps } from "@base-ui/react/menu";
 import { Menu as BaseMenu } from "@base-ui/react/menu";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./menu.module.css";
 
 /**

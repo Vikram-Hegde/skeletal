@@ -1,5 +1,5 @@
 import { Horse, Sparkle } from "@phosphor-icons/react";
-import { Button, Cluster, Icon } from "@elemental";
+import { Button, Cluster, Icon } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const iconDoc: Doc = {

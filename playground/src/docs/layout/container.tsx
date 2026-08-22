@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from "@elemental";
+import { Box, Container, Stack } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const containerDoc: Doc = {

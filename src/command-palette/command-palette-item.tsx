@@ -1,6 +1,6 @@
 import type { AutocompleteItemProps as BaseAutocompleteItemProps } from "@base-ui/react/autocomplete";
 import { Autocomplete as BaseAutocomplete } from "@base-ui/react/autocomplete";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import type { ReactNode } from "react";
 import styles from "./command-palette.module.css";
 

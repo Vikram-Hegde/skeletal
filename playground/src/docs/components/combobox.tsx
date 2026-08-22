@@ -1,5 +1,5 @@
 import { CaretDown, CaretUpDown, Check, X } from "@phosphor-icons/react";
-import { Combobox, Icon } from "@elemental";
+import { Combobox, Icon } from "@skeletal";
 import { useState } from "react";
 import type { Doc } from "@/docs/types";
 

@@ -1,6 +1,6 @@
 import type { ButtonProps as BaseButtonProps } from "@base-ui/react/button";
 import { Button as BaseButton } from "@base-ui/react/button";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import { clsx } from "clsx";
 import styles from "./button.module.css";
 

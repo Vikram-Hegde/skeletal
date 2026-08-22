@@ -1,7 +1,7 @@
 import type { DrawerTriggerProps as BaseDrawerTriggerProps } from "@base-ui/react/drawer";
 import { Drawer as BaseDrawer } from "@base-ui/react/drawer";
-import type { ButtonProps } from "@elemental/button/button";
-import { Button } from "@elemental/button/button";
+import type { ButtonProps } from "@skeletal/button/button";
+import { Button } from "@skeletal/button/button";
 
 /**
  * A button that opens the drawer. Renders a `<button>` element.

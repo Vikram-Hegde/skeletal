@@ -1,11 +1,11 @@
-import { DialogBackdrop } from "@elemental/dialog/dialog-backdrop";
-import { DialogClose } from "@elemental/dialog/dialog-close";
-import { DialogContent } from "@elemental/dialog/dialog-content";
-import { DialogDescription } from "@elemental/dialog/dialog-description";
-import { DialogFooter } from "@elemental/dialog/dialog-footer";
-import { DialogPortal } from "@elemental/dialog/dialog-portal";
-import { DialogTitle } from "@elemental/dialog/dialog-title";
-import { DialogViewport } from "@elemental/dialog/dialog-viewport";
+import { DialogBackdrop } from "@skeletal/dialog/dialog-backdrop";
+import { DialogClose } from "@skeletal/dialog/dialog-close";
+import { DialogContent } from "@skeletal/dialog/dialog-content";
+import { DialogDescription } from "@skeletal/dialog/dialog-description";
+import { DialogFooter } from "@skeletal/dialog/dialog-footer";
+import { DialogPortal } from "@skeletal/dialog/dialog-portal";
+import { DialogTitle } from "@skeletal/dialog/dialog-title";
+import { DialogViewport } from "@skeletal/dialog/dialog-viewport";
 import { AlertDialogRoot } from "./alert-dialog-root";
 import { AlertDialogTrigger } from "./alert-dialog-trigger";
 
@@ -15,7 +15,7 @@ import { AlertDialogTrigger } from "./alert-dialog-trigger";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { AlertDialog } from '@vikram-hegde/elemental'
+ * import { AlertDialog } from '@vikram-hegde/skeletal'
  *
  * <AlertDialog.Root>
  *   <AlertDialog.Trigger>Delete</AlertDialog.Trigger>

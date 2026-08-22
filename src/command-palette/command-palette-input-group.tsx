@@ -1,7 +1,7 @@
 import type { AutocompleteInputGroupProps as BaseAutocompleteInputGroupProps } from "@base-ui/react/autocomplete";
 import { Autocomplete as BaseAutocomplete } from "@base-ui/react/autocomplete";
-import { Cluster } from "@elemental/layout/cluster";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { Cluster } from "@skeletal/layout/cluster";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./command-palette.module.css";
 
 /**

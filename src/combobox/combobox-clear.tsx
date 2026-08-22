@@ -1,8 +1,8 @@
 import type { ComboboxClearProps as BaseComboboxClearProps } from "@base-ui/react/combobox";
 import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
-import type { ButtonProps } from "@elemental/button/button";
-import { Button } from "@elemental/button/button";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import type { ButtonProps } from "@skeletal/button/button";
+import { Button } from "@skeletal/button/button";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./combobox.module.css";
 
 /**

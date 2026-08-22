@@ -1,4 +1,4 @@
-import { Cluster, Drawer } from "@elemental";
+import { Cluster, Drawer } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 const FILTER_ROWS = Array.from(
@@ -15,7 +15,7 @@ export const drawerDoc: Doc = {
   examples: [
     {
       title: "Right",
-      code: `import { Drawer } from "@vikram-hegde/elemental";
+      code: `import { Drawer } from "@vikram-hegde/skeletal";
 
 <Drawer.Root side="right">
   <Drawer.Trigger>View cart</Drawer.Trigger>
@@ -131,7 +131,7 @@ export const drawerDoc: Doc = {
     },
     {
       title: "Sticky header & footer",
-      code: `import { Drawer } from "@vikram-hegde/elemental";
+      code: `import { Drawer } from "@vikram-hegde/skeletal";
 
 <Drawer.Root side="right">
   <Drawer.Trigger>Filters</Drawer.Trigger>

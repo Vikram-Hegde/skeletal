@@ -1,4 +1,4 @@
-import { Box, Button, Cluster, Stack } from "@elemental";
+import { Box, Button, Cluster, Stack } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const stackDoc: Doc = {

@@ -1,4 +1,4 @@
-import { Box, Button, Cluster, Skeleton, Stack } from "@elemental";
+import { Box, Button, Cluster, Skeleton, Stack } from "@skeletal";
 import type { CSSProperties } from "react";
 import { useState } from "react";
 import type { Doc } from "@/docs/types";

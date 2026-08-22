@@ -15,7 +15,7 @@ import { DialogViewport } from "./dialog-viewport";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Dialog } from '@vikram-hegde/elemental'
+ * import { Dialog } from '@vikram-hegde/skeletal'
  *
  * <Dialog.Root>
  *   <Dialog.Trigger>Open</Dialog.Trigger>

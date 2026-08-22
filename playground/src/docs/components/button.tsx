@@ -1,5 +1,5 @@
 import { ArrowRight, PaperPlaneTilt, Plus, Sparkle } from "@phosphor-icons/react";
-import { Button, Cluster, Icon } from "@elemental";
+import { Button, Cluster, Icon } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const buttonDoc: Doc = {
@@ -10,7 +10,7 @@ export const buttonDoc: Doc = {
   examples: [
     {
       title: "Variants",
-      code: `import { Button } from "@vikram-hegde/elemental";
+      code: `import { Button } from "@vikram-hegde/skeletal";
 
 <Button>Primary</Button>
 <Button variant="secondary">Secondary</Button>

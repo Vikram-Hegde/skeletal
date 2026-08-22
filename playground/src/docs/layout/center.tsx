@@ -1,4 +1,4 @@
-import { Box, Button, Center, Cluster, Stack } from "@elemental";
+import { Box, Button, Center, Cluster, Stack } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const centerDoc: Doc = {

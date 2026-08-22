@@ -1,5 +1,5 @@
 import { Info, TextB, TextItalic, TextUnderline } from "@phosphor-icons/react";
-import { Cluster, Icon, Tooltip } from "@elemental";
+import { Cluster, Icon, Tooltip } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 const tip = Tooltip.createHandle();
@@ -104,7 +104,7 @@ export const tooltipDoc: Doc = {
   examples: [
     {
       title: "Basic",
-      code: `import { Tooltip } from "@vikram-hegde/elemental";
+      code: `import { Tooltip } from "@vikram-hegde/skeletal";
 
 <Tooltip.Root>
   <Tooltip.Trigger aria-label="Bold">

@@ -13,8 +13,8 @@
     "emitDeclarationOnly": true,
     "verbatimModuleSyntax": true,
     "paths": {
-      "@elemental": ["./src/index.ts"],
-      "@elemental/*": ["./src/*"]
+      "@skeletal": ["./src/index.ts"],
+      "@skeletal/*": ["./src/*"]
     }
   },
   "include": ["src"]

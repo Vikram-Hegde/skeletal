@@ -1,4 +1,4 @@
-import { Reel } from "@elemental";
+import { Reel } from "@skeletal";
 import { DemoCard } from "@/docs/helpers";
 import type { Doc } from "@/docs/types";
 

@@ -19,7 +19,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./playground/src", import.meta.url)),
-      "@elemental": fileURLToPath(new URL("./src", import.meta.url)),
+      "@skeletal": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
   test: {

@@ -1,6 +1,6 @@
 import type { TooltipPortalProps as BaseTooltipPortalProps } from "@base-ui/react/tooltip";
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./tooltip.module.css";
 
 /**

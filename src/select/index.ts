@@ -24,7 +24,7 @@ import { SelectValue } from "./select-value";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Select } from '@vikram-hegde/elemental'
+ * import { Select } from '@vikram-hegde/skeletal'
  *
  * const items = [
  *   { value: 'system', label: 'System default' },

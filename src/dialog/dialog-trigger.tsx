@@ -1,7 +1,7 @@
 import type { DialogTriggerProps as BaseDialogTriggerProps } from "@base-ui/react/dialog";
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
-import type { ButtonProps } from "@elemental/button/button";
-import { Button } from "@elemental/button/button";
+import type { ButtonProps } from "@skeletal/button/button";
+import { Button } from "@skeletal/button/button";
 
 /**
  * A button that opens the dialog. Renders a `<button>` element.

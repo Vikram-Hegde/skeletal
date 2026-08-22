@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Switch } from "@elemental";
+import { Switch } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 function ControlledSwitch() {

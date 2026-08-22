@@ -1,4 +1,4 @@
-import { Box, Imposter } from "@elemental";
+import { Box, Imposter } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const imposterDoc: Doc = {

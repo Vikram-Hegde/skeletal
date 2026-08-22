@@ -13,7 +13,7 @@ interface ThemeValue {
 const ThemeContext = createContext<ThemeValue | null>(null);
 
 function getInitialTheme(): Theme {
-  const stored = localStorage.getItem("elemental:theme") as Theme | null;
+  const stored = localStorage.getItem("skeletal:theme") as Theme | null;
   if (stored === "light" || stored === "dark") return stored;
   // `system` (or legacy) means no explicit preference — follow OS
   return "system";
@@ -24,11 +24,11 @@ function applyTheme(theme: Theme) {
   root.classList.remove("light", "dark");
   if (theme === "light" || theme === "dark") {
     root.classList.add(theme);
-    localStorage.setItem("elemental:theme", theme);
+    localStorage.setItem("skeletal:theme", theme);
   } else {
     // Two-state toggle: no stored value = follow system (Lea Verou / Josh
     // Collinsworth — store only when explicit choice differs from system)
-    localStorage.removeItem("elemental:theme");
+    localStorage.removeItem("skeletal:theme");
   }
 }
 

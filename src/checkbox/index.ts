@@ -8,7 +8,7 @@ import { CheckboxRoot } from "./checkbox-root";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Checkbox } from '@vikram-hegde/elemental'
+ * import { Checkbox } from '@vikram-hegde/skeletal'
  *
  * <label>
  *   <Checkbox.Root defaultChecked name="terms" required />

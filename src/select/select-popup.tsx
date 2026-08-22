@@ -1,6 +1,6 @@
 import type { SelectPopupProps as BaseSelectPopupProps } from "@base-ui/react/select";
 import { Select as BaseSelect } from "@base-ui/react/select";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./select.module.css";
 
 /**

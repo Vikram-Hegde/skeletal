@@ -1,5 +1,5 @@
 import { Check, Trash } from "@phosphor-icons/react";
-import { Icon, Menu } from "@elemental";
+import { Icon, Menu } from "@skeletal";
 import { useState } from "react";
 import type { Doc } from "@/docs/types";
 
@@ -131,7 +131,7 @@ export const menuDoc: Doc = {
   examples: [
     {
       title: "Basic",
-      code: `import { Menu } from "@vikram-hegde/elemental";
+      code: `import { Menu } from "@vikram-hegde/skeletal";
 
 <Menu.Root>
   <Menu.Trigger>Options</Menu.Trigger>

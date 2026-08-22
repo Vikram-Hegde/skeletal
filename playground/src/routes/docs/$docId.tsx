@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight, Check, Copy } from "@phosphor-icons/react";
-import { Box, Button, Cluster, Container, Icon, Stack } from "@elemental";
+import { Box, Button, Cluster, Container, Icon, Stack } from "@skeletal";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { tokenize } from "rangi";
 import { githubDark, githubLight } from "rangi/themes";

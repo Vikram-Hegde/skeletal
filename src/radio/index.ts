@@ -8,7 +8,7 @@ import { RadioRoot } from "./radio-root";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Radio } from '@vikram-hegde/elemental'
+ * import { Radio } from '@vikram-hegde/skeletal'
  *
  * <Radio.Group defaultValue="free" name="plan">
  *   <label>

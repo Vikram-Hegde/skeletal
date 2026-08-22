@@ -1,5 +1,5 @@
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { Button, CommandPalette, Icon } from "@elemental";
+import { Button, CommandPalette, Icon } from "@skeletal";
 import { useState } from "react";
 import type { Doc } from "@/docs/types";
 
@@ -58,7 +58,7 @@ export const commandPaletteDoc: Doc = {
   examples: [
     {
       title: "Basic",
-      code: `import { CommandPalette } from "@vikram-hegde/elemental";
+      code: `import { CommandPalette } from "@vikram-hegde/skeletal";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 
 const [open, setOpen] = useState(false);

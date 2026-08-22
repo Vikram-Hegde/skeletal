@@ -1,4 +1,4 @@
-import { Switcher } from "@elemental";
+import { Switcher } from "@skeletal";
 import { DemoCard } from "@/docs/helpers";
 import type { Doc } from "@/docs/types";
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Checkbox } from "@elemental";
+import { Checkbox } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 function ControlledGroup() {

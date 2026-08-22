@@ -6,7 +6,7 @@ import {
   TextB,
   Warning,
 } from "@phosphor-icons/react";
-import { Button, Checkbox, Icon, Radio, Switch } from "@elemental";
+import { Button, Checkbox, Icon, Radio, Switch } from "@skeletal";
 import type { CSSProperties, ReactNode } from "react";
 
 /**

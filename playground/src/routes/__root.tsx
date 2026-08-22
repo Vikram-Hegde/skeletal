@@ -1,5 +1,5 @@
 import { House, List, MagnifyingGlass, Moon, Sun, X } from "@phosphor-icons/react";
-import { Badge, Button, CommandPalette, Drawer, Icon, Sidebar, Stack } from "@elemental";
+import { Badge, Button, CommandPalette, Drawer, Icon, Sidebar, Stack } from "@skeletal";
 import { createRootRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { DOC_GROUPS, DOCS } from "@/docs";
@@ -22,8 +22,8 @@ interface CommandGroup {
   items: Command[];
 }
 
-const GITHUB_URL = "https://github.com/vikram-hegde/elemental";
-const NPM_URL = "https://www.npmjs.com/package/@vikram-hegde/elemental";
+const GITHUB_URL = "https://github.com/vikram-hegde/skeletal";
+const NPM_URL = "https://www.npmjs.com/package/@vikram-hegde/skeletal";
 
 export const Route = createRootRoute({
   notFoundComponent: ComponentNotFound,
@@ -183,7 +183,7 @@ function RootComponent() {
           </Button>
           <Link to="/" className="docs-brand">
             <BrandMark />
-            <span className="docs-brand__label">Elemental</span>
+            <span className="docs-brand__label">Skeletal</span>
           </Link>
           <a className="docs-skip" href="#docs-main">
             Skip to content
@@ -222,10 +222,10 @@ function RootComponent() {
           </div>
           <footer className="docs-sidebar__footer">
             <p className="docs-sidebar__pkg">
-              <strong>Elemental</strong>
+              <strong>Skeletal</strong>
               <Badge variant="outline">v{pkg.version}</Badge>
             </p>
-            <p className="docs-sidebar__pkg-name">@vikram-hegde/elemental</p>
+            <p className="docs-sidebar__pkg-name">@vikram-hegde/skeletal</p>
             <p className="docs-sidebar__links">
               <a className="docs-sidebar__link" href={GITHUB_URL} target="_blank" rel="noreferrer">
                 GitHub
@@ -249,7 +249,7 @@ function RootComponent() {
               <Drawer.Header>
                 <Drawer.Title className="docs-menu__title">
                   <BrandMark />
-                  <span className="docs-brand__label">Elemental</span>
+                  <span className="docs-brand__label">Skeletal</span>
                 </Drawer.Title>
                 <Drawer.Close size="sm" variant="ghost" aria-label="Close navigation menu">
                   <Icon name={X} size={16} />

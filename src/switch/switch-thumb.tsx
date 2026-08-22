@@ -1,6 +1,6 @@
 import type { SwitchThumbProps as BaseSwitchThumbProps } from "@base-ui/react/switch";
 import { Switch as BaseSwitch } from "@base-ui/react/switch";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./switch.module.css";
 
 /**

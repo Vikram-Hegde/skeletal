@@ -1,7 +1,7 @@
-import { DialogClose } from "@elemental/dialog/dialog-close";
-import { DialogDescription } from "@elemental/dialog/dialog-description";
-import { DialogPortal } from "@elemental/dialog/dialog-portal";
-import { DialogTitle } from "@elemental/dialog/dialog-title";
+import { DialogClose } from "@skeletal/dialog/dialog-close";
+import { DialogDescription } from "@skeletal/dialog/dialog-description";
+import { DialogPortal } from "@skeletal/dialog/dialog-portal";
+import { DialogTitle } from "@skeletal/dialog/dialog-title";
 import { DrawerBackdrop } from "./drawer-backdrop";
 import { DrawerContent } from "./drawer-content";
 import { DrawerFooter } from "./drawer-footer";
@@ -18,7 +18,7 @@ import { DrawerViewport } from "./drawer-viewport";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Drawer } from '@vikram-hegde/elemental'
+ * import { Drawer } from '@vikram-hegde/skeletal'
  *
  * <Drawer.Root side="right">
  *   <Drawer.Trigger>Open</Drawer.Trigger>

@@ -1,6 +1,6 @@
 import type { DialogBackdropProps as BaseDialogBackdropProps } from "@base-ui/react/dialog";
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./dialog.module.css";
 
 /**

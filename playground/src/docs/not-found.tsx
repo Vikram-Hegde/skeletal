@@ -1,5 +1,5 @@
 import { ArrowRight, ArrowUpRight } from "@phosphor-icons/react";
-import { Cluster, Cover, Icon, Stack } from "@elemental";
+import { Cluster, Cover, Icon, Stack } from "@skeletal";
 import type { NotFoundRouteProps } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import type { Doc } from "@/docs";

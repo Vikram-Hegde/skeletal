@@ -1,17 +1,17 @@
 import "./index.css";
 
-export type { AlertDialogProps, AlertDialogTriggerProps } from "@elemental/alert-dialog";
-export { AlertDialog } from "@elemental/alert-dialog";
-export type { BadgeProps, BadgeVariant } from "@elemental/badge";
-export { Badge } from "@elemental/badge";
-export type { ButtonProps, ButtonSize, ButtonVariant } from "@elemental/button";
-export { Button } from "@elemental/button";
+export type { AlertDialogProps, AlertDialogTriggerProps } from "@skeletal/alert-dialog";
+export { AlertDialog } from "@skeletal/alert-dialog";
+export type { BadgeProps, BadgeVariant } from "@skeletal/badge";
+export { Badge } from "@skeletal/badge";
+export type { ButtonProps, ButtonSize, ButtonVariant } from "@skeletal/button";
+export { Button } from "@skeletal/button";
 export type {
   CheckboxGroupProps,
   CheckboxIndicatorProps,
   CheckboxProps,
-} from "@elemental/checkbox";
-export { Checkbox } from "@elemental/checkbox";
+} from "@skeletal/checkbox";
+export { Checkbox } from "@skeletal/checkbox";
 export type {
   ComboboxArrowProps,
   ComboboxBackdropProps,
@@ -39,8 +39,8 @@ export type {
   ComboboxStatusProps,
   ComboboxTriggerProps,
   ComboboxValueProps,
-} from "@elemental/combobox";
-export { Combobox } from "@elemental/combobox";
+} from "@skeletal/combobox";
+export { Combobox } from "@skeletal/combobox";
 export type {
   CommandPaletteContentProps,
   CommandPaletteEmptyProps,
@@ -53,8 +53,8 @@ export type {
   CommandPaletteListProps,
   CommandPaletteOpenChangeDetails,
   CommandPaletteRootProps,
-} from "@elemental/command-palette";
-export { CommandPalette } from "@elemental/command-palette";
+} from "@skeletal/command-palette";
+export { CommandPalette } from "@skeletal/command-palette";
 export type {
   DialogBackdropProps,
   DialogCloseProps,
@@ -67,8 +67,8 @@ export type {
   DialogTitleProps,
   DialogTriggerProps,
   DialogViewportProps,
-} from "@elemental/dialog";
-export { Dialog } from "@elemental/dialog";
+} from "@skeletal/dialog";
+export { Dialog } from "@skeletal/dialog";
 export type {
   DrawerBackdropProps,
   DrawerContentProps,
@@ -81,10 +81,10 @@ export type {
   DrawerSwipeAreaProps,
   DrawerTriggerProps,
   DrawerViewportProps,
-} from "@elemental/drawer";
-export { Drawer } from "@elemental/drawer";
-export type { IconProps } from "@elemental/icon";
-export { Icon } from "@elemental/icon";
+} from "@skeletal/drawer";
+export { Drawer } from "@skeletal/drawer";
+export type { IconProps } from "@skeletal/icon";
+export { Icon } from "@skeletal/icon";
 export type {
   BoxProps,
   CenterProps,
@@ -99,7 +99,7 @@ export type {
   SidebarProps,
   StackProps,
   SwitcherProps,
-} from "@elemental/layout";
+} from "@skeletal/layout";
 export {
   Box,
   Center,
@@ -113,7 +113,7 @@ export {
   Sidebar,
   Stack,
   Switcher,
-} from "@elemental/layout";
+} from "@skeletal/layout";
 export type {
   MenuArrowProps,
   MenuBackdropProps,
@@ -135,14 +135,14 @@ export type {
   MenuSubmenuTriggerProps,
   MenuTriggerProps,
   MenuViewportProps,
-} from "@elemental/menu";
-export { Menu } from "@elemental/menu";
+} from "@skeletal/menu";
+export { Menu } from "@skeletal/menu";
 export type {
   RadioGroupProps,
   RadioIndicatorProps,
   RadioProps,
-} from "@elemental/radio";
-export { Radio } from "@elemental/radio";
+} from "@skeletal/radio";
+export { Radio } from "@skeletal/radio";
 export type {
   SelectArrowProps,
   SelectBackdropProps,
@@ -163,14 +163,14 @@ export type {
   SelectSeparatorProps,
   SelectTriggerProps,
   SelectValueProps,
-} from "@elemental/select";
-export { Select } from "@elemental/select";
-export type { SkeletonProps } from "@elemental/skeleton";
-export { Skeleton } from "@elemental/skeleton";
-export type { SpinnerProps } from "@elemental/spinner";
-export { Spinner } from "@elemental/spinner";
-export type { SwitchProps, SwitchThumbProps } from "@elemental/switch";
-export { Switch } from "@elemental/switch";
+} from "@skeletal/select";
+export { Select } from "@skeletal/select";
+export type { SkeletonProps } from "@skeletal/skeleton";
+export { Skeleton } from "@skeletal/skeleton";
+export type { SpinnerProps } from "@skeletal/spinner";
+export { Spinner } from "@skeletal/spinner";
+export type { SwitchProps, SwitchThumbProps } from "@skeletal/switch";
+export { Switch } from "@skeletal/switch";
 export type {
   TooltipArrowProps,
   TooltipHandle,
@@ -181,5 +181,5 @@ export type {
   TooltipProviderProps,
   TooltipTriggerProps,
   TooltipViewportProps,
-} from "@elemental/tooltip";
-export { Tooltip } from "@elemental/tooltip";
+} from "@skeletal/tooltip";
+export { Tooltip } from "@skeletal/tooltip";

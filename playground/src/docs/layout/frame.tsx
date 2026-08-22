@@ -1,4 +1,4 @@
-import { Frame, Grid } from "@elemental";
+import { Frame, Grid } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const frameDoc: Doc = {

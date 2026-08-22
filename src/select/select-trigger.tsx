@@ -1,8 +1,8 @@
 import type { SelectTriggerProps as BaseSelectTriggerProps } from "@base-ui/react/select";
 import { Select as BaseSelect } from "@base-ui/react/select";
-import type { ButtonProps } from "@elemental/button/button";
-import { Button } from "@elemental/button/button";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import type { ButtonProps } from "@skeletal/button/button";
+import { Button } from "@skeletal/button/button";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./select.module.css";
 
 /**

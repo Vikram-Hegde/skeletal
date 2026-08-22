@@ -25,7 +25,7 @@ import { MenuViewport } from "./menu-viewport";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Menu } from '@vikram-hegde/elemental'
+ * import { Menu } from '@vikram-hegde/skeletal'
  *
  * <Menu.Root>
  *   <Menu.Trigger>Options</Menu.Trigger>

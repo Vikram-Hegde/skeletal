@@ -1,5 +1,5 @@
-import { styleVars } from "@elemental/lib/style-vars";
-import { transformChildren } from "@elemental/lib/transform-children";
+import { styleVars } from "@skeletal/lib/style-vars";
+import { transformChildren } from "@skeletal/lib/transform-children";
 import { clsx } from "clsx";
 import type { CSSProperties, ElementType, ReactElement } from "react";
 import { Children, cloneElement, createElement } from "react";

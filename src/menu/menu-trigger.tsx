@@ -1,7 +1,7 @@
 import type { MenuTriggerProps as BaseMenuTriggerProps } from "@base-ui/react/menu";
 import { Menu as BaseMenu } from "@base-ui/react/menu";
-import type { ButtonProps } from "@elemental/button/button";
-import { Button } from "@elemental/button/button";
+import type { ButtonProps } from "@skeletal/button/button";
+import { Button } from "@skeletal/button/button";
 
 /**
  * A button that opens the menu. Renders a `<button>` element.

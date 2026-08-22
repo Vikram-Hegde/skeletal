@@ -1,4 +1,4 @@
-import { AlertDialog } from "@elemental";
+import { AlertDialog } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const alertDialogDoc: Doc = {
@@ -10,7 +10,7 @@ export const alertDialogDoc: Doc = {
   examples: [
     {
       title: "Basic",
-      code: `import { AlertDialog } from "@vikram-hegde/elemental";
+      code: `import { AlertDialog } from "@vikram-hegde/skeletal";
 
 <AlertDialog.Root>
   <AlertDialog.Trigger variant="destructive">Discard draft</AlertDialog.Trigger>

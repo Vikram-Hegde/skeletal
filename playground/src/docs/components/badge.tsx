@@ -1,4 +1,4 @@
-import { Badge, Cluster } from "@elemental";
+import { Badge, Cluster } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const badgeDoc: Doc = {

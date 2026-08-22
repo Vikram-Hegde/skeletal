@@ -1,6 +1,6 @@
-import { DialogBackdrop } from "@elemental/dialog/dialog-backdrop";
-import { DialogPortal } from "@elemental/dialog/dialog-portal";
-import { DialogViewport } from "@elemental/dialog/dialog-viewport";
+import { DialogBackdrop } from "@skeletal/dialog/dialog-backdrop";
+import { DialogPortal } from "@skeletal/dialog/dialog-portal";
+import { DialogViewport } from "@skeletal/dialog/dialog-viewport";
 import { CommandPaletteContent } from "./command-palette-content";
 import { CommandPaletteEmpty } from "./command-palette-empty";
 import { CommandPaletteFooter } from "./command-palette-footer";
@@ -18,7 +18,7 @@ import { CommandPaletteRoot } from "./command-palette-root";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { CommandPalette } from '@vikram-hegde/elemental'
+ * import { CommandPalette } from '@vikram-hegde/skeletal'
  *
  * <CommandPalette.Root open={open} onOpenChange={setOpen} items={commands}>
  *   <CommandPalette.Portal>

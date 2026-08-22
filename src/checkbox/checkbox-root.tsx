@@ -1,6 +1,6 @@
 import type { CheckboxRootProps as BaseCheckboxRootProps } from "@base-ui/react/checkbox";
 import { Checkbox as BaseCheckbox } from "@base-ui/react/checkbox";
-import { mergeClassName } from "@elemental/lib/merge-class-name";
+import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./checkbox.module.css";
 import { CheckboxIndicator } from "./checkbox-indicator";
 

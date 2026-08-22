@@ -1,4 +1,4 @@
-import { Grid } from "@elemental";
+import { Grid } from "@skeletal";
 import { DemoCard } from "@/docs/helpers";
 import type { Doc } from "@/docs/types";
 

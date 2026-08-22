@@ -1,4 +1,4 @@
-# Elemental Design System
+# Skeletal Design System
 
 - use `pnpm` for running all commands (`pnpm install`, `pnpm run play`, `pnpm run build`, `pnpm run gen:docs`). Node >=20.
 - no useEffect's or useState's, we'll be using base-ui as the library which handles the complexity for us, the design system itself should be a styling layer alone.
@@ -15,7 +15,7 @@
 - Each component is exported as a single compound object, imported as one name:
 
   ```ts
-  import { Dialog } from '@vikram-hegde/elemental'
+  import { Dialog } from '@vikram-hegde/skeletal'
   ```
 
 - Parts are accessed as properties on the object: `Dialog.Trigger`, `Dialog.Content`, `Dialog.Close`, etc. Do not export individual parts as top-level named exports.

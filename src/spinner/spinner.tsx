@@ -1,4 +1,4 @@
-import { styleVars } from "@elemental/lib/style-vars";
+import { styleVars } from "@skeletal/lib/style-vars";
 import { clsx } from "clsx";
 import type { HTMLAttributes } from "react";
 import styles from "./spinner.module.css";
