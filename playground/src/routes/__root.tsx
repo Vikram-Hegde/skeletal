@@ -1,7 +1,7 @@
 import { House, List, MagnifyingGlass, Moon, Sun, X } from "@phosphor-icons/react";
-import { Badge, Button, CommandPalette, Drawer, Icon, Sidebar, Stack } from "@skeletal";
+import { Badge, Button, CommandPalette, Drawer, Icon, ScrollArea, Sidebar, Stack } from "@skeletal";
 import { createRootRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DOC_GROUPS, DOCS } from "@/docs";
 import { ComponentNotFound } from "@/docs/not-found";
 import { fuzzyMatch } from "@/lib/fuzzy";
@@ -22,8 +22,8 @@ interface CommandGroup {
   items: Command[];
 }
 
-const GITHUB_URL = "https://github.com/vikram-hegde/skeletal";
-const NPM_URL = "https://www.npmjs.com/package/@vikram-hegde/skeletal";
+const GITHUB_URL = "https://github.com/someGoodBits/project-backbone";
+const NPM_URL = "https://www.npmjs.com/package/@project-backbone/skeletal";
 
 export const Route = createRootRoute({
   notFoundComponent: ComponentNotFound,
@@ -85,7 +85,6 @@ function RootComponent() {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [paletteQuery, setPaletteQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const navScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -97,23 +96,6 @@ function RootComponent() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
-
-  useEffect(() => {
-    const el = navScrollRef.current;
-    if (!el) return;
-    const update = () => {
-      el.toggleAttribute("data-scrolled", el.scrollTop > 8);
-      el.toggleAttribute("data-at-end", el.scrollTop >= el.scrollHeight - el.clientHeight - 8);
-    };
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    const observer = new ResizeObserver(update);
-    observer.observe(el);
-    return () => {
-      el.removeEventListener("scroll", update);
-      observer.disconnect();
-    };
   }, []);
 
   const commands = useMemo<CommandGroup[]>(
@@ -215,17 +197,22 @@ function RootComponent() {
 
       <Sidebar className="docs-body" sideWidth="15.5rem" contentMin="0" space="0">
         <Stack as="nav" className="docs-sidebar" space="0" aria-label="Components">
-          <div ref={navScrollRef} className="docs-sidebar__scroll">
-            <div className="docs-sidebar__shadow docs-sidebar__shadow--top" aria-hidden="true" />
-            <DocsNav className="docs-sidebar__nav" />
-            <div className="docs-sidebar__shadow docs-sidebar__shadow--bottom" aria-hidden="true" />
-          </div>
+          <ScrollArea.Root className="docs-sidebar__scroll">
+            <ScrollArea.Viewport fade fadeSize="1.5rem">
+              <ScrollArea.Content>
+                <DocsNav className="docs-sidebar__nav" />
+              </ScrollArea.Content>
+            </ScrollArea.Viewport>
+            <ScrollArea.Scrollbar>
+              <ScrollArea.Thumb />
+            </ScrollArea.Scrollbar>
+          </ScrollArea.Root>
           <footer className="docs-sidebar__footer">
             <p className="docs-sidebar__pkg">
               <strong>Skeletal</strong>
               <Badge variant="outline">v{pkg.version}</Badge>
             </p>
-            <p className="docs-sidebar__pkg-name">@vikram-hegde/skeletal</p>
+            <p className="docs-sidebar__pkg-name">@project-backbone/skeletal</p>
             <p className="docs-sidebar__links">
               <a className="docs-sidebar__link" href={GITHUB_URL} target="_blank" rel="noreferrer">
                 GitHub

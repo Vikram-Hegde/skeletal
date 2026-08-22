@@ -12,6 +12,7 @@ import { radioDoc } from "@/docs/components/radio";
 import { selectDoc } from "@/docs/components/select";
 import { skeletonDoc } from "@/docs/components/skeleton";
 import { spinnerDoc } from "@/docs/components/spinner";
+import { scrollAreaDoc } from "@/docs/components/scroll-area";
 import { switchDoc } from "@/docs/components/switch";
 import { tooltipDoc } from "@/docs/components/tooltip";
 import { apiProps } from "@/docs/generated/api.generated";
@@ -46,6 +47,7 @@ const RAW_DOCS: [Doc, ...Doc[]] = [
   skeletonDoc,
   spinnerDoc,
   tooltipDoc,
+  scrollAreaDoc,
   stackDoc,
   boxDoc,
   clusterDoc,
@@ -61,7 +63,7 @@ const RAW_DOCS: [Doc, ...Doc[]] = [
 ];
 
 /**
- * Each doc's API table is the JSDoc-derived rows (from `pnpm run gen:docs`)
+ * Each doc's API table is the JSDoc-derived rows (from `bun run gen:docs`)
  * merged with the hand-curated extras in the doc file. A curated row with the
  * same `name` overrides the generated one (e.g. an imported alias type written
  * out by hand).

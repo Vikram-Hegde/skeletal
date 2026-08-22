@@ -165,6 +165,15 @@ export type {
   SelectValueProps,
 } from "@skeletal/select";
 export { Select } from "@skeletal/select";
+export type {
+  ScrollAreaContentProps,
+  ScrollAreaCornerProps,
+  ScrollAreaRootProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaViewportProps,
+} from "@skeletal/scroll-area";
+export { ScrollArea } from "@skeletal/scroll-area";
 export type { SkeletonProps } from "@skeletal/skeleton";
 export { Skeleton } from "@skeletal/skeleton";
 export type { SpinnerProps } from "@skeletal/spinner";

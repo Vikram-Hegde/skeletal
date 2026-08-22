@@ -50,6 +50,7 @@ const REGISTRY: Record<string, { file: string; interface: string }> = {
   checkbox: { file: "src/checkbox/checkbox-root.tsx", interface: "CheckboxProps" },
   radio: { file: "src/radio/radio-root.tsx", interface: "RadioProps" },
   switch: { file: "src/switch/switch-root.tsx", interface: "SwitchProps" },
+  "scroll-area": { file: "src/scroll-area/scroll-area-viewport.tsx", interface: "ScrollAreaViewportProps" },
   stack: { file: "src/layout/stack.tsx", interface: "StackProps" },
   box: { file: "src/layout/box.tsx", interface: "BoxProps" },
   cluster: { file: "src/layout/cluster.tsx", interface: "ClusterProps" },

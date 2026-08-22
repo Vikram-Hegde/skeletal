@@ -1,0 +1,166 @@
+@layer skeletal {
+  .scroll-area {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-area__viewport {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+    outline: none;
+  }
+
+  .scroll-area__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-area__viewport:focus-visible {
+    outline: 2px solid var(--sk-ring);
+    outline-offset: -2px;
+  }
+
+  /* Fade: soft mask at scroll edges. Driven by the --scroll-area-overflow-*
+     CSS variables Base UI sets on the viewport (distance from each edge in px).
+     Before hydration those vars are 0 (or inherit fallback), so the bottom
+     uses a fallback of the fade size to hint that more content exists. */
+  .scroll-area__viewport--fade {
+    --_scroll-area-fade-size: 2rem;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      black min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-y-start)),
+      black
+        calc(100% - min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-y-end, var(--_scroll-area-fade-size)))),
+      transparent 100%
+    );
+    mask-repeat: no-repeat;
+  }
+
+  .scroll-area__viewport--fade-x {
+    --_scroll-area-fade-size: 2rem;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-x-start)),
+      black
+        calc(100% - min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-x-end, var(--_scroll-area-fade-size)))),
+      transparent 100%
+    );
+    mask-repeat: no-repeat;
+  }
+
+  .scroll-area__viewport--fade-both {
+    --_scroll-area-fade-size: 2rem;
+    mask-image:
+      linear-gradient(
+        to bottom,
+        transparent 0,
+        black min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-y-start)),
+        black
+          calc(100% - min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-y-end, var(--_scroll-area-fade-size)))),
+        transparent 100%
+      ),
+      linear-gradient(
+        to right,
+        transparent 0,
+        black min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-x-start)),
+        black
+          calc(100% - min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-x-end, var(--_scroll-area-fade-size)))),
+        transparent 100%
+      );
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+    mask-repeat: no-repeat;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* No animation needed — mask tracks scroll position via CSS vars. */
+  }
+
+  .scroll-area__content {
+    /* Keep content at natural size; Root/Viewport control clipping. */
+    display: block;
+    min-width: 100%;
+  }
+
+  .scroll-area__scrollbar {
+    display: flex;
+    position: absolute;
+    background-color: transparent;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease-out;
+    user-select: none;
+    touch-action: none;
+  }
+
+  .scroll-area__scrollbar[data-hovering],
+  .scroll-area__scrollbar[data-scrolling] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .scroll-area__scrollbar[data-hovering] {
+    transition-duration: 150ms;
+  }
+
+  .scroll-area__scrollbar[data-scrolling] {
+    transition-duration: 0ms;
+  }
+
+  .scroll-area__scrollbar[data-orientation="vertical"] {
+    top: 0;
+    right: 0;
+    bottom: var(--scroll-area-corner-height, 0);
+    width: 0.625rem;
+    padding: 2px;
+    justify-content: center;
+  }
+
+  .scroll-area__scrollbar[data-orientation="horizontal"] {
+    bottom: 0;
+    left: 0;
+    right: var(--scroll-area-corner-width, 0);
+    height: 0.625rem;
+    padding: 2px;
+    align-items: center;
+  }
+
+  .scroll-area__thumb {
+    flex-shrink: 0;
+    background-color: var(--sk-scrollbar-thumb);
+    border-radius: 999px;
+    position: relative;
+  }
+
+  .scroll-area__thumb:hover {
+    background-color: var(--sk-scrollbar-thumb-hover);
+  }
+
+  .scroll-area__thumb[data-orientation="vertical"] {
+    width: 100%;
+    min-height: var(--scroll-area-thumb-height);
+  }
+
+  .scroll-area__thumb[data-orientation="horizontal"] {
+    height: 100%;
+    min-width: var(--scroll-area-thumb-width);
+  }
+
+  .scroll-area__corner {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: var(--scroll-area-corner-width);
+    height: var(--scroll-area-corner-height);
+    background-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-area__scrollbar {
+      transition: none;
+    }
+  }
+}

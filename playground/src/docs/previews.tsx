@@ -510,4 +510,50 @@ export const PREVIEWS: Record<string, ReactNode> = {
       </div>
     </div>
   ),
+
+  "scroll-area": (
+    <div
+      style={{
+        width: "42cqw",
+        height: "32cqw",
+        border: "1px solid var(--docs-border)",
+        borderRadius: "2.5cqw",
+        background: "var(--docs-panel)",
+        overflow: "hidden",
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        padding: "2.5cqw",
+        gap: "1.875cqw",
+        maskImage: "linear-gradient(to bottom, transparent 0, black 12%, black 88%, transparent 100%)",
+      }}
+    >
+      <div className="pv-line" style={{ width: "80%" }} />
+      <div className="pv-line" style={{ width: "100%" }} />
+      <div className="pv-line" style={{ width: "90%" }} />
+      <div className="pv-line" style={{ width: "70%" }} />
+      <div className="pv-line" style={{ width: "85%" }} />
+      <div
+        style={{
+          position: "absolute",
+          top: "1.25cqw",
+          right: "1.875cqw",
+          bottom: "1.25cqw",
+          width: "1.25cqw",
+          borderRadius: "999px",
+          background: "var(--docs-border)",
+        }}
+      >
+        <div
+          style={{
+            marginTop: "3cqw",
+            height: "10cqw",
+            borderRadius: "999px",
+            background: "var(--docs-muted)",
+            opacity: 0.5,
+          }}
+        />
+      </div>
+    </div>
+  ),
 };

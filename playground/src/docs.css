@@ -270,56 +270,15 @@
   .docs-sidebar__scroll {
     flex: 1;
     min-height: 0;
-    overflow-y: auto;
-    padding: 0;
+    /* ScrollArea.Root now owns the clipping; the Viewport does the
+     scrolling and its `fade` prop draws the edge mask via
+     --scroll-area-overflow-y-start/end — no sticky shadows or
+     scroll listeners needed. */
   }
 
-  /* Breathing room around the nav list. It lives on the content (not the
-   scroll container) so the sticky edge shadows span the full width and can
-   reach the fold — a sticky element can't cross the container's padding. */
+  /* Breathing room around the nav list. */
   .docs-sidebar__nav {
     padding: 1rem 0.75rem 3rem;
-  }
-
-  /* Scrolling edge shadows. The classic `background-attachment: local`
-   masking trick and `animation-timeline: scroll()` both render unreliably in
-   Chromium once the nav is composited (the background/timeline fails to track
-   the scroll position), so the shadows are `position: sticky` gradient bands
-   whose opacity is driven by `data-scrolled` / `data-at-end` attributes set
-   from a small scroll listener in `__root.tsx`. The top band fades in once you
-   scroll away from the top; the bottom band fades out as you reach the end.
-   The negative margins remove the bands from layout flow so the nav isn't
-   pushed. In dark mode the docs surface is near-black (`oklch(0.1)`, ~RGB 2),
-   where a black shadow is unreadable, so the band flips to a subtly lighter
-   grey (`--docs-shadow`). */
-  .docs-sidebar__shadow {
-    position: sticky;
-    height: 1.5rem;
-    margin-bottom: -1.5rem;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 150ms ease;
-  }
-
-  .docs-sidebar__shadow--top {
-    top: 0;
-    background: linear-gradient(to bottom, var(--docs-shadow), transparent);
-  }
-
-  .docs-sidebar__shadow--bottom {
-    bottom: 0;
-    margin-top: -1.5rem;
-    margin-bottom: 0;
-    background: linear-gradient(to top, var(--docs-shadow), transparent);
-  }
-
-  .docs-sidebar__scroll[data-scrolled] .docs-sidebar__shadow--top {
-    opacity: 1;
-  }
-
-  .docs-sidebar__scroll:not([data-at-end]) .docs-sidebar__shadow--bottom {
-    opacity: 1;
   }
 
   .docs-nav-title {
