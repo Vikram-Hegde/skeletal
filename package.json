@@ -19,6 +19,9 @@
   "scripts": {
     "gen:docs": "tsx scripts/gen-docs-api.mts",
     "build": "pnpm run css:types && tsdown",
+    "build:docs": "pnpm run gen:docs && vite build",
+    "preview:docs": "vite preview",
+    "deploy:docs": "pnpm run build:docs && wrangler pages deploy playground/dist --project-name=skeletal",
     "dev": "tsdown --watch",
     "play": "pnpm run gen:docs && vite",
     "test": "vitest",
@@ -53,7 +56,8 @@
     "typescript": "^7.0.2",
     "vite": "^8.1.4",
     "vitest": "^4.1.10",
-    "vitest-browser-react": "^2.2.0"
+    "vitest-browser-react": "^2.2.0",
+    "wrangler": "^4.125.0"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
