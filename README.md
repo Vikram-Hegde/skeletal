@@ -1,6 +1,6 @@
 # Elemental
 
-A design system — forked from Skeletal (project-backbone).
+A design system.
 
 ## Development
 
