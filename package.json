@@ -2,7 +2,7 @@
   "name": "@vikram-hegde/elemental",
   "type": "module",
   "version": "0.0.0",
-  "description": "Elemental — a design system (forked from Skeletal)",
+  "description": "Elemental, a design system",
   "author": "Vikram Hegde <vikramhegde1440@gmail.com>",
   "license": "MIT",
   "exports": {
