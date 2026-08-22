@@ -24,15 +24,24 @@
   /* Fade: soft mask at scroll edges. Driven by the --scroll-area-overflow-*
      CSS variables Base UI sets on the viewport (distance from each edge in px).
      Before hydration those vars are 0 (or inherit fallback), so the bottom
-     uses a fallback of the fade size to hint that more content exists. */
+     uses a fallback of the fade size to hint that more content exists.
+     The gradient uses an eased curve (semi-transparent midpoint) so the edge
+     reads in both themes — a plain linear 2rem fade washes out on the dark
+     near-black chrome. --_scroll-area-fade-size is set via the fadeSize prop;
+     --_scroll-area-fade is the theme-scaled effective size (25% longer in
+     dark where luminance perception is lower). */
   .scroll-area__viewport--fade {
     --_scroll-area-fade-size: 2rem;
+    --_scroll-area-fade-scale: 1;
+    --_scroll-area-fade: calc(var(--_scroll-area-fade-size) * var(--_scroll-area-fade-scale));
     mask-image: linear-gradient(
       to bottom,
       transparent 0,
-      black min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-y-start)),
-      black
-        calc(100% - min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-y-end, var(--_scroll-area-fade-size)))),
+      oklch(0 0 0 / 0.45) calc(min(var(--_scroll-area-fade), var(--scroll-area-overflow-y-start)) * 0.4),
+      black min(var(--_scroll-area-fade), var(--scroll-area-overflow-y-start)),
+      black calc(100% - min(var(--_scroll-area-fade), var(--scroll-area-overflow-y-end, var(--_scroll-area-fade)))),
+      oklch(0 0 0 / 0.45)
+        calc(100% - min(var(--_scroll-area-fade), var(--scroll-area-overflow-y-end, var(--_scroll-area-fade))) * 0.4),
       transparent 100%
     );
     mask-repeat: no-repeat;
@@ -40,12 +49,16 @@
 
   .scroll-area__viewport--fade-x {
     --_scroll-area-fade-size: 2rem;
+    --_scroll-area-fade-scale: 1;
+    --_scroll-area-fade: calc(var(--_scroll-area-fade-size) * var(--_scroll-area-fade-scale));
     mask-image: linear-gradient(
       to right,
       transparent 0,
-      black min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-x-start)),
-      black
-        calc(100% - min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-x-end, var(--_scroll-area-fade-size)))),
+      oklch(0 0 0 / 0.45) calc(min(var(--_scroll-area-fade), var(--scroll-area-overflow-x-start)) * 0.4),
+      black min(var(--_scroll-area-fade), var(--scroll-area-overflow-x-start)),
+      black calc(100% - min(var(--_scroll-area-fade), var(--scroll-area-overflow-x-end, var(--_scroll-area-fade)))),
+      oklch(0 0 0 / 0.45)
+        calc(100% - min(var(--_scroll-area-fade), var(--scroll-area-overflow-x-end, var(--_scroll-area-fade))) * 0.4),
       transparent 100%
     );
     mask-repeat: no-repeat;
@@ -53,26 +66,52 @@
 
   .scroll-area__viewport--fade-both {
     --_scroll-area-fade-size: 2rem;
+    --_scroll-area-fade-scale: 1;
+    --_scroll-area-fade: calc(var(--_scroll-area-fade-size) * var(--_scroll-area-fade-scale));
     mask-image:
       linear-gradient(
         to bottom,
         transparent 0,
-        black min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-y-start)),
-        black
-          calc(100% - min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-y-end, var(--_scroll-area-fade-size)))),
+        oklch(0 0 0 / 0.45) calc(min(var(--_scroll-area-fade), var(--scroll-area-overflow-y-start)) * 0.4),
+        black min(var(--_scroll-area-fade), var(--scroll-area-overflow-y-start)),
+        black calc(100% - min(var(--_scroll-area-fade), var(--scroll-area-overflow-y-end, var(--_scroll-area-fade)))),
+        oklch(0 0 0 / 0.45)
+          calc(100% - min(var(--_scroll-area-fade), var(--scroll-area-overflow-y-end, var(--_scroll-area-fade))) * 0.4),
         transparent 100%
       ),
       linear-gradient(
         to right,
         transparent 0,
-        black min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-x-start)),
-        black
-          calc(100% - min(var(--_scroll-area-fade-size), var(--scroll-area-overflow-x-end, var(--_scroll-area-fade-size)))),
+        oklch(0 0 0 / 0.45) calc(min(var(--_scroll-area-fade), var(--scroll-area-overflow-x-start)) * 0.4),
+        black min(var(--_scroll-area-fade), var(--scroll-area-overflow-x-start)),
+        black calc(100% - min(var(--_scroll-area-fade), var(--scroll-area-overflow-x-end, var(--_scroll-area-fade)))),
+        oklch(0 0 0 / 0.45)
+          calc(100% - min(var(--_scroll-area-fade), var(--scroll-area-overflow-x-end, var(--_scroll-area-fade))) * 0.4),
         transparent 100%
       );
     mask-composite: intersect;
     -webkit-mask-composite: source-in;
     mask-repeat: no-repeat;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .scroll-area__viewport--fade,
+    .scroll-area__viewport--fade-x,
+    .scroll-area__viewport--fade-both {
+      --_scroll-area-fade-scale: 1.25;
+    }
+  }
+
+  html.dark .scroll-area__viewport--fade,
+  html.dark .scroll-area__viewport--fade-x,
+  html.dark .scroll-area__viewport--fade-both {
+    --_scroll-area-fade-scale: 1.25;
+  }
+
+  html.light .scroll-area__viewport--fade,
+  html.light .scroll-area__viewport--fade-x,
+  html.light .scroll-area__viewport--fade-both {
+    --_scroll-area-fade-scale: 1;
   }
 
   @media (prefers-reduced-motion: no-preference) {
