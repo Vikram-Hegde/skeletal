@@ -5,3 +5,4 @@ dist
 *.css.d.ts
 .tanstack
 playground/src/docs/generated
+.wrangler
