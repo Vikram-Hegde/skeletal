@@ -52,8 +52,8 @@ export function Cluster({
       style: styleVars(
         {
           "--_cluster-gap": space,
-          "--_cluster-justify": justify,
-          "--_cluster-align": align,
+          "--_cluster-justify": justify ?? "flex-start",
+          "--_cluster-align": align ?? "center",
         },
         style,
       ),

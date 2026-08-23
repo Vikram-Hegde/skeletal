@@ -523,34 +523,81 @@ export const PREVIEWS: Record<string, ReactNode> = {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        padding: "2.5cqw",
-        gap: "1.875cqw",
-        maskImage: "linear-gradient(to bottom, transparent 0, black 12%, black 88%, transparent 100%)",
       }}
     >
-      <div className="pv-line" style={{ width: "80%" }} />
-      <div className="pv-line" style={{ width: "100%" }} />
-      <div className="pv-line" style={{ width: "90%" }} />
-      <div className="pv-line" style={{ width: "70%" }} />
-      <div className="pv-line" style={{ width: "85%" }} />
+      <div
+        style={{
+          height: "7.5cqw",
+          display: "flex",
+          alignItems: "center",
+          gap: "1.75cqw",
+          padding: "0 3cqw",
+          borderBottom: "1px solid var(--docs-border)",
+          flexShrink: 0,
+        }}
+      >
+        <div style={{ width: "1.8cqw", height: "1.8cqw", borderRadius: "999px", background: "var(--docs-accent)" }} />
+        <div className="pv-line" style={{ width: "28%", height: "2.6cqw" }} />
+        <div style={{ marginLeft: "auto", width: "9cqw", height: "4.2cqw", borderRadius: "999px", background: "var(--docs-accent-soft)" }} />
+      </div>
+      <div
+        style={{
+          flex: 1,
+          minHeight: 0,
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.9cqw",
+          padding: "2.8cqw 3cqw",
+          maskImage: "linear-gradient(to bottom, transparent 0, black 10%, black 90%, transparent 100%)",
+        }}
+      >
+        {[
+          { w: "92%", accent: true },
+          { w: "78%" },
+          { w: "88%" },
+          { w: "64%" },
+          { w: "82%" },
+        ].map((r, i) => (
+          <div key={i} style={{ display: "flex", gap: "1.75cqw", alignItems: "flex-start" }}>
+            <div
+              style={{
+                width: "5.5cqw",
+                height: "5.5cqw",
+                borderRadius: "999px",
+                flexShrink: 0,
+                background: r.accent ? "var(--docs-accent-soft)" : "var(--docs-border)",
+                border: r.accent ? "1px solid var(--docs-border)" : "none",
+                marginTop: "0.2cqw",
+              }}
+            />
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1.1cqw" }}>
+              <div className="pv-line" style={{ width: r.w, height: "2.4cqw" }} />
+              <div className="pv-line" style={{ width: "100%", height: "1.7cqw", opacity: 0.9 }} />
+            </div>
+          </div>
+        ))}
+      </div>
       <div
         style={{
           position: "absolute",
-          top: "1.25cqw",
-          right: "1.875cqw",
-          bottom: "1.25cqw",
-          width: "1.25cqw",
+          top: "9.5cqw",
+          right: "1.5cqw",
+          bottom: "1.5cqw",
+          width: "1.1cqw",
           borderRadius: "999px",
-          background: "var(--docs-border)",
+          background: "transparent",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <div
           style={{
-            marginTop: "3cqw",
-            height: "10cqw",
+            marginTop: "1.2cqw",
+            height: "9cqw",
             borderRadius: "999px",
-            background: "var(--docs-muted)",
-            opacity: 0.5,
+            background: "var(--sk-scrollbar-thumb)",
+            opacity: 1,
+            boxShadow: "0 0 0 1px var(--docs-panel)",
           }}
         />
       </div>

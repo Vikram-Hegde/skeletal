@@ -84,7 +84,7 @@ export function Stack({
     Comp,
     {
       className: clsx(styles.stack, fill && styles["stack--fill"], className),
-      style: styleVars({ "--_stack-space": space }, style),
+      style: styleVars({ "--_stack-space": space ?? "1.5rem" }, style),
       ...(recursive ? { "data-recursive": true } : {}),
       ...props,
     },
