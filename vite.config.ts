@@ -5,10 +5,10 @@ import react from "@vitejs/plugin-react";
 import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vite";
 
-export default defineConfig(({ command }) => ({
-  // GitHub Pages serves project sites at https://<user>.github.io/<repo>/ → base must be "/skeletal/"
-  // Keep "/" for dev so `pnpm run play` works at localhost:5173 without a prefix
-  base: command === "build" ? "/skeletal/" : "/",
+export default defineConfig({
+  // Custom domain skeletal.vikram.wiki is served from root → base "/"
+  // (project site vikram-hegde.github.io/skeletal would need "/skeletal/")
+  base: "/",
   root: "./playground",
   plugins: [
     tanstackRouter({
@@ -37,4 +37,4 @@ export default defineConfig(({ command }) => ({
       headless: true,
     },
   },
-}));
+});
