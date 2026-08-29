@@ -32,10 +32,10 @@
        between different trigger payloads; otherwise they resolve to the
        popup's natural size. --available-width/height clamp the popup to
        the viewport so long menus scroll instead of overflowing. */
-    width: var(--positioner-width);
-    height: var(--positioner-height);
-    max-width: var(--available-width);
-    max-height: var(--available-height);
+    inline-size: var(--positioner-width);
+    block-size: var(--positioner-height);
+    max-inline-size: var(--available-width);
+    max-block-size: var(--available-height);
   }
 
   .menu__popup {
@@ -43,13 +43,13 @@
     z-index: 50;
     display: grid;
     grid-template-columns: 1.25rem 1fr;
-    min-width: 10rem;
+    min-inline-size: 10rem;
     /* Base UI sets --popup-width/height for Viewport animations (freeze
        size during payload switches). Keep available-width/height on the
        Positioner so long menus are clamped to the viewport without
        clipping the Arrow (Popup stays overflow:visible). */
-    width: var(--popup-width, auto);
-    height: var(--popup-height, auto);
+    inline-size: var(--popup-width, auto);
+    block-size: var(--popup-height, auto);
     padding: 0.25rem;
     border: 1px solid var(--sk-border);
     border-radius: var(--sk-radius);
@@ -81,9 +81,10 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    width: 100%;
-    min-height: 2.25rem;
-    padding: 0.375rem 0.625rem;
+    inline-size: 100%;
+    min-block-size: 2.25rem;
+    padding-block: 0.375rem;
+    padding-inline: 0.625rem;
     border: none;
     border-radius: var(--sk-radius);
     background: transparent;
@@ -91,7 +92,7 @@
     font-family: inherit;
     font-size: 0.875rem;
     line-height: 1.25;
-    text-align: left;
+    text-align: start;
     cursor: pointer;
     user-select: none;
     outline: none;
@@ -126,7 +127,8 @@
     grid-template-columns: 1.25rem 1fr;
     column-gap: 0.5rem;
     align-items: center;
-    padding: 0.375rem 0.625rem;
+    padding-block: 0.375rem;
+    padding-inline: 0.625rem;
   }
 
   .menu__radio-item::before,
@@ -150,10 +152,10 @@
     &::after {
       content: "";
       margin-inline-start: auto;
-      width: 0.375rem;
-      height: 0.375rem;
-      border-top: 1.5px solid currentColor;
-      border-right: 1.5px solid currentColor;
+      inline-size: 0.375rem;
+      block-size: 0.375rem;
+      border-block-start: 1.5px solid currentColor;
+      border-inline-end: 1.5px solid currentColor;
       transform: rotate(45deg);
     }
 
@@ -170,14 +172,17 @@
 
   .menu__separator {
     grid-column: 1 / -1;
-    height: 1px;
-    margin: 0.375rem -0.25rem;
+    block-size: 1px;
+    margin-block: 0.375rem;
+    margin-inline: -0.25rem;
     background-color: var(--sk-border);
   }
 
   .menu__group-label {
     grid-column: 1 / -1;
-    padding: 0.5rem 0.625rem 0.25rem;
+    padding-block-start: 0.5rem;
+    padding-inline: 0.625rem;
+    padding-block-end: 0.25rem;
     color: var(--sk-muted-foreground);
     font-size: 0.75rem;
     font-weight: 500;
@@ -214,46 +219,46 @@
   .menu__arrow {
     position: absolute;
     display: block;
-    width: 12px;
-    height: 6px;
+    inline-size: 12px;
+    block-size: 6px;
     overflow: clip;
 
     &::before {
       content: "";
       position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 8.49px;
-      height: 8.49px;
+      inset-block-end: 0;
+      inset-inline-start: 50%;
+      inline-size: 8.49px;
+      block-size: 8.49px;
       border: 1px solid var(--sk-border);
       background-color: var(--sk-popover);
       transform: translate(-50%, 50%) rotate(45deg);
     }
 
     &[data-side="bottom"] {
-      top: -6px;
+      inset-block-start: -6px;
     }
 
     &[data-side="left"] {
-      right: -9px;
+      inset-inline-end: -9px;
       transform: rotate(90deg);
     }
 
     &[data-side="right"] {
-      left: -9px;
+      inset-inline-start: -9px;
       transform: rotate(-90deg);
     }
 
     &[data-side="top"] {
-      bottom: -6px;
+      inset-block-end: -6px;
       transform: rotate(180deg);
     }
   }
 
   .menu__viewport {
     grid-column: 1 / -1;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     overflow: clip;
     padding: 0;
   }

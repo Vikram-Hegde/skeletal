@@ -23,9 +23,9 @@
   .dialog__content {
     position: relative;
     margin: auto;
-    width: min(32rem, 100%);
-    max-height: calc(100dvh - 3rem);
-    overflow-y: auto;
+    inline-size: min(32rem, 100%);
+    max-block-size: calc(100dvb - 3rem);
+    overflow-block: auto;
     padding: 1.5rem;
     border: 1px solid var(--sk-border);
     border-radius: var(--sk-radius);
@@ -53,13 +53,13 @@
       &,
       &.dialog__content--sm,
       &.dialog__content--lg {
-        width: 100%;
-        max-width: none;
+        inline-size: 100%;
+        max-inline-size: none;
         margin: 0;
-        max-height: min(85dvh, calc(100dvh - 2rem));
+        max-block-size: min(85dvb, calc(100dvb - 2rem));
         border-radius: calc(var(--sk-radius) + 0.5rem * (var(--sk-radius) / var(--sk-radius)))
           calc(var(--sk-radius) + 0.5rem * (var(--sk-radius) / var(--sk-radius))) 0 0;
-        padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+        padding-block-end: calc(1.5rem + env(safe-area-inset-bottom, 0px));
         transform: translateY(0);
         transition:
           transform 220ms ease-out,
@@ -81,11 +81,11 @@
   }
 
   .dialog__content--sm {
-    width: min(24rem, 100%);
+    inline-size: min(24rem, 100%);
   }
 
   .dialog__content--lg {
-    width: min(44rem, 100%);
+    inline-size: min(44rem, 100%);
   }
 
   .dialog__title {
@@ -110,10 +110,11 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-inline: -1.5rem;
-    margin-bottom: -1.5rem;
-    padding: 0.75rem 1.5rem;
+    margin-block-end: -1.5rem;
+    padding-block: 0.75rem;
+    padding-inline: 1.5rem;
     background-color: var(--sk-muted);
-    border-top: 1px solid var(--sk-border);
+    border-block-start: 1px solid var(--sk-border);
     border-radius: 0 0 var(--sk-radius) var(--sk-radius);
 
     /* Bottom sheet: the sheet is full width but its content still carries the
@@ -121,8 +122,8 @@
      the vertical one — flush to the screen's bottom edge, extending the muted
      surface into the safe area. */
     @media (width < 48rem) {
-      margin-bottom: calc(-1.5rem - env(safe-area-inset-bottom, 0px));
-      padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+      margin-block-end: calc(-1.5rem - env(safe-area-inset-bottom, 0px));
+      padding-block-end: calc(0.75rem + env(safe-area-inset-bottom, 0px));
       border-radius: 0;
     }
   }
@@ -136,7 +137,7 @@
     inset: 0;
     z-index: 50;
     display: flex;
-    overflow-y: auto;
+    overflow-block: auto;
     padding: 1.5rem;
 
     /* Below 48rem the dialog becomes a bottom sheet: pin the content to the

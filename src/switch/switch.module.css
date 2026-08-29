@@ -3,8 +3,8 @@
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
-    width: 2.25rem;
-    height: 1.25rem;
+    inline-size: 2.25rem;
+    block-size: 1.25rem;
     padding: 0.125rem;
     margin: 0;
     border: 1px solid var(--sk-border);
@@ -40,8 +40,8 @@
   }
 
   .switch__thumb {
-    width: 0.875rem;
-    height: 0.875rem;
+    inline-size: 0.875rem;
+    block-size: 0.875rem;
     background-color: var(--sk-foreground);
     transition:
       translate 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -49,13 +49,13 @@
       scale 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
     &[data-unchecked] {
-      transform-origin: left center;
+      transform-origin: inline-start center;
     }
 
     &[data-checked] {
       translate: 1rem 0;
       background-color: var(--sk-primary-foreground);
-      transform-origin: right center;
+      transform-origin: inline-end center;
     }
 
     @media (prefers-reduced-motion: reduce) {

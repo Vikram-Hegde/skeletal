@@ -16,8 +16,8 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: 1rem;
-    height: 1rem;
+    inline-size: 1rem;
+    block-size: 1rem;
     padding: 0;
     margin: 0;
     border: 1px solid var(--sk-border);
@@ -60,8 +60,8 @@
 
     &::before {
       content: "";
-      width: 0.5rem;
-      height: 0.5rem;
+      inline-size: 0.5rem;
+      block-size: 0.5rem;
       border-radius: 100%;
       background-color: currentcolor;
     }

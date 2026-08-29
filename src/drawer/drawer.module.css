@@ -90,9 +90,9 @@
   /* Side drawers: fixed width, full height, slide in horizontally. */
   .drawer__popup[data-swipe-direction="left"],
   .drawer__popup[data-swipe-direction="right"] {
-    height: 100%;
-    width: min(var(--_drawer-size), 100%);
-    max-width: 100vw;
+    block-size: 100%;
+    inline-size: min(var(--_drawer-size), 100%);
+    max-inline-size: 100vi;
   }
 
   .drawer__popup[data-swipe-direction="right"] {
@@ -122,8 +122,8 @@
    position ("top"/"bottom"). */
   .drawer__popup[data-swipe-direction="down"],
   .drawer__popup[data-swipe-direction="up"] {
-    width: 100%;
-    max-height: min(var(--_drawer-size), 85dvh);
+    inline-size: 100%;
+    max-block-size: min(var(--_drawer-size), 85dvb);
   }
 
   .drawer__popup[data-swipe-direction="down"] {
@@ -158,15 +158,15 @@
 
   .drawer__content {
     flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
+    min-block-size: 0;
+    overflow-block: auto;
     overscroll-behavior: contain;
     padding: 1.5rem;
 
     /* Bottom sheets: keep content clear of the home indicator. The popup's
      `data-swipe-direction` is "down" (the gesture) for a bottom sheet. */
     [data-swipe-direction="down"] & {
-      padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+      padding-block-end: calc(1.5rem + env(safe-area-inset-bottom, 0px));
     }
   }
 
@@ -177,14 +177,15 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
+    padding-block: 0.75rem;
+    padding-inline: 1.5rem;
     background-color: var(--sk-popover);
-    border-bottom: 1px solid var(--sk-border);
+    border-block-end: 1px solid var(--sk-border);
 
     /* Top sheets: keep content clear of the status bar. `data-swipe-direction`
      is "up" (the gesture) for a top sheet. */
     [data-swipe-direction="up"] & {
-      padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
+      padding-block-start: calc(0.75rem + env(safe-area-inset-top, 0px));
     }
   }
 
@@ -195,13 +196,14 @@
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
+    padding-block: 0.75rem;
+    padding-inline: 1.5rem;
     background-color: var(--sk-muted);
-    border-top: 1px solid var(--sk-border);
+    border-block-start: 1px solid var(--sk-border);
 
     /* Bottom sheets: keep content clear of the home indicator. */
     [data-swipe-direction="down"] & {
-      padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+      padding-block-end: calc(0.75rem + env(safe-area-inset-bottom, 0px));
     }
   }
 

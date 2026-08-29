@@ -20,7 +20,7 @@
   .skeleton__real,
   .skeleton__shimmer {
     grid-area: 1 / 1;
-    min-width: 0;
+    min-inline-size: 0;
     transition:
       opacity var(--_skeleton-transition-duration) ease-out,
       visibility var(--_skeleton-transition-duration) allow-discrete;
@@ -99,7 +99,7 @@
     display: inline-block;
     vertical-align: middle;
     line-height: 0;
-    width: max-content;
+    inline-size: max-content;
     border-radius: var(--_skeleton-radius, var(--sk-radius));
     background-color: var(--_skeleton-base);
     background-image: linear-gradient(

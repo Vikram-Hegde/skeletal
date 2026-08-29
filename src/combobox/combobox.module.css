@@ -1,7 +1,8 @@
 @layer skeletal {
   .combobox__label {
-    margin-bottom: 0.5rem;
-    padding: 0.125rem 0;
+    margin-block-end: 0.5rem;
+    padding-block: 0.125rem;
+    padding-inline: 0;
     color: var(--sk-foreground);
     font-size: 0.8125rem;
     font-weight: 500;
@@ -19,7 +20,7 @@
   .combobox__trigger {
     justify-content: space-between;
     padding-inline: 0.75rem;
-    text-align: left;
+    text-align: start;
     font-weight: 400;
 
     /* Reflect Field validation state when wrapped in Field.Root (standalone
@@ -38,9 +39,11 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    width: 100%;
-    min-height: 2.5rem;
-    padding: 0 0.25rem 0 0.75rem;
+    inline-size: 100%;
+    min-block-size: 2.5rem;
+    padding-block: 0;
+    padding-inline-start: 0.75rem;
+    padding-inline-end: 0.25rem;
     border: 1px solid var(--sk-input);
     border-radius: var(--sk-radius);
     background-color: var(--sk-background);
@@ -83,8 +86,8 @@
     & .combobox__clear {
       flex-shrink: 0;
       justify-content: center;
-      min-height: 1.75rem;
-      width: 1.75rem;
+      min-block-size: 1.75rem;
+      inline-size: 1.75rem;
       padding: 0;
       border-radius: var(--sk-radius);
     }
@@ -107,36 +110,41 @@
        its trailing edge so text clears the clear/trigger buttons without
        doubling up the left inset. */
     & .combobox__input {
-      padding: 0.5rem 0.375rem 0.5rem 0;
+      padding-block: 0.5rem;
+      padding-inline-start: 0;
+      padding-inline-end: 0.375rem;
       /* The group's flex layout sizes the input; reset the standalone input's
          full-width so it grows to fill the remaining space, not the popup. */
-      width: auto;
+      inline-size: auto;
       /* Undo the standalone (input-inside-popup) breakout — the negative
          margins and divider rule belong to the popup pattern only. */
       margin: 0;
-      border-bottom: none;
+      border-block-end: none;
     }
   }
 
   .combobox__input {
     flex: 1 1 auto;
-    min-width: 0;
+    min-inline-size: 0;
     /* Full inline gutter for the input-inside-popup (searchable select) pattern
        so the text lines up with the list's content gutter; the input group
        overrides this above since it owns the leading gutter itself. */
-    padding: 0.5rem 0.625rem;
+    padding-block: 0.5rem;
+    padding-inline: 0.625rem;
     /* The standalone (input-inside-popup) input must span the popup; browsers
        otherwise size it to its placeholder (`size` default), leaving a narrow
        field floating in a wide popup. The input group resets to `auto` since
        its flex layout sizes it. */
-    width: 100%;
+    inline-size: 100%;
     /* Span the popup end-to-end: cancel the popup's uniform `0.25rem` padding
        on the top and sides (the same breakout `.combobox__separator` uses) so
        the bottom rule reads as a true divider across the full popup width.
        Text keeps its `0.625rem` gutter above, so it still aligns with items. */
-    margin: -0.25rem -0.25rem 0;
+    margin-block-start: -0.25rem;
+    margin-inline: -0.25rem;
+    margin-block-end: 0;
     border: none;
-    border-bottom: 1px solid var(--sk-border);
+    border-block-end: 1px solid var(--sk-border);
     background: transparent;
     color: var(--sk-foreground);
     font-family: inherit;
@@ -174,14 +182,16 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.25rem;
-    width: 100%;
+    inline-size: 100%;
   }
 
   .combobox__chip {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    padding: 0.125rem 0.25rem 0.125rem 0.5rem;
+    padding-block: 0.125rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.25rem;
     border-radius: var(--sk-radius);
     background-color: var(--sk-secondary);
     color: var(--sk-secondary-foreground);
@@ -205,8 +215,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.125rem;
-    height: 1.125rem;
+    inline-size: 1.125rem;
+    block-size: 1.125rem;
     padding: 0;
     border: none;
     border-radius: var(--sk-radius);
@@ -258,7 +268,7 @@
   .combobox__popup {
     position: relative;
     z-index: 50;
-    min-width: var(--anchor-width);
+    min-inline-size: var(--anchor-width);
     padding: 0.25rem;
     border: 1px solid var(--sk-border);
     border-radius: var(--sk-radius);
@@ -293,8 +303,8 @@
     position: relative;
     display: grid;
     grid-template-columns: 1.25rem 1fr;
-    max-height: var(--available-height);
-    overflow-y: auto;
+    max-block-size: var(--available-height);
+    overflow-block: auto;
     overscroll-behavior: contain;
     scroll-padding-block: 0.25rem;
     outline: 0;
@@ -308,8 +318,9 @@
     grid-template-columns: 1.25rem 1fr;
     column-gap: 0.5rem;
     align-items: center;
-    min-height: 2.25rem;
-    padding: 0.375rem 0.625rem;
+    min-block-size: 2.25rem;
+    padding-block: 0.375rem;
+    padding-inline: 0.625rem;
     border: none;
     border-radius: var(--sk-radius);
     background: transparent;
@@ -317,7 +328,7 @@
     font-family: inherit;
     font-size: 0.875rem;
     line-height: 1.25;
-    text-align: left;
+    text-align: start;
     cursor: pointer;
     user-select: none;
     outline: none;
@@ -374,7 +385,8 @@
     /* No-op when rendered outside the list grid (e.g. in the popup), but spans
        both tracks when placed inside it. */
     grid-column: 1 / -1;
-    padding: 0.75rem 0.625rem;
+    padding-block: 0.75rem;
+    padding-inline: 0.625rem;
     color: var(--sk-muted-foreground);
     font-size: 0.875rem;
     line-height: 1.25;
@@ -391,7 +403,9 @@
 
   .combobox__group-label {
     grid-column: 1 / -1;
-    padding: 0.5rem 0.625rem 0.25rem;
+    padding-block-start: 0.5rem;
+    padding-inline: 0.625rem;
+    padding-block-end: 0.25rem;
     color: var(--sk-muted-foreground);
     font-size: 0.75rem;
     font-weight: 500;
@@ -401,46 +415,47 @@
 
   .combobox__separator {
     grid-column: 1 / -1;
-    height: 1px;
-    margin: 0.375rem -0.25rem;
+    block-size: 1px;
+    margin-block: 0.375rem;
+    margin-inline: -0.25rem;
     background-color: var(--sk-border);
   }
 
   .combobox__arrow {
     position: absolute;
     display: block;
-    width: 12px;
-    height: 6px;
+    inline-size: 12px;
+    block-size: 6px;
     overflow: clip;
 
     &::before {
       content: "";
       position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 8.49px;
-      height: 8.49px;
+      inset-block-end: 0;
+      inset-inline-start: 50%;
+      inline-size: 8.49px;
+      block-size: 8.49px;
       border: 1px solid var(--sk-border);
       background-color: var(--sk-popover);
       transform: translate(-50%, 50%) rotate(45deg);
     }
 
     &[data-side="bottom"] {
-      top: -6px;
+      inset-block-start: -6px;
     }
 
     &[data-side="left"] {
-      right: -9px;
+      inset-inline-end: -9px;
       transform: rotate(90deg);
     }
 
     &[data-side="right"] {
-      left: -9px;
+      inset-inline-start: -9px;
       transform: rotate(-90deg);
     }
 
     &[data-side="top"] {
-      bottom: -6px;
+      inset-block-end: -6px;
       transform: rotate(180deg);
     }
   }

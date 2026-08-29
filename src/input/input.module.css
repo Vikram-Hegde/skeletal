@@ -3,9 +3,10 @@
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
-    width: 15rem;
-    min-height: 2.5rem;
-    padding: 0 0.875rem;
+    inline-size: 15rem;
+    min-block-size: 2.5rem;
+    padding-block: 0;
+    padding-inline: 0.875rem;
     border: 1px solid var(--_input-border, var(--sk-input));
     border-radius: var(--sk-radius);
     background-color: var(--sk-background);
@@ -62,20 +63,22 @@
   }
 
   .input--sm {
-    min-height: 2rem;
-    padding: 0 0.625rem;
+    min-block-size: 2rem;
+    padding-block: 0;
+    padding-inline: 0.625rem;
     font-size: 0.8125rem;
     line-height: 1.125rem;
   }
 
   .input--lg {
-    min-height: 3rem;
-    padding: 0 1.125rem;
+    min-block-size: 3rem;
+    padding-block: 0;
+    padding-inline: 1.125rem;
     font-size: 1rem;
     line-height: 1.5rem;
   }
 
   .input--full {
-    width: 100%;
+    inline-size: 100%;
   }
 }

@@ -4,8 +4,9 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 2.5rem;
-    padding: 0 1.25rem;
+    min-block-size: 2.5rem;
+    padding-block: 0;
+    padding-inline: 1.25rem;
     border: 1px solid var(--_button-border, transparent);
     border-radius: var(--sk-radius);
     background-color: var(--_button-bg);
@@ -161,18 +162,20 @@
   }
 
   .button--sm {
-    min-height: 2rem;
-    padding: 0 0.75rem;
+    min-block-size: 2rem;
+    padding-block: 0;
+    padding-inline: 0.75rem;
     font-size: 0.8125rem;
   }
 
   .button--lg {
-    min-height: 3rem;
-    padding: 0 1.5rem;
+    min-block-size: 3rem;
+    padding-block: 0;
+    padding-inline: 1.5rem;
     font-size: 1rem;
   }
 
   .button--full {
-    width: 100%;
+    inline-size: 100%;
   }
 }
