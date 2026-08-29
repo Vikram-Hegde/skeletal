@@ -6,11 +6,6 @@ on:
   release:
     types: [published]
   workflow_dispatch:
-    inputs:
-      otp:
-        description: "npm OTP code (only if token requires 2FA)"
-        required: false
-        type: string
 
 permissions:
   contents: read
@@ -43,15 +38,9 @@ jobs:
       - name: Verify package
         run: npm pack --dry-run
 
-      - name: Publish to npm (provenance)
-        # For granular/classic tokens that require 2FA, pass OTP if provided via workflow_dispatch.
-        # For automation tokens (recommended) or OIDC trusted publisher, no OTP needed.
-        run: |
-          if [ -n "${{ inputs.otp }}" ]; then
-            npm publish --access public --provenance --otp ${{ inputs.otp }}
-          else
-            npm publish --access public --provenance
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+      # OIDC Trusted Publisher: no NPM_TOKEN needed.
+      # Configure once at https://www.npmjs.com/package/@vikram-hegde/skeletal/access
+      # or https://www.npmjs.com/settings/[your-org]/access -> Trusted Publishers
+      # Publisher: GitHub Actions, repo: Vikram-Hegde/skeletal, workflow: publish.yml
+      - name: Publish to npm (OIDC provenance)
+        run: npm publish --access public --provenance
