@@ -5,6 +5,7 @@ import { checkboxDoc } from "@/docs/components/checkbox";
 import { comboboxDoc } from "@/docs/components/combobox";
 import { commandPaletteDoc } from "@/docs/components/command-palette";
 import { dialogDoc } from "@/docs/components/dialog";
+import { fieldDoc } from "@/docs/components/field";
 import { drawerDoc } from "@/docs/components/drawer";
 import { iconDoc } from "@/docs/components/icon";
 import { menuDoc } from "@/docs/components/menu";
@@ -34,6 +35,7 @@ const RAW_DOCS: [Doc, ...Doc[]] = [
   buttonDoc,
   badgeDoc,
   iconDoc,
+  fieldDoc,
   dialogDoc,
   drawerDoc,
   alertDialogDoc,

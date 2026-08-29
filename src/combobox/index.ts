@@ -8,7 +8,6 @@ import { ComboboxCollection } from "./combobox-collection";
 import { ComboboxEmpty } from "./combobox-empty";
 import { ComboboxGroup } from "./combobox-group";
 import { ComboboxGroupLabel } from "./combobox-group-label";
-import { ComboboxIcon } from "./combobox-icon";
 import { ComboboxInput } from "./combobox-input";
 import { ComboboxInputGroup } from "./combobox-input-group";
 import { ComboboxItem } from "./combobox-item";
@@ -47,11 +46,7 @@ import { ComboboxValue } from "./combobox-value";
  *     <Combobox.Clear aria-label="Clear selection">
  *       <Icon name={X} size={14} />
  *     </Combobox.Clear>
- *     <Combobox.Trigger aria-label="Open popup">
- *       <Combobox.Icon>
- *         <Icon name={CaretDown} size={16} />
- *       </Combobox.Icon>
- *     </Combobox.Trigger>
+ *     <Combobox.Trigger aria-label="Open popup" />
  *   </Combobox.InputGroup>
  *   <Combobox.Portal>
  *     <Combobox.Positioner>
@@ -77,7 +72,7 @@ import { ComboboxValue } from "./combobox-value";
  * `Combobox.InputGroup` (so it matches the field's width) and handles collision
  * avoidance; `Combobox.Portal` moves it to `<body>`. Add `multiple` to
  * `Combobox.Root` and render `Combobox.Chip`s inside `Combobox.Value` for
- * multi-select.
+ * multi-select. The trigger owns its `CaretDown` chevron — no `Combobox.Icon` is needed.
  *
  * All parts are thin styled wrappers over Base UI's `Combobox`, so every Base UI
  * prop, `render` override, and ref behaves the same. Part prop types are
@@ -89,7 +84,6 @@ export const Combobox = {
   InputGroup: ComboboxInputGroup,
   Input: ComboboxInput,
   Trigger: ComboboxTrigger,
-  Icon: ComboboxIcon,
   Clear: ComboboxClear,
   Value: ComboboxValue,
   Chips: ComboboxChips,
@@ -122,7 +116,6 @@ export type { ComboboxCollectionProps } from "./combobox-collection";
 export type { ComboboxEmptyProps } from "./combobox-empty";
 export type { ComboboxGroupProps } from "./combobox-group";
 export type { ComboboxGroupLabelProps } from "./combobox-group-label";
-export type { ComboboxIconProps } from "./combobox-icon";
 export type { ComboboxInputProps } from "./combobox-input";
 export type { ComboboxInputGroupProps } from "./combobox-input-group";
 export type { ComboboxItemProps } from "./combobox-item";

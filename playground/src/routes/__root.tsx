@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { DOC_GROUPS, DOCS } from "@/docs";
 import { ComponentNotFound } from "@/docs/not-found";
 import { fuzzyMatch } from "@/lib/fuzzy";
+import { ThemerDrawer } from "@/themer/ThemerDrawer";
 import { useTheme } from "@/theme";
 import pkg from "../../../package.json";
 
@@ -184,6 +185,7 @@ function RootComponent() {
           <kbd>⌘K</kbd>
         </button>
         <div className="docs-header__actions">
+          <ThemerDrawer />
           <Button
             variant="ghost"
             size="sm"

@@ -1,7 +1,9 @@
+import { CaretDown } from "@phosphor-icons/react";
 import type { SelectTriggerProps as BaseSelectTriggerProps } from "@base-ui/react/select";
 import { Select as BaseSelect } from "@base-ui/react/select";
 import type { ButtonProps } from "@skeletal/button/button";
 import { Button } from "@skeletal/button/button";
+import { Icon } from "@skeletal/icon/icon";
 import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./select.module.css";
 
@@ -13,9 +15,9 @@ import styles from "./select.module.css";
  * `onClick`, ...) plus the select-trigger props from Base UI. Defaults to the
  * `outline` variant.
  *
- * Put a `Select.Value` and a `Select.Icon` inside to render the selected value
- * and the disclosure chevron. The trigger lays them out with the value
- * left-aligned and the icon pushed to the right edge.
+ * The trigger always renders the selected `Select.Value` on the left and a
+ * built-in `CaretDown` disclosure chevron on the right (via `BaseSelect.Icon`,
+ * which rotates 180° when open). The layout is `justify-content: space-between`.
  */
 export interface SelectTriggerProps
   extends ButtonProps,
@@ -26,6 +28,7 @@ export function SelectTrigger({
   variant = "outline",
   size = "md",
   fullWidth = false,
+  children,
   ...props
 }: SelectTriggerProps) {
   return (
@@ -39,6 +42,11 @@ export function SelectTrigger({
         />
       }
       {...props}
-    />
+    >
+      {children}
+      <BaseSelect.Icon className={styles.select__icon}>
+        <Icon name={CaretDown} size={16} />
+      </BaseSelect.Icon>
+    </BaseSelect.Trigger>
   );
 }

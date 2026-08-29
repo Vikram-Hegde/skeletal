@@ -2,7 +2,6 @@ import { SelectArrow } from "./select-arrow";
 import { SelectBackdrop } from "./select-backdrop";
 import { SelectGroup } from "./select-group";
 import { SelectGroupLabel } from "./select-group-label";
-import { SelectIcon } from "./select-icon";
 import { SelectItem } from "./select-item";
 import { SelectItemIndicator } from "./select-item-indicator";
 import { SelectItemText } from "./select-item-text";
@@ -36,9 +35,6 @@ import { SelectValue } from "./select-value";
  *   <Select.Label>Theme</Select.Label>
  *   <Select.Trigger>
  *     <Select.Value placeholder="Select theme" />
- *     <Select.Icon>
- *       <Icon name={CaretDown} size={16} />
- *     </Select.Icon>
  *   </Select.Trigger>
  *   <Select.Portal>
  *     <Select.Positioner>
@@ -64,7 +60,7 @@ import { SelectValue } from "./select-value";
  * overlaps the trigger so the selected item aligns with the trigger's value
  * text (`alignItemWithTrigger`). `Select.Portal` moves the popup to `<body>`.
  * `Select.ScrollUpArrow` / `Select.ScrollDownArrow` give edge scrolling on long
- * lists.
+ * lists. The trigger owns its `CaretDown` chevron — no `Select.Icon` is needed.
  *
  * All parts are thin styled wrappers over Base UI's `Select`, so every Base UI
  * prop, `render` override, and ref behaves the same. Part prop types are
@@ -75,7 +71,6 @@ export const Select = {
   Label: SelectLabel,
   Trigger: SelectTrigger,
   Value: SelectValue,
-  Icon: SelectIcon,
   Portal: SelectPortal,
   Backdrop: SelectBackdrop,
   Positioner: SelectPositioner,
@@ -96,7 +91,6 @@ export type { SelectArrowProps } from "./select-arrow";
 export type { SelectBackdropProps } from "./select-backdrop";
 export type { SelectGroupProps } from "./select-group";
 export type { SelectGroupLabelProps } from "./select-group-label";
-export type { SelectIconProps } from "./select-icon";
 export type { SelectItemProps } from "./select-item";
 export type { SelectItemIndicatorProps } from "./select-item-indicator";
 export type { SelectItemTextProps } from "./select-item-text";

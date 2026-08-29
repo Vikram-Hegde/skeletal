@@ -86,6 +86,49 @@ export const PREVIEWS: Record<string, ReactNode> = {
     </div>
   ),
 
+  drawer: (
+    <div
+      className="pv-surface"
+      style={{ width: "72cqw", height: "42cqw", position: "relative", padding: 0 }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "light-dark(rgba(0,0,0,0.4), rgba(255,255,255,0.35))",
+          opacity: 0.45,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: "64%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2.5cqw",
+          padding: "3.75cqw",
+          background: "var(--sk-background)",
+          borderLeft: "1px solid var(--docs-border)",
+          boxShadow: "var(--sk-shadow-md)",
+        }}
+      >
+        <div className="pv-row" style={{ justifyContent: "space-between" }}>
+          <div className="pv-line pv-line--title" style={{ width: "42%" }} />
+          <div className="pv-dot" style={{ background: "var(--docs-border)" }} />
+        </div>
+        <div className="pv-line" style={{ width: "92%" }} />
+        <div className="pv-line" style={{ width: "76%" }} />
+        <div style={{ marginTop: "auto", display: "flex", gap: "2cqw" }}>
+          <div className="pv-chip" style={{ width: "20cqw" }} />
+          <div className="pv-chip" style={{ width: "20cqw", background: "var(--docs-accent-soft)" }} />
+        </div>
+      </div>
+    </div>
+  ),
+
   "command-palette": (
     <div className="pv-surface" style={{ width: "80cqw" }}>
       <div className="pv-search">

@@ -23,7 +23,6 @@ export type {
   ComboboxEmptyProps,
   ComboboxGroupLabelProps,
   ComboboxGroupProps,
-  ComboboxIconProps,
   ComboboxInputGroupProps,
   ComboboxInputProps,
   ComboboxItemIndicatorProps,
@@ -85,6 +84,15 @@ export type {
 export { Drawer } from "@skeletal/drawer";
 export type { IconProps } from "@skeletal/icon";
 export { Icon } from "@skeletal/icon";
+export type { InputProps, InputSize } from "@skeletal/input";
+export { Input } from "@skeletal/input";
+export type {
+  FieldRootProps,
+  FieldLabelProps,
+  FieldDescriptionProps,
+  FieldErrorProps,
+} from "@skeletal/input";
+export { Field } from "@skeletal/input";
 export type {
   BoxProps,
   CenterProps,
@@ -148,7 +156,6 @@ export type {
   SelectBackdropProps,
   SelectGroupLabelProps,
   SelectGroupProps,
-  SelectIconProps,
   SelectItemIndicatorProps,
   SelectItemProps,
   SelectItemTextProps,

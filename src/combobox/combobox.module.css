@@ -21,6 +21,17 @@
     padding-inline: 0.75rem;
     text-align: left;
     font-weight: 400;
+
+    /* Reflect Field validation state when wrapped in Field.Root (standalone
+     * input-inside-popup pattern). The trigger is composed from Button. */
+    &[data-invalid] {
+      border-color: var(--sk-destructive);
+      box-shadow: 0 0 0 1px var(--sk-destructive);
+    }
+
+    &[data-invalid]:focus-visible {
+      outline-color: var(--sk-destructive);
+    }
   }
 
   .combobox__input-group {
@@ -53,6 +64,13 @@
       cursor: default;
     }
 
+    /* Reflect Field validation state when wrapped in Field.Root. Reuses the
+     * same red border + ring affordance as Input, replacing the focus ring. */
+    &[data-invalid] {
+      border-color: var(--sk-destructive);
+      box-shadow: 0 0 0 1px var(--sk-destructive);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       transition: none;
     }
@@ -69,6 +87,21 @@
       width: 1.75rem;
       padding: 0;
       border-radius: var(--sk-radius);
+    }
+
+    /* Inside the input group the validation affordance belongs on the group
+       itself — suppress the trigger/clear's own invalid border so it doesn't
+       render as a nested pink square (see Field docs screenshot). The more
+       specific selector overrides `.combobox__trigger[data-invalid]`. */
+    & .combobox__trigger[data-invalid],
+    & .combobox__clear[data-invalid] {
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    & .combobox__trigger[data-invalid]:focus-visible,
+    & .combobox__clear[data-invalid]:focus-visible {
+      outline-color: var(--sk-ring);
     }
     /* The group already insets the leading edge (0.75rem); the input only pads
        its trailing edge so text clears the clear/trigger buttons without

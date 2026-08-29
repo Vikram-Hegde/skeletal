@@ -1,4 +1,4 @@
-import { CaretDown, CaretUpDown, Check, X } from "@phosphor-icons/react";
+import { Check, X } from "@phosphor-icons/react";
 import { Combobox, Icon } from "@skeletal";
 import { useState } from "react";
 import type { Doc } from "@/docs/types";
@@ -29,11 +29,7 @@ function BasicCombobox() {
         <Combobox.Clear aria-label="Clear selection">
           <Icon name={X} size={12} />
         </Combobox.Clear>
-        <Combobox.Trigger aria-label="Open popup">
-          <Combobox.Icon>
-            <Icon name={CaretDown} size={16} />
-          </Combobox.Icon>
-        </Combobox.Trigger>
+        <Combobox.Trigger aria-label="Open popup" />
       </Combobox.InputGroup>
       <Combobox.Portal>
         <Combobox.Positioner>
@@ -125,9 +121,6 @@ function SearchableSelectCombobox() {
       <Combobox.Label>Country</Combobox.Label>
       <Combobox.Trigger variant="outline" size="md" fullWidth>
         <Combobox.Value placeholder="Select country" />
-        <Combobox.Icon>
-          <Icon name={CaretUpDown} size={16} />
-        </Combobox.Icon>
       </Combobox.Trigger>
       <Combobox.Portal>
         <Combobox.Positioner>
@@ -156,7 +149,7 @@ export const comboboxDoc: Doc = {
   group: "Components",
   name: "Combobox",
   blurb:
-    "A filterable Select: an input combined with a list of predefined items. Type to filter, arrow keys to navigate, Enter to select. Assemble parts as Combobox.Root, .Label, .InputGroup, .Input, .Clear, .Trigger, .Portal, .Positioner, .Popup, .List, .Item — plus .Chips/.Chip/.ChipRemove for multi-select.",
+    "A filterable Select: an input combined with a list of predefined items. Type to filter, arrow keys to navigate, Enter to select. Assemble parts as Combobox.Root, .Label, .InputGroup, .Input, .Clear, .Trigger, .Portal, .Positioner, .Popup, .List, .Item — plus .Chips/.Chip/.ChipRemove for multi-select. The trigger owns its chevron.",
   examples: [
     {
       title: "Basic",
@@ -173,11 +166,7 @@ export const comboboxDoc: Doc = {
     <Combobox.Clear aria-label="Clear selection">
       <Icon name={X} size={12} />
     </Combobox.Clear>
-    <Combobox.Trigger aria-label="Open popup">
-      <Combobox.Icon>
-        <Icon name={CaretDown} size={16} />
-      </Combobox.Icon>
-    </Combobox.Trigger>
+    <Combobox.Trigger aria-label="Open popup" />
   </Combobox.InputGroup>
   <Combobox.Portal>
     <Combobox.Positioner>
@@ -252,9 +241,6 @@ export const comboboxDoc: Doc = {
   <Combobox.Label>Country</Combobox.Label>
   <Combobox.Trigger variant="outline" size="md" fullWidth>
     <Combobox.Value placeholder="Select country" />
-    <Combobox.Icon>
-      <Icon name={CaretUpDown} size={16} />
-    </Combobox.Icon>
   </Combobox.Trigger>
   <Combobox.Portal>
     <Combobox.Positioner>
@@ -344,7 +330,7 @@ export const comboboxDoc: Doc = {
       type: "ButtonProps",
       default: "variant='ghost', size='sm'",
       description:
-        "Reuses Button. Inside an InputGroup it compacts to an icon button; standalone it lays out Value + Icon space-between.",
+        "Reuses Button. Inside an InputGroup it compacts to an icon button; standalone it lays out Value with a built-in chevron. No Icon child is needed.",
     },
     {
       name: "Clear",

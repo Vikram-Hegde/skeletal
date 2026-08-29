@@ -1,7 +1,9 @@
+import { CaretDown } from "@phosphor-icons/react";
 import type { ComboboxTriggerProps as BaseComboboxTriggerProps } from "@base-ui/react/combobox";
 import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
 import type { ButtonProps } from "@skeletal/button/button";
 import { Button } from "@skeletal/button/button";
+import { Icon } from "@skeletal/icon/icon";
 import { mergeClassName } from "@skeletal/lib/merge-class-name";
 import styles from "./combobox.module.css";
 
@@ -13,8 +15,12 @@ import styles from "./combobox.module.css";
  * plus the combobox-trigger props from Base UI. Defaults to the `ghost` `sm`
  * variant, which — when placed inside a `Combobox.InputGroup` — compacts into
  * an icon-sized square button. For the "input inside popup" (select-like)
- * pattern, pass `variant="outline"` / `size="md"` and place a
- * `<Combobox.Value>` plus `<Combobox.Icon>` inside.
+ * pattern, pass `variant="outline"` / `size="md"` and wrap a
+ * `<Combobox.Value>` inside.
+ *
+ * The disclosure `CaretDown` chevron is always rendered by the trigger itself
+ * (via `BaseCombobox.Icon`, rotating 180° when open) — no `Combobox.Icon`
+ * prop is needed.
  */
 export interface ComboboxTriggerProps
   extends ButtonProps,
@@ -25,6 +31,7 @@ export function ComboboxTrigger({
   variant = "ghost",
   size = "sm",
   fullWidth = false,
+  children,
   ...props
 }: ComboboxTriggerProps) {
   return (
@@ -38,6 +45,11 @@ export function ComboboxTrigger({
         />
       }
       {...props}
-    />
+    >
+      {children}
+      <BaseCombobox.Icon className={styles.combobox__icon}>
+        <Icon name={CaretDown} size={16} />
+      </BaseCombobox.Icon>
+    </BaseCombobox.Trigger>
   );
 }

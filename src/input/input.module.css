@@ -1,0 +1,81 @@
+@layer skeletal {
+  .input {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    width: 15rem;
+    min-height: 2.5rem;
+    padding: 0 0.875rem;
+    border: 1px solid var(--_input-border, var(--sk-input));
+    border-radius: var(--sk-radius);
+    background-color: var(--sk-background);
+    color: var(--sk-foreground);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    transition:
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out,
+      background-color 150ms ease-out;
+
+    &::placeholder {
+      color: var(--sk-muted-foreground);
+    }
+
+    @media (any-pointer: coarse) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    &:hover:not([data-disabled]):not([data-invalid]) {
+      border-color: var(--_input-hover-border, var(--sk-ring));
+    }
+
+    /* When wrapped in Field, Base UI sets these data attributes. */
+    &[data-focused]:not([data-invalid]) {
+      border-color: var(--sk-ring);
+      box-shadow: 0 0 0 1px var(--sk-ring);
+      outline: none;
+    }
+
+    &[data-invalid] {
+      border-color: var(--sk-destructive);
+      box-shadow: 0 0 0 1px var(--sk-destructive);
+    }
+
+    &[data-disabled],
+    &:disabled {
+      opacity: 0.55;
+      background-color: var(--sk-muted);
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--sk-ring);
+      outline-offset: 1px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .input--sm {
+    min-height: 2rem;
+    padding: 0 0.625rem;
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+  }
+
+  .input--lg {
+    min-height: 3rem;
+    padding: 0 1.125rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .input--full {
+    width: 100%;
+  }
+}

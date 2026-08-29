@@ -1,4 +1,4 @@
-import { CaretDown, CaretUpDown, Check } from "@phosphor-icons/react";
+import { Check } from "@phosphor-icons/react";
 import { Icon, Select } from "@skeletal";
 import { useState } from "react";
 import type { Doc } from "@/docs/types";
@@ -16,9 +16,6 @@ function BasicSelect() {
       <Select.Label>Theme</Select.Label>
       <Select.Trigger>
         <Select.Value placeholder="Select theme" />
-        <Select.Icon>
-          <Icon name={CaretUpDown} size={16} />
-        </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
         <Select.Positioner>
@@ -65,9 +62,6 @@ function GroupedSelect() {
       <Select.Label>Produce</Select.Label>
       <Select.Trigger>
         <Select.Value placeholder="Select produce" />
-        <Select.Icon>
-          <Icon name={CaretUpDown} size={16} />
-        </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
         <Select.Positioner>
@@ -109,9 +103,6 @@ function MultiSelect() {
       <Select.Label>Languages</Select.Label>
       <Select.Trigger>
         <Select.Value>{renderValue}</Select.Value>
-        <Select.Icon>
-          <Icon name={CaretUpDown} size={16} />
-        </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
         <Select.Positioner alignItemWithTrigger={false}>
@@ -139,9 +130,6 @@ function FloatingSelect() {
       <Select.Label>Alignment</Select.Label>
       <Select.Trigger>
         <Select.Value />
-        <Select.Icon>
-          <Icon name={CaretDown} size={16} />
-        </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
         <Select.Positioner alignItemWithTrigger={false} sideOffset={8}>
@@ -178,7 +166,7 @@ export const selectDoc: Doc = {
   group: "Components",
   name: "Select",
   blurb:
-    "A form control for choosing a predefined value from a dropdown. Assemble parts as Select.Root, .Label, .Trigger, .Value, .Icon, .Portal, .Positioner, .Popup, .List, .Item, plus groups and scroll arrows.",
+    "A form control for choosing a predefined value from a dropdown. Assemble parts as Select.Root, .Label, .Trigger, .Value, .Portal, .Positioner, .Popup, .List, .Item, plus groups and scroll arrows. The trigger owns its chevron.",
   examples: [
     {
       title: "Basic",
@@ -192,9 +180,6 @@ export const selectDoc: Doc = {
   <Select.Label>Theme</Select.Label>
   <Select.Trigger>
     <Select.Value placeholder="Select theme" />
-    <Select.Icon>
-      <Icon name={CaretUpDown} size={16} />
-    </Select.Icon>
   </Select.Trigger>
   <Select.Portal>
     <Select.Positioner>
@@ -221,9 +206,6 @@ export const selectDoc: Doc = {
   <Select.Label>Produce</Select.Label>
   <Select.Trigger>
     <Select.Value placeholder="Select produce" />
-    <Select.Icon>
-      <Icon name={CaretUpDown} size={16} />
-    </Select.Icon>
   </Select.Trigger>
   <Select.Portal>
     <Select.Positioner>
@@ -255,9 +237,6 @@ export const selectDoc: Doc = {
   <Select.Label>Languages</Select.Label>
   <Select.Trigger>
     <Select.Value>{renderValue}</Select.Value>
-    <Select.Icon>
-      <Icon name={CaretUpDown} size={16} />
-    </Select.Icon>
   </Select.Trigger>
   <Select.Portal>
     <Select.Positioner alignItemWithTrigger={false}>
@@ -284,9 +263,6 @@ export const selectDoc: Doc = {
   <Select.Label>Alignment</Select.Label>
   <Select.Trigger>
     <Select.Value />
-    <Select.Icon>
-      <Icon name={CaretDown} size={16} />
-    </Select.Icon>
   </Select.Trigger>
   <Select.Portal>
     <Select.Positioner alignItemWithTrigger={false} sideOffset={8}>
@@ -342,7 +318,7 @@ export const selectDoc: Doc = {
       name: "Trigger",
       type: "ButtonProps",
       default: "variant='outline'",
-      description: "Reuses Button; accepts variant, size, fullWidth. Put Value + Icon inside.",
+      description: "Reuses Button; accepts variant, size, fullWidth. Renders Value plus a built-in chevron.",
     },
     {
       name: "Value.placeholder",

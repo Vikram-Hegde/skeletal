@@ -22,6 +22,18 @@
     &[data-pressed] {
       transform: none;
     }
+
+    /* Reflect Field validation state when wrapped in Field.Root. The trigger is
+     * composed from Button, so its `outline`/`border` tokens are overridden here
+     * to keep the same invalid affordance as Input. */
+    &[data-invalid] {
+      border-color: var(--sk-destructive);
+      box-shadow: 0 0 0 1px var(--sk-destructive);
+    }
+
+    &[data-invalid]:focus-visible {
+      outline-color: var(--sk-destructive);
+    }
   }
 
   .select__value {

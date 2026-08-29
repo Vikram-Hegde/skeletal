@@ -1374,4 +1374,33 @@
       animation: none;
     }
   }
+
+  /* Themer (dev-only) — header button + badge */
+  .docs-themer__label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .docs-themer__badge {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    min-width: 1.125rem;
+    height: 1.125rem;
+    padding: 0 0.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--sk-destructive);
+    color: var(--sk-destructive-foreground);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  @media (max-width: 28rem) {
+    .docs-themer__label {
+      display: none;
+    }
+  }
 }
