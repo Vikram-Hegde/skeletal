@@ -188,6 +188,21 @@ export { Spinner } from "@skeletal/spinner";
 export type { SwitchProps, SwitchThumbProps } from "@skeletal/switch";
 export { Switch } from "@skeletal/switch";
 export type {
+  PopoverArrowProps,
+  PopoverBackdropProps,
+  PopoverCloseProps,
+  PopoverDescriptionProps,
+  PopoverHandle,
+  PopoverPortalProps,
+  PopoverPositionerProps,
+  PopoverPopupProps,
+  PopoverProps,
+  PopoverTitleProps,
+  PopoverTriggerProps,
+  PopoverViewportProps,
+} from "@skeletal/popover";
+export { Popover } from "@skeletal/popover";
+export type {
   TooltipArrowProps,
   TooltipHandle,
   TooltipPopupProps,

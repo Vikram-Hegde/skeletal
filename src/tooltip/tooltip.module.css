@@ -6,6 +6,11 @@
   .tooltip__positioner {
     z-index: 50;
     outline: none;
+    /* Freeze to measured size when Viewport animates between triggers. */
+    width: var(--positioner-width);
+    height: var(--positioner-height);
+    max-width: var(--available-width);
+    max-height: var(--available-height);
   }
 
   .tooltip__popup {
@@ -19,7 +24,13 @@
     box-shadow: var(--sk-shadow-md);
     font-size: 0.875rem;
     line-height: 1.25;
+    /* Keep popup visible for Arrow (outside border) and use
+       --available-width to prevent overflow on small viewports. */
+    max-width: min(var(--available-width, 20rem), 20rem);
     transform-origin: var(--transform-origin);
+    /* For Viewport animations, Base UI sets --popup-width/height. */
+    width: var(--popup-width, auto);
+    height: var(--popup-height, auto);
     transition:
       scale 100ms ease-out,
       opacity 100ms ease-out;

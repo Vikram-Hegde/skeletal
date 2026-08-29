@@ -47,6 +47,7 @@ const REGISTRY: Record<string, { file: string; interface: string }> = {
   spinner: { file: "src/spinner/spinner.tsx", interface: "SpinnerProps" },
   skeleton: { file: "src/skeleton/skeleton.tsx", interface: "SkeletonProps" },
   tooltip: { file: "src/tooltip/tooltip-root.tsx", interface: "TooltipProps" },
+  popover: { file: "src/popover/popover-root.tsx", interface: "PopoverProps" },
   checkbox: { file: "src/checkbox/checkbox-root.tsx", interface: "CheckboxProps" },
   radio: { file: "src/radio/radio-root.tsx", interface: "RadioProps" },
   switch: { file: "src/switch/switch-root.tsx", interface: "SwitchProps" },

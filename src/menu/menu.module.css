@@ -27,6 +27,15 @@
   .menu__positioner {
     z-index: 50;
     outline: none;
+    /* Base UI sets --positioner-width/height to the measured popup size.
+       Use them to freeze the positioner when a shared Viewport animates
+       between different trigger payloads; otherwise they resolve to the
+       popup's natural size. --available-width/height clamp the popup to
+       the viewport so long menus scroll instead of overflowing. */
+    width: var(--positioner-width);
+    height: var(--positioner-height);
+    max-width: var(--available-width);
+    max-height: var(--available-height);
   }
 
   .menu__popup {
@@ -35,6 +44,12 @@
     display: grid;
     grid-template-columns: 1.25rem 1fr;
     min-width: 10rem;
+    /* Base UI sets --popup-width/height for Viewport animations (freeze
+       size during payload switches). Keep available-width/height on the
+       Positioner so long menus are clamped to the viewport without
+       clipping the Arrow (Popup stays overflow:visible). */
+    width: var(--popup-width, auto);
+    height: var(--popup-height, auto);
     padding: 0.25rem;
     border: 1px solid var(--sk-border);
     border-radius: var(--sk-radius);
@@ -104,16 +119,20 @@
   .menu__radio-item,
   .menu__checkbox-item {
     display: grid;
-    grid-template-columns: subgrid;
-    grid-template-areas: "tick label";
+    /* Mirrors .combobox__item / .combobox__list: restate the popup's
+       1.25rem checkmark gutter explicitly rather than inheriting via
+       subgrid, so the label stays on track 2 whether the indicator is
+       mounted or not. */
+    grid-template-columns: 1.25rem 1fr;
     column-gap: 0.5rem;
-    padding: 0.375rem 0.625rem 0.375rem 0;
+    align-items: center;
+    padding: 0.375rem 0.625rem;
   }
 
   .menu__radio-item::before,
   .menu__checkbox-item::before {
     content: "";
-    grid-area: tick;
+    grid-area: 1 / 1;
   }
 
   .menu__item--danger {
@@ -168,15 +187,27 @@
 
   .menu__radio-item-indicator,
   .menu__checkbox-item-indicator {
-    grid-area: tick;
+    grid-area: 1 / 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.25rem;
     color: var(--sk-muted-foreground);
+    transition:
+      scale 100ms ease-out,
+      opacity 100ms ease-out;
 
     &[data-checked] {
       color: var(--sk-foreground);
+    }
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      scale: 0.5;
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
     }
   }
 

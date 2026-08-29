@@ -14,6 +14,7 @@ import { selectDoc } from "@/docs/components/select";
 import { skeletonDoc } from "@/docs/components/skeleton";
 import { spinnerDoc } from "@/docs/components/spinner";
 import { scrollAreaDoc } from "@/docs/components/scroll-area";
+import { popoverDoc } from "@/docs/components/popover";
 import { switchDoc } from "@/docs/components/switch";
 import { tooltipDoc } from "@/docs/components/tooltip";
 import { apiProps } from "@/docs/generated/api.generated";
@@ -49,6 +50,7 @@ const RAW_DOCS: [Doc, ...Doc[]] = [
   skeletonDoc,
   spinnerDoc,
   tooltipDoc,
+  popoverDoc,
   scrollAreaDoc,
   stackDoc,
   boxDoc,
