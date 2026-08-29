@@ -1,0 +1,57 @@
+name: Publish to npm
+
+on:
+  push:
+    tags: ["v*"]
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      otp:
+        description: "npm OTP code (only if token requires 2FA)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    # Prevent publish from running on forks
+    if: github.repository == 'Vikram-Hegde/skeletal'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.17.0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Verify package
+        run: npm pack --dry-run
+
+      - name: Publish to npm (provenance)
+        # For granular/classic tokens that require 2FA, pass OTP if provided via workflow_dispatch.
+        # For automation tokens (recommended) or OIDC trusted publisher, no OTP needed.
+        run: |
+          if [ -n "${{ inputs.otp }}" ]; then
+            npm publish --access public --provenance --otp ${{ inputs.otp }}
+          else
+            npm publish --access public --provenance
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
