@@ -19,12 +19,16 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Visual regression tests
-        # test:visual starts the pinned browser container itself, so CI
-        # renders with the exact same browser as local runs.
-        run: pnpm run test:visual -- --run
+        # test:visual starts the pinned browser container itself (and waits
+        # for its WS endpoint), so CI renders with the exact same browser as
+        # local runs. No `-- --run` flag: CI has no TTY so vitest already runs
+        # once, and pnpm would forward the `--` literally, turning `--run`
+        # into a filename filter. Failure artifacts land in
+        # .vitest-attachments/, not test-results/.
+        run: pnpm run test:visual
       - name: Upload failure screenshots
         if: failure()
         uses: actions/upload-artifact@v6
         with:
           name: visual-failure-screenshots
-          path: test-results/
+          path: .vitest-attachments/
