@@ -23,7 +23,10 @@
     "preview:docs": "vite preview",
     "dev": "tsdown --watch",
     "play": "pnpm run gen:docs && vite",
-    "test": "vitest",
+    "test": "vitest --project unit --project visual --passWithNoTests",
+    "test:unit": "vitest --project unit --passWithNoTests",
+    "test:visual": "docker compose up -d playwright && PLAYWRIGHT_WS_ENDPOINT=ws://127.0.0.1:6677/ vitest --project visual",
+    "test:visual:update": "docker compose up -d playwright && PLAYWRIGHT_WS_ENDPOINT=ws://127.0.0.1:6677/ vitest --project visual --update",
     "typecheck": "pnpm run css:types && tsc --noEmit && tsc --noEmit -p playground/tsconfig.json",
     "css:types": "tcm -p '**/*.module.css' src",
     "css:types:watch": "tcm -p '**/*.module.css' src --watch",
@@ -47,6 +50,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "@vitest/browser-playwright": "^4.1.10",
+    "playwright": "1.62.1",
     "bumpp": "^11.1.0",
     "rangi": "^2.2.0",
     "tsdown": "^0.22.5",
@@ -58,7 +62,7 @@
     "vitest-browser-react": "^2.2.0"
   },
   "dependencies": {
-    "@base-ui/react": "^1.7.0",
+    "@base-ui/react": "^1.8.0",
     "clsx": "^2.1.1"
   },
   "packageManager": "pnpm@11.17.0",

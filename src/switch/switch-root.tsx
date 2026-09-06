@@ -50,7 +50,9 @@ import { SwitchThumb } from "./switch-thumb";
  *
  * Validation styling (`data-invalid`, `data-valid`, ...) activates when the
  * switch is wrapped in Base UI's `Field.Root`. Label it with an enclosing
- * `<label>`.
+ * `<label>` and lay the pair out with a layout primitive — e.g.
+ * `<Cluster as="label" space="0.5rem">` — since the system never styles
+ * consumer-written markup.
  */
 export interface SwitchProps extends BaseSwitchRootProps {}
 

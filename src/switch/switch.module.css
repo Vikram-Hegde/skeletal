@@ -20,6 +20,12 @@
       background-color: var(--sk-primary);
     }
 
+    /* When wrapped in Field, Base UI sets these data attributes. */
+    &[data-invalid] {
+      border-color: var(--sk-destructive);
+      box-shadow: 0 0 0 1px var(--sk-destructive);
+    }
+
     &[data-unchecked]:hover:not([data-disabled]) {
       border-color: var(--sk-ring);
     }

@@ -8,22 +8,22 @@ import { RadioRoot } from "./radio-root";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Radio } from '@vikram-hegde/skeletal'
- *
- * <Radio.Group defaultValue="free" name="plan">
- *   <label>
- *     <Radio.Root value="free">
- *       <Radio.Indicator />
- *     </Radio.Root>
- *     Free
- *   </label>
- *   <label>
- *     <Radio.Root value="pro">
- *       <Radio.Indicator />
- *     </Radio.Root>
- *     Pro
- *   </label>
- * </Radio.Group>
+  * import { Cluster, Radio } from '@vikram-hegde/skeletal'
+  *
+  * <Radio.Group defaultValue="free" name="plan">
+  *   <Cluster as="label" space="0.5rem">
+  *     <Radio.Root value="free">
+  *       <Radio.Indicator />
+  *     </Radio.Root>
+  *     Free
+  *   </Cluster>
+  *   <Cluster as="label" space="0.5rem">
+  *     <Radio.Root value="pro">
+  *       <Radio.Indicator />
+  *     </Radio.Root>
+  *     Pro
+  *   </Cluster>
+  * </Radio.Group>
  * ```
  *
  * The `Group` owns the value and renders the hidden form input — see its

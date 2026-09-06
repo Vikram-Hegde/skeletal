@@ -6,7 +6,7 @@ import {
   TextB,
   Warning,
 } from "@phosphor-icons/react";
-import { Button, Checkbox, Icon, Radio, Switch } from "@skeletal";
+import { Button, Checkbox, Cluster, Icon, Radio, Switch } from "@skeletal";
 import type { CSSProperties, ReactNode } from "react";
 
 /**
@@ -197,6 +197,39 @@ export const PREVIEWS: Record<string, ReactNode> = {
       <Button size="sm" variant="ghost">
         <Icon name={TextB} size={15} style={ICON.md} />
       </Button>
+    </div>
+  ),
+
+  popover: (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "2.5cqw",
+      }}
+    >
+      <div className="pv-surface" style={{ width: "60cqw", position: "relative", overflow: "visible" }}>
+        <div className="pv-card__body" style={{ padding: "3.75cqw 4cqw" }}>
+          <div className="pv-line pv-line--title" style={{ width: "45%" }} />
+          <div className="pv-line" style={{ width: "90%" }} />
+          <div className="pv-line" style={{ width: "70%" }} />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            bottom: "-1.4cqw",
+            width: "2.8cqw",
+            height: "2.8cqw",
+            transform: "translateX(-50%) rotate(45deg)",
+            background: "var(--docs-panel)",
+            borderRight: "1px solid var(--docs-border)",
+            borderBottom: "1px solid var(--docs-border)",
+          }}
+        />
+      </div>
+      <Button size="sm">View notifications</Button>
     </div>
   ),
 
@@ -439,32 +472,22 @@ export const PREVIEWS: Record<string, ReactNode> = {
 
   checkbox: (
     <div style={{ display: "flex", flexDirection: "column", gap: "3cqw", alignItems: "flex-start" }}>
-      <label
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2.5cqw",
-          fontSize: "4.5cqw",
-          lineHeight: 1.2,
-          color: "var(--docs-text)",
-        }}
+      <Cluster
+        as="label"
+        space="2.5cqw"
+        style={{ fontSize: "4.5cqw", lineHeight: 1.2, color: "var(--docs-text)" }}
       >
         <Checkbox.Root />
         Accept terms
-      </label>
-      <label
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2.5cqw",
-          fontSize: "4.5cqw",
-          lineHeight: 1.2,
-          color: "var(--docs-text)",
-        }}
+      </Cluster>
+      <Cluster
+        as="label"
+        space="2.5cqw"
+        style={{ fontSize: "4.5cqw", lineHeight: 1.2, color: "var(--docs-text)" }}
       >
         <Checkbox.Root defaultChecked />
         Subscribe
-      </label>
+      </Cluster>
     </div>
   ),
 
@@ -473,63 +496,43 @@ export const PREVIEWS: Record<string, ReactNode> = {
       defaultValue="b"
       style={{ display: "flex", flexDirection: "column", gap: "3cqw", alignItems: "flex-start" }}
     >
-      <label
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2.5cqw",
-          fontSize: "4.5cqw",
-          lineHeight: 1.2,
-          color: "var(--docs-text)",
-        }}
+      <Cluster
+        as="label"
+        space="2.5cqw"
+        style={{ fontSize: "4.5cqw", lineHeight: 1.2, color: "var(--docs-text)" }}
       >
         <Radio.Root value="a" />
         Free
-      </label>
-      <label
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2.5cqw",
-          fontSize: "4.5cqw",
-          lineHeight: 1.2,
-          color: "var(--docs-accent)",
-        }}
+      </Cluster>
+      <Cluster
+        as="label"
+        space="2.5cqw"
+        style={{ fontSize: "4.5cqw", lineHeight: 1.2, color: "var(--docs-accent)" }}
       >
         <Radio.Root value="b" />
         Pro
-      </label>
+      </Cluster>
     </Radio.Group>
   ),
 
   switch: (
     <div style={{ display: "flex", flexDirection: "column", gap: "3cqw", alignItems: "flex-start" }}>
-      <label
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2.5cqw",
-          fontSize: "4.5cqw",
-          lineHeight: 1.2,
-          color: "var(--docs-text)",
-        }}
+      <Cluster
+        as="label"
+        space="2.5cqw"
+        style={{ fontSize: "4.5cqw", lineHeight: 1.2, color: "var(--docs-text)" }}
       >
         <Switch.Root defaultChecked />
         Notifications
-      </label>
-      <label
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2.5cqw",
-          fontSize: "4.5cqw",
-          lineHeight: 1.2,
-          color: "var(--docs-text)",
-        }}
+      </Cluster>
+      <Cluster
+        as="label"
+        space="2.5cqw"
+        style={{ fontSize: "4.5cqw", lineHeight: 1.2, color: "var(--docs-text)" }}
       >
         <Switch.Root />
         Dark mode
-      </label>
+      </Cluster>
     </div>
   ),
 

@@ -1,0 +1,30 @@
+name: Visual tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  visual:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.17.0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Visual regression tests
+        # test:visual starts the pinned browser container itself, so CI
+        # renders with the exact same browser as local runs.
+        run: pnpm run test:visual -- --run
+      - name: Upload failure screenshots
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: visual-failure-screenshots
+          path: test-results/

@@ -1,29 +1,29 @@
 import { useState } from "react";
-import { Radio } from "@skeletal";
+import { Cluster, Radio } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 function ControlledRadioGroup() {
   const [value, setValue] = useState("pro");
   return (
     <Radio.Group aria-label="Plan" value={value} onValueChange={setValue}>
-      <label>
+      <Cluster as="label" space="0.5rem">
         <Radio.Root value="free">
           <Radio.Indicator />
         </Radio.Root>
         Free
-      </label>
-      <label>
+      </Cluster>
+      <Cluster as="label" space="0.5rem">
         <Radio.Root value="pro">
           <Radio.Indicator />
         </Radio.Root>
         Pro
-      </label>
-      <label>
+      </Cluster>
+      <Cluster as="label" space="0.5rem">
         <Radio.Root value="enterprise">
           <Radio.Indicator />
         </Radio.Root>
         Enterprise
-      </label>
+      </Cluster>
     </Radio.Group>
   );
 }
@@ -38,29 +38,29 @@ export const radioDoc: Doc = {
     {
       title: "Basic (uncontrolled)",
       code: `<Radio.Group defaultValue="free" name="plan">
-  <label>
+  <Cluster as="label" space="0.5rem">
     <Radio.Root value="free"><Radio.Indicator /></Radio.Root>
     Free
-  </label>
-  <label>
+  </Cluster>
+  <Cluster as="label" space="0.5rem">
     <Radio.Root value="pro"><Radio.Indicator /></Radio.Root>
     Pro
-  </label>
+  </Cluster>
 </Radio.Group>`,
       demo: (
         <Radio.Group defaultValue="free" name="plan">
-          <label>
+          <Cluster as="label" space="0.5rem">
             <Radio.Root value="free">
               <Radio.Indicator />
             </Radio.Root>
             Free
-          </label>
-          <label>
+          </Cluster>
+          <Cluster as="label" space="0.5rem">
             <Radio.Root value="pro">
               <Radio.Indicator />
             </Radio.Root>
             Pro
-          </label>
+          </Cluster>
         </Radio.Group>
       ),
     },
@@ -69,18 +69,18 @@ export const radioDoc: Doc = {
       code: `const [value, setValue] = useState('pro');
 
 <Radio.Group value={value} onValueChange={setValue}>
-  <label><Radio.Root value="free" /> Free</label>
-  <label><Radio.Root value="pro" /> Pro</label>
-  <label><Radio.Root value="legacy" disabled /> Legacy</label>
+  <Cluster as="label" space="0.5rem"><Radio.Root value="free" /> Free</Cluster>
+  <Cluster as="label" space="0.5rem"><Radio.Root value="pro" /> Pro</Cluster>
+  <Cluster as="label" space="0.5rem"><Radio.Root value="legacy" disabled /> Legacy</Cluster>
 </Radio.Group>`,
       demo: (
         <>
           <ControlledRadioGroup />
           <br />
-          <label>
+          <Cluster as="label" space="0.5rem">
             <Radio.Root value="legacy" disabled />
             Legacy (disabled)
-          </label>
+          </Cluster>
         </>
       ),
     },
@@ -97,7 +97,7 @@ export const radioDoc: Doc = {
       onBlur={field.onBlur}
     >
       {/* radios only declare their value */}
-      <label><Radio.Root value="free" /> Free</label>
+      <Cluster as="label" space="0.5rem"><Radio.Root value="free" /> Free</Cluster>
     </Radio.Group>
   )}
 />

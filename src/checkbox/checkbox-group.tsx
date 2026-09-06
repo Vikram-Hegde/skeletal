@@ -18,8 +18,8 @@ import styles from "./checkbox.module.css";
  *   name="protocols"
  *   render={({ field }) => (
  *     <Checkbox.Group value={field.value} onValueChange={field.onChange} onBlur={field.onBlur}>
- *       <label><Checkbox.Root value="http" /> HTTP</label>
- *       <label><Checkbox.Root value="https" /> HTTPS</label>
+  *       <Cluster as="label" space="0.5rem"><Checkbox.Root value="http" /> HTTP</Cluster>
+  *       <Cluster as="label" space="0.5rem"><Checkbox.Root value="https" /> HTTPS</Cluster>
  *     </Checkbox.Group>
  *   )}
  * />

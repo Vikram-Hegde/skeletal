@@ -8,12 +8,12 @@ import { CheckboxRoot } from "./checkbox-root";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Checkbox } from '@vikram-hegde/skeletal'
- *
- * <label>
- *   <Checkbox.Root defaultChecked name="terms" required />
- *   Accept terms and conditions
- * </label>
+  * import { Checkbox, Cluster } from '@vikram-hegde/skeletal'
+  *
+  * <Cluster as="label" space="0.5rem">
+  *   <Checkbox.Root defaultChecked name="terms" required />
+  *   Accept terms and conditions
+  * </Cluster>
  * ```
  *
  * Wrap several checkboxes in `Checkbox.Group` to manage them as one

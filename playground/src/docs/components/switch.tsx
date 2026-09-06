@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Switch } from "@skeletal";
+import { Cluster, Switch } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 function ControlledSwitch() {
   const [checked, setChecked] = useState(true);
   return (
-    <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+    <Cluster as="label" space="0.5rem">
       <Switch.Root checked={checked} onCheckedChange={setChecked} />
       {checked ? "Notifications on" : "Notifications off"}
-    </label>
+    </Cluster>
   );
 }
 
@@ -21,26 +21,26 @@ export const switchDoc: Doc = {
   examples: [
     {
       title: "Basic",
-      code: `<label>
+      code: `<Cluster as="label" space="0.5rem">
   <Switch.Root defaultChecked />
   Notifications
-</label>
+</Cluster>
 
-<label>
+<Cluster as="label" space="0.5rem">
   <Switch.Root />
   Dark mode
-</label>`,
+</Cluster>`,
       demo: (
         <>
-          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Cluster as="label" space="0.5rem">
             <Switch.Root defaultChecked />
             Notifications
-          </label>
+          </Cluster>
           <br />
-          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Cluster as="label" space="0.5rem">
             <Switch.Root />
             Dark mode
-          </label>
+          </Cluster>
         </>
       ),
     },
@@ -53,20 +53,20 @@ export const switchDoc: Doc = {
 </Cluster>`,
       demo: (
         <>
-          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Cluster as="label" space="0.5rem">
             <Switch.Root disabled />
             Disabled off
-          </label>
+          </Cluster>
           <br />
-          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Cluster as="label" space="0.5rem">
             <Switch.Root defaultChecked disabled />
             Disabled on
-          </label>
+          </Cluster>
           <br />
-          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Cluster as="label" space="0.5rem">
             <Switch.Root readOnly defaultChecked />
             Read-only
-          </label>
+          </Cluster>
         </>
       ),
     },
@@ -74,10 +74,10 @@ export const switchDoc: Doc = {
       title: "Controlled",
       code: `const [checked, setChecked] = useState(true);
 
-<label>
+<Cluster as="label" space="0.5rem">
   <Switch.Root checked={checked} onCheckedChange={setChecked} />
   {checked ? 'Notifications on' : 'Notifications off'}
-</label>`,
+</Cluster>`,
       demo: <ControlledSwitch />,
     },
   ],

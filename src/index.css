@@ -19,9 +19,6 @@
     --sk-card-foreground: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
     --sk-popover: light-dark(oklch(1 0 0), oklch(0.205 0 0));
     --sk-popover-foreground: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
-    /* Monochrome brand: primary is ink (near-black in light, near-white in
-       dark), secondary a neutral gray. All chroma lives in the status colors
-       (success / warning / destructive) instead of the brand. */
     --sk-primary: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
     --sk-primary-foreground: light-dark(oklch(0.985 0 0), oklch(0.145 0 0));
     --sk-secondary: light-dark(oklch(0.967 0 0), oklch(0.274 0 0));
@@ -44,14 +41,8 @@
     --sk-chart-3: light-dark(oklch(0.439 0 0), oklch(0.55 0 0));
     --sk-chart-4: light-dark(oklch(0.371 0 0), oklch(0.5 0 0));
     --sk-chart-5: light-dark(oklch(0.269 0 0), oklch(0.45 0 0));
-    /* Sharp edges: the design language has no rounded corners. Consumers can
-       re-theme by overriding this token on :root (e.g. --sk-radius: 0.5rem)
-       to reintroduce rounding system-wide. */
     --sk-radius: 0;
 
-    /* Shadow scale. Each token carries its own light-dark() pair so the same
-       surface reads elevated in both schemes. Defaults are tuned for the
-       token palette; override on :root (or a consumer layer) to re-skin. */
     --sk-shadow-sm: light-dark(
       0 1px 2px oklch(0 0 0 / 4%),
       0 1px 2px oklch(0 0 0 / 20%)
@@ -74,10 +65,15 @@
     --sk-sidebar-ring: light-dark(oklch(0.708 0 0), oklch(0.556 0 0));
     --sk-scrollbar-thumb: light-dark(oklch(0.84 0 0), oklch(0.31 0 0));
     --sk-scrollbar-thumb-hover: light-dark(oklch(0.68 0 0), oklch(0.45 0 0));
+    --sk-font-sans:
+      "Geist Variable", Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
-  /* Forced themes. Consumers toggle these classes on <html> to override the
-   OS preference that light-dark() otherwise follows. */
+  :root {
+    font-family: var(--sk-font-sans);
+  }
+
   html.dark {
     color-scheme: dark;
   }
@@ -86,9 +82,6 @@
     color-scheme: light;
   }
 
-  /* Custom scrollbars, enforced once globally like the box-sizing reset.
-   Slim thumb with inset padding; the track stays invisible so scrollbars
-   recede against the background. */
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--sk-scrollbar-thumb) transparent;
@@ -113,21 +106,5 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--sk-scrollbar-thumb-hover);
     background-clip: content-box;
-  }
-
-  /* Auto-gap for labels that wrap a form control so
-     <label><Checkbox.Root /> Text</label> doesn't stick.
-     Switch docs already use flex+gap inline, this makes the
-     bare-label pattern (used in Checkbox/Radio docs) match.
-     Keep low specificity so consumer overrides win. */
-  label:has([role="checkbox"]),
-  label:has([role="radio"]),
-  label:has([role="switch"]) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    line-height: 1.25;
-    /* prevent line-height jump when indicator mounts/unmounts */
-    min-block-size: 1rem;
   }
 }

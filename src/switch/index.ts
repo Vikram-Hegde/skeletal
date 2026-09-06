@@ -7,12 +7,12 @@ import { SwitchThumb } from "./switch-thumb";
  * Assemble the parts as properties of the object:
  *
  * ```tsx
- * import { Switch } from '@vikram-hegde/skeletal'
- *
- * <label>
- *   <Switch.Root defaultChecked name="notifications" />
- *   Notifications
- * </label>
+  * import { Cluster, Switch } from '@vikram-hegde/skeletal'
+  *
+  * <Cluster as="label" space="0.5rem">
+  *   <Switch.Root defaultChecked name="notifications" />
+  *   Notifications
+  * </Cluster>
  * ```
  *
  * Use a switch for instant-effect settings that don't wait on form

@@ -1,4 +1,4 @@
-import { Combobox, Field, Input, Select } from "@skeletal";
+import { Checkbox, Cluster, Combobox, Field, Input, Radio, Select } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 export const fieldDoc: Doc = {
@@ -12,14 +12,14 @@ export const fieldDoc: Doc = {
       code: `<Field.Root>
   <Field.Label>Name</Field.Label>
   <Field.Description>Shown on your public profile.</Field.Description>
-  <Input placeholder="Ada Lovelace" />
+  <Input id="name" placeholder="Ada Lovelace" />
   <Field.Error />
 </Field.Root>`,
       demo: (
         <Field.Root>
           <Field.Label>Name</Field.Label>
           <Field.Description>Shown on your public profile.</Field.Description>
-          <Input placeholder="Ada Lovelace" />
+          <Input id="name" placeholder="Ada Lovelace" />
           <Field.Error />
         </Field.Root>
       ),
@@ -33,7 +33,7 @@ export const fieldDoc: Doc = {
   }
 >
   <Field.Label>Username</Field.Label>
-  <Input placeholder="3+ characters" />
+  <Input id="username" placeholder="3+ characters" />
   <Field.Error />
 </Field.Root>`,
       demo: (
@@ -42,7 +42,7 @@ export const fieldDoc: Doc = {
           validate={(value) => (String(value).length < 3 ? "Too short" : null)}
         >
           <Field.Label>Username</Field.Label>
-          <Input placeholder="3+ characters" />
+          <Input id="username" placeholder="3+ characters" />
           <Field.Error />
         </Field.Root>
       ),
@@ -146,6 +146,62 @@ export const fieldDoc: Doc = {
             </Combobox.Portal>
           </Combobox.Root>
           <Field.Error>Required.</Field.Error>
+        </Field.Root>
+      ),
+    },
+    {
+      title: "Checkbox in a field",
+      code: `<Field.Root name="terms" invalid>
+  <Cluster as="label" space="0.5rem">
+    <Checkbox.Root required />
+    Accept terms and conditions
+  </Cluster>
+  <Field.Error>You must accept the terms to continue.</Field.Error>
+</Field.Root>`,
+      demo: (
+        <Field.Root name="terms" invalid>
+          <Cluster as="label" space="0.5rem">
+            <Checkbox.Root required />
+            Accept terms and conditions
+          </Cluster>
+          <Field.Error>You must accept the terms to continue.</Field.Error>
+        </Field.Root>
+      ),
+    },
+    {
+      title: "Radio group in a field",
+      code: `<Field.Root name="plan" invalid>
+  <Field.Label>Plan</Field.Label>
+  <Radio.Group defaultValue="free">
+    <Cluster as="label" space="0.5rem">
+      <Radio.Root value="free"><Radio.Indicator /></Radio.Root>
+      Free
+    </Cluster>
+    <Cluster as="label" space="0.5rem">
+      <Radio.Root value="pro"><Radio.Indicator /></Radio.Root>
+      Pro
+    </Cluster>
+  </Radio.Group>
+  <Field.Error>Please select a plan.</Field.Error>
+</Field.Root>`,
+      demo: (
+        <Field.Root name="plan" invalid>
+          <Field.Label>Plan</Field.Label>
+          <Radio.Group defaultValue="free">
+            <Cluster as="label" space="0.5rem">
+              <Radio.Root value="free">
+                <Radio.Indicator />
+              </Radio.Root>
+              Free
+            </Cluster>
+            <Cluster as="label" space="0.5rem">
+              <Radio.Root value="pro">
+                <Radio.Indicator />
+              </Radio.Root>
+              Pro
+            </Cluster>
+          </Radio.Group>
+          <Field.Error>Please select a plan.</Field.Error>
         </Field.Root>
       ),
     },

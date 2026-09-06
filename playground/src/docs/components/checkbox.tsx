@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Checkbox } from "@skeletal";
+import { Checkbox, Cluster } from "@skeletal";
 import type { Doc } from "@/docs/types";
 
 function ControlledGroup() {
@@ -10,18 +10,18 @@ function ControlledGroup() {
       value={value}
       onValueChange={setValue}
     >
-      <label>
+      <Cluster as="label" space="0.5rem">
         <Checkbox.Root value="http" />
         HTTP
-      </label>
-      <label>
+      </Cluster>
+      <Cluster as="label" space="0.5rem">
         <Checkbox.Root value="https" />
         HTTPS
-      </label>
-      <label>
+      </Cluster>
+      <Cluster as="label" space="0.5rem">
         <Checkbox.Root value="ssh" />
         SSH
-      </label>
+      </Cluster>
     </Checkbox.Group>
   );
 }
@@ -31,22 +31,22 @@ function ParentGroup() {
   const [value, setValue] = useState<string[]>(["gala"]);
   return (
     <Checkbox.Group value={value} onValueChange={setValue} allValues={allValues}>
-      <label>
+      <Cluster as="label" space="0.5rem">
         <Checkbox.Root parent />
         All apples
-      </label>
-      <label style={{ marginInlineStart: "1rem" }}>
+      </Cluster>
+      <Cluster as="label" space="0.5rem" style={{ marginInlineStart: "1rem" }}>
         <Checkbox.Root value="fuji" />
         Fuji
-      </label>
-      <label style={{ marginInlineStart: "1rem" }}>
+      </Cluster>
+      <Cluster as="label" space="0.5rem" style={{ marginInlineStart: "1rem" }}>
         <Checkbox.Root value="gala" />
         Gala
-      </label>
-      <label style={{ marginInlineStart: "1rem" }}>
+      </Cluster>
+      <Cluster as="label" space="0.5rem" style={{ marginInlineStart: "1rem" }}>
         <Checkbox.Root value="granny-smith" />
         Granny Smith
-      </label>
+      </Cluster>
     </Checkbox.Group>
   );
 }
@@ -60,26 +60,26 @@ export const checkboxDoc: Doc = {
   examples: [
     {
       title: "Basic",
-      code: `<label>
+      code: `<Cluster as="label" space="0.5rem">
   <Checkbox.Root name="terms" required />
   Accept terms and conditions
-</label>
+</Cluster>
 
-<label>
+<Cluster as="label" space="0.5rem">
   <Checkbox.Root defaultChecked />
   Subscribe to updates
-</label>`,
+</Cluster>`,
       demo: (
         <>
-          <label>
+          <Cluster as="label" space="0.5rem">
             <Checkbox.Root name="terms" required />
             Accept terms and conditions
-          </label>
+          </Cluster>
           <br />
-          <label>
+          <Cluster as="label" space="0.5rem">
             <Checkbox.Root defaultChecked />
             Subscribe to updates
-          </label>
+          </Cluster>
         </>
       ),
     },
@@ -93,25 +93,25 @@ export const checkboxDoc: Doc = {
 </Cluster>`,
       demo: (
         <>
-          <label>
+          <Cluster as="label" space="0.5rem">
             <Checkbox.Root disabled />
             Disabled unchecked
-          </label>
+          </Cluster>
           <br />
-          <label>
+          <Cluster as="label" space="0.5rem">
             <Checkbox.Root checked disabled />
             Disabled checked
-          </label>
+          </Cluster>
           <br />
-          <label>
+          <Cluster as="label" space="0.5rem">
             <Checkbox.Root readOnly defaultChecked />
             Read-only
-          </label>
+          </Cluster>
           <br />
-          <label>
+          <Cluster as="label" space="0.5rem">
             <Checkbox.Root indeterminate />
             Indeterminate
-          </label>
+          </Cluster>
         </>
       ),
     },
@@ -120,9 +120,9 @@ export const checkboxDoc: Doc = {
       code: `const [value, setValue] = useState(['https']);
 
 <Checkbox.Group value={value} onValueChange={setValue}>
-  <label><Checkbox.Root value="http" /> HTTP</label>
-  <label><Checkbox.Root value="https" /> HTTPS</label>
-  <label><Checkbox.Root value="ssh" /> SSH</label>
+  <Cluster as="label" space="0.5rem"><Checkbox.Root value="http" /> HTTP</Cluster>
+  <Cluster as="label" space="0.5rem"><Checkbox.Root value="https" /> HTTPS</Cluster>
+  <Cluster as="label" space="0.5rem"><Checkbox.Root value="ssh" /> SSH</Cluster>
 </Checkbox.Group>
 
 // react-hook-form: wrap in Controller, map onValueChange → field.onChange
@@ -135,10 +135,10 @@ export const checkboxDoc: Doc = {
 const [value, setValue] = useState(['gala']);
 
 <Checkbox.Group value={value} onValueChange={setValue} allValues={allValues}>
-  <label>
+  <Cluster as="label" space="0.5rem">
     <Checkbox.Root parent />
     All apples
-  </label>
+  </Cluster>
   {/* child checkboxes with their own values */}
 </Checkbox.Group>`,
       demo: <ParentGroup />,

@@ -1,0 +1,13 @@
+# Pinned browser server for pixel-accurate visual regression tests.
+# The browser (which does the rendering) always runs in this image, so
+# screenshots match between local dev and CI. Version must stay in sync with
+# the `playwright` devDependency in package.json.
+services:
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.62.1-noble
+    command: /bin/sh -c "npx -y playwright@1.62.1 run-server --port 6677 --host 0.0.0.0"
+    init: true
+    ipc: host
+    user: pwuser
+    ports:
+      - "6677:6677"

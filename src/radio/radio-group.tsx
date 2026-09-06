@@ -18,8 +18,8 @@ import styles from "./radio.module.css";
  *   name="plan"
  *   render={({ field }) => (
  *     <Radio.Group value={field.value} onValueChange={field.onChange} onBlur={field.onBlur}>
- *       <label><Radio.Root value="free" /> Free</label>
- *       <label><Radio.Root value="pro" /> Pro</label>
+  *       <Cluster as="label" space="0.5rem"><Radio.Root value="free" /> Free</Cluster>
+  *       <Cluster as="label" space="0.5rem"><Radio.Root value="pro" /> Pro</Cluster>
  *     </Radio.Group>
  *   )}
  * />
