@@ -1,3 +1,23 @@
+/* Component internals, registered globally (registration is document-wide
+ * wherever the rule sits, and this ships with the component chunk). Rules:
+ * `inherits: false` unless a read depends on inheritance — see the registry
+ * header in src/index.css. */
+@property --_scroll-area-fade-size {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 2rem;
+}
+@property --_scroll-area-fade-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+@property --_scroll-area-fade {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 2rem;
+}
+
 @layer skeletal {
   .scroll-area {
     position: relative;

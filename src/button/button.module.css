@@ -1,3 +1,33 @@
+/* Component internals, registered globally (registration is document-wide
+ * wherever the rule sits, and this ships with the component chunk). Rules:
+ * `inherits: false` unless a read depends on inheritance — see the registry
+ * header in src/index.css. */
+@property --_button-bg {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+@property --_button-fg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: black;
+}
+@property --_button-border {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+@property --_button-hover-bg {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: black;
+}
+@property --_button-progress-duration {
+  syntax: "<time>";
+  inherits: false;
+  initial-value: 1.4s;
+}
+
 @layer skeletal {
   .button {
     display: inline-flex;

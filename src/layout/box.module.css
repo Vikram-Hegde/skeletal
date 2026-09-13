@@ -1,3 +1,26 @@
+/* Component internals, registered globally (registration is document-wide
+ * wherever the rule sits, and this ships with the component chunk). Rules:
+ * `inherits: false` unless a read depends on inheritance — see the registry
+ * header in src/index.css. */
+@property --_box-padding {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 1.5rem;
+}
+@property --_box-border {
+  syntax: "*";
+  inherits: false;
+}
+@property --_box-bg {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+@property --_box-color {
+  syntax: "*";
+  inherits: false;
+}
+
 @layer skeletal {
   .box {
     --_box-padding: 1.5rem;

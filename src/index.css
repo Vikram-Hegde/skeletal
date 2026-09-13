@@ -4,6 +4,240 @@
    fighting specificity. Declared here first so it's the earliest layer. */
 @layer skeletal;
 
+/* Registered global tokens. Every `--sk-*` token is declared here so the
+ * browser validates assignments instead of propagating garbage: a mistyped
+ * token falls back to its initial value rather than poisoning every
+ * `oklch(from …)` derivation downstream (silent fallback — inspect computed
+ * styles when a token looks ignored).
+ *
+ * - tokens use `inherits: true` (set once on `:root`, read everywhere) with a
+ *   type (`<color>`, `<length> | <percentage>` so `50%` radii stay valid)
+ *   plus the token's own value as `initial-value`. Shadows and the font stack
+ *   use the universal syntax (`*`) — no standard type fits them.
+ * - component internals (`--_*`) are registered at the top of their own
+ *   `*.module.css` (unlayered — registration is document-wide wherever the
+ *   rule sits, and it ships with the component chunk). Same conventions:
+ *   `inherits: false` unless a read depends on inheritance (`button-fg` in
+ *   `::before`/`::after`, skeleton descendants), `<length-percentage>` for
+ *   lengths, `*` with no initial value for em-relative values, shorthands,
+ *   and keywords. `initial-value` must be computationally independent.
+ * - never register Base UI-managed variables (`--transform-origin`,
+ *   `--anchor-width`, `--available-height`, `--scroll-area-overflow-*`) —
+ *   they belong to Base UI's positioners.
+ *
+ * Older browsers ignore `@property` and behave exactly as before, so this is
+ * progressive enhancement, not a breaking change. */
+@property --sk-background {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(1 0 0), oklch(0.145 0 0));
+}
+@property --sk-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
+}
+@property --sk-card {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(1 0 0), oklch(0.205 0 0));
+}
+@property --sk-card-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
+}
+@property --sk-popover {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(1 0 0), oklch(0.205 0 0));
+}
+@property --sk-popover-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
+}
+@property --sk-primary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
+}
+@property --sk-primary-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.985 0 0), oklch(0.145 0 0));
+}
+@property --sk-secondary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.967 0 0), oklch(0.274 0 0));
+}
+@property --sk-secondary-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.21 0 0), oklch(0.985 0 0));
+}
+@property --sk-muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.97 0 0), oklch(0.269 0 0));
+}
+@property --sk-muted-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.556 0 0), oklch(0.708 0 0));
+}
+@property --sk-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.97 0 0), oklch(0.269 0 0));
+}
+@property --sk-accent-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.205 0 0), oklch(0.985 0 0));
+}
+@property --sk-destructive {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.577 0.245 27.325), oklch(0.704 0.191 22.216));
+}
+@property --sk-destructive-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.97 0 0), oklch(0.12 0.021 26.805));
+}
+@property --sk-success {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.627 0.194 149.214), oklch(0.696 0.17 162.48));
+}
+@property --sk-success-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.985 0 0), oklch(0.985 0 0));
+}
+@property --sk-warning {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.795 0.184 86.047), oklch(0.828 0.189 84.429));
+}
+@property --sk-warning-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.279 0.077 45.635), oklch(0.279 0.077 45.635));
+}
+@property --sk-border {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 10%));
+}
+@property --sk-input {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 15%));
+}
+@property --sk-ring {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.708 0 0), oklch(0.556 0 0));
+}
+@property --sk-chart-1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.87 0 0), oklch(0.72 0 0));
+}
+@property --sk-chart-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.556 0 0), oklch(0.66 0 0));
+}
+@property --sk-chart-3 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.439 0 0), oklch(0.55 0 0));
+}
+@property --sk-chart-4 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.371 0 0), oklch(0.5 0 0));
+}
+@property --sk-chart-5 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.269 0 0), oklch(0.45 0 0));
+}
+@property --sk-radius {
+  syntax: "<length> | <percentage>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --sk-shadow-sm {
+  syntax: "*";
+  inherits: true;
+}
+@property --sk-shadow-md {
+  syntax: "*";
+  inherits: true;
+}
+@property --sk-shadow-lg {
+  syntax: "*";
+  inherits: true;
+}
+@property --sk-sidebar {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.985 0 0), oklch(0.205 0 0));
+}
+@property --sk-sidebar-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
+}
+@property --sk-sidebar-primary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.546 0.245 262.881), oklch(0.623 0.214 259.815));
+}
+@property --sk-sidebar-primary-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.97 0.014 254.604), oklch(0.97 0.014 254.604));
+}
+@property --sk-sidebar-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.97 0 0), oklch(0.269 0 0));
+}
+@property --sk-sidebar-accent-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.205 0 0), oklch(0.985 0 0));
+}
+@property --sk-sidebar-border {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 10%));
+}
+@property --sk-sidebar-ring {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.708 0 0), oklch(0.556 0 0));
+}
+@property --sk-scrollbar-thumb {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.84 0 0), oklch(0.31 0 0));
+}
+@property --sk-scrollbar-thumb-hover {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: light-dark(oklch(0.68 0 0), oklch(0.45 0 0));
+}
+@property --sk-font-sans {
+  syntax: "*";
+  inherits: true;
+}
 @layer skeletal {
   *,
   *::before,

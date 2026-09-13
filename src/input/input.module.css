@@ -1,3 +1,16 @@
+/* Component internals, registered globally (registration is document-wide
+ * wherever the rule sits, and this ships with the component chunk). Rules:
+ * `inherits: false` unless a read depends on inheritance — see the registry
+ * header in src/index.css. */
+@property --_input-border {
+  syntax: "*";
+  inherits: false;
+}
+@property --_input-hover-border {
+  syntax: "*";
+  inherits: false;
+}
+
 @layer skeletal {
   .input {
     box-sizing: border-box;
