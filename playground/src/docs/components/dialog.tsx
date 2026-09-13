@@ -1,5 +1,42 @@
+import { useState } from "react";
 import { Cluster, Dialog } from "@skeletal";
 import type { Doc } from "@/docs/types";
+
+function SaveDialog() {
+  const [savedAt, setSavedAt] = useState<string | null>(null);
+  return (
+    <>
+      <Dialog.Root>
+        <Dialog.Trigger>Edit profile</Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Backdrop />
+          <Dialog.Viewport>
+            <Dialog.Content>
+              <Dialog.Title>Edit profile</Dialog.Title>
+              <Dialog.Description>
+                Saving applies your changes immediately and closes the dialog.
+              </Dialog.Description>
+              <Dialog.Footer>
+                <Dialog.Close variant="ghost">Cancel</Dialog.Close>
+                <Dialog.Close
+                  variant="primary"
+                  onClick={() => setSavedAt(new Date().toLocaleTimeString())}
+                >
+                  Save changes
+                </Dialog.Close>
+              </Dialog.Footer>
+            </Dialog.Content>
+          </Dialog.Viewport>
+        </Dialog.Portal>
+      </Dialog.Root>
+      {savedAt ? (
+        <p style={{ fontSize: "0.8125rem", color: "var(--docs-muted)" }}>
+          Saved at {savedAt}
+        </p>
+      ) : null}
+    </>
+  );
+}
 
 export const dialogDoc: Doc = {
   id: "dialog",
@@ -44,6 +81,17 @@ export const dialogDoc: Doc = {
           </Dialog.Portal>
         </Dialog.Root>
       ),
+    },
+    {
+      title: "Primary action that saves and closes",
+      code: `<Dialog.Footer>
+  <Dialog.Close variant="ghost">Cancel</Dialog.Close>
+  {/* onClick runs your action first — the dialog still closes. */}
+  <Dialog.Close variant="primary" onClick={handleSave}>
+    Save changes
+  </Dialog.Close>
+</Dialog.Footer>`,
+      demo: <SaveDialog />,
     },
     {
       title: "Sizes",

@@ -10,6 +10,9 @@ import { Button } from "@skeletal/button/button";
  * accepts all `Button` props (`variant`, `size`, `fullWidth`, `disabled`, ...).
  * Defaults to the `secondary` variant. For destructive confirmations (e.g. the
  * "Discard" action in an Alert Dialog), pass `variant="destructive"`.
+ *
+ * Attach `onClick` to run an action before closing — e.g. a primary "Save
+ * changes" button that persists and then dismisses the dialog.
  */
 export interface DialogCloseProps
   extends ButtonProps,
