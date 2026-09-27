@@ -4,7 +4,7 @@
  * header in src/index.css. */
 @property --_cover-space {
   syntax: "<length-percentage>";
-  inherits: false;
+  inherits: true;
   initial-value: 1rem;
 }
 @property --_cover-min {

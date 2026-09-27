@@ -4,11 +4,11 @@
  * header in src/index.css. */
 @property --_sidebar-width {
   syntax: "*";
-  inherits: false;
+  inherits: true;
 }
 @property --_sidebar-content-min {
   syntax: "<length-percentage>";
-  inherits: false;
+  inherits: true;
   initial-value: 50%;
 }
 @property --_sidebar-space {
