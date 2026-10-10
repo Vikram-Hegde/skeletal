@@ -21,12 +21,12 @@
     padding-inline: var(--_center-gutters, 1rem);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: safe center;
   }
 
   .center[data-intrinsic] {
     display: grid;
-    place-items: center;
+    place-items: safe center;
   }
 
   .center[data-center-text] {

@@ -10,7 +10,7 @@
 @layer skeletal {
   .frame {
     aspect-ratio: var(--_frame-ratio, 16 / 9);
-    overflow: hidden;
+    overflow: clip;
     display: grid;
     place-items: center;
   }

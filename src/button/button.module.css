@@ -48,20 +48,28 @@
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
+    touch-action: manipulation;
     transition:
-      background-color 150ms ease-out,
-      border-color 150ms ease-out,
-      color 150ms ease-out,
-      transform 150ms ease-out;
+      background-color 150ms var(--sk-ease-out),
+      border-color 150ms var(--sk-ease-out),
+      color 150ms var(--sk-ease-out);
 
-    @media (hover: hover) {
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        background-color 150ms var(--sk-ease-out),
+        border-color 150ms var(--sk-ease-out),
+        color 150ms var(--sk-ease-out),
+        transform 160ms var(--sk-ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
       &:hover:not([data-disabled]) {
         background-color: var(--_button-hover-bg);
       }
     }
 
     &:active:not([data-disabled]) {
-      transform: translateY(0.5px);
+      transform: scale(0.97);
     }
 
     &[data-disabled],
@@ -72,7 +80,7 @@
 
     &.button--loading {
       position: relative;
-      overflow: hidden;
+      overflow: clip;
       cursor: progress;
       opacity: 0.65;
       pointer-events: auto;
@@ -115,16 +123,12 @@
         transparent 100%
       );
       background-size: 50% 100%;
-      animation: skeletal-button-progress var(--_button-progress-duration, 1.4s) linear infinite;
+      opacity: 0.4;
     }
 
     &:focus-visible {
       outline: 2px solid var(--sk-ring);
       outline-offset: 2px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
     }
   }
 
@@ -140,10 +144,10 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: no-preference) {
     .button.button--loading::after {
-      animation: none;
-      opacity: 0.4;
+      opacity: 1;
+      animation: skeletal-button-progress var(--_button-progress-duration, 1.4s) linear infinite;
     }
   }
 

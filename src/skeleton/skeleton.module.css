@@ -55,7 +55,7 @@
     grid-area: 1 / 1;
     min-inline-size: 0;
     transition:
-      opacity var(--_skeleton-transition-duration) ease-out,
+      opacity var(--_skeleton-transition-duration) var(--sk-ease-out),
       visibility var(--_skeleton-transition-duration) allow-discrete;
   }
 
@@ -148,12 +148,5 @@
   .skeleton__media-raw {
     display: block;
     opacity: 0;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .skeleton__real,
-    .skeleton__shimmer {
-      transition: none;
-    }
   }
 }

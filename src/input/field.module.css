@@ -21,13 +21,14 @@
     font-size: 0.8125rem;
     line-height: 1.25rem;
     color: var(--sk-muted-foreground);
+    text-wrap: pretty;
   }
 
   .field__error {
     font-size: 0.8125rem;
     line-height: 1.25rem;
     color: var(--sk-destructive);
-    animation: skeletal-field-error-in 150ms ease-out;
+    text-wrap: pretty;
   }
 
   @keyframes skeletal-field-error-in {
@@ -41,9 +42,9 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: no-preference) {
     .field__error {
-      animation: none;
+      animation: skeletal-field-error-in 150ms var(--sk-ease-out);
     }
   }
 }

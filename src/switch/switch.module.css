@@ -1,5 +1,6 @@
 @layer skeletal {
   .switch__root {
+    position: relative;
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
@@ -12,8 +13,8 @@
     background-color: var(--sk-background);
     cursor: pointer;
     transition:
-      background-color 150ms ease-out,
-      border-color 150ms ease-out;
+      background-color 150ms var(--sk-ease-out),
+      border-color 150ms var(--sk-ease-out);
 
     &[data-checked] {
       border-color: var(--sk-primary);
@@ -26,8 +27,10 @@
       box-shadow: 0 0 0 1px var(--sk-destructive);
     }
 
-    &[data-unchecked]:hover:not([data-disabled]) {
-      border-color: var(--sk-ring);
+    @media (hover: hover) and (pointer: fine) {
+      &[data-unchecked]:hover:not([data-disabled]) {
+        border-color: var(--sk-ring);
+      }
     }
 
     &[data-disabled] {
@@ -40,8 +43,11 @@
       outline-offset: 2px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    /* Hit area grows to 44px without changing the visual size. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: min(0px, (100% - 44px) / 2);
     }
   }
 
@@ -49,10 +55,7 @@
     inline-size: 0.875rem;
     block-size: 0.875rem;
     background-color: var(--sk-foreground);
-    transition:
-      translate 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      background-color 150ms ease-out,
-      scale 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: background-color 150ms var(--sk-ease-out);
 
     &[data-unchecked] {
       transform-origin: inline-start center;
@@ -64,8 +67,11 @@
       transform-origin: inline-end center;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        translate 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        background-color 150ms var(--sk-ease-out),
+        scale 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
     }
   }
 
@@ -73,8 +79,8 @@
      On hover the thumb stretches via scaleX toward the state it will
      move to (rubber-band anticipation). Uses scale rather than width
      so layout doesn't reflow. Origin is set per-state above so
-     hover-out doesn't snap. Respects reduced-motion. */
-  @media (hover: hover) and (pointer: fine) {
+     hover-out doesn't snap. It moves, so it is opt-in. */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
     .switch__root:not([data-disabled]):hover .switch__thumb[data-unchecked],
     .switch__root:not([data-disabled]):hover .switch__thumb[data-checked] {
       scale: 1.12 1;
@@ -83,12 +89,6 @@
     .switch__root:not([data-disabled]):active .switch__thumb[data-unchecked],
     .switch__root:not([data-disabled]):active .switch__thumb[data-checked] {
       scale: 1.22 1;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .switch__thumb {
-      transition: none;
     }
   }
 }

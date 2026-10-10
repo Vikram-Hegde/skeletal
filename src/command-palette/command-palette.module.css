@@ -6,7 +6,7 @@
     max-block-size: min(70dvb, 30rem);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: clip;
     border: 1px solid var(--sk-border);
     /* Popup rounding stays flexible: a fixed extra on top of --sk-radius, but
        the `var(--sk-radius) / var(--sk-radius)` factor collapses it to 0 when
@@ -16,9 +16,7 @@
     background-color: var(--sk-popover);
     color: var(--sk-popover-foreground);
     box-shadow: var(--sk-shadow-lg);
-    transition:
-      scale 200ms ease-out,
-      opacity 200ms ease-out;
+    transition: opacity 200ms var(--sk-ease-out);
 
     &[data-starting-style],
     &[data-ending-style] {
@@ -26,8 +24,10 @@
       opacity: 0;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 200ms var(--sk-ease-out),
+        opacity 200ms var(--sk-ease-out);
     }
 
     /* Below 48rem the palette renders as a full-width bottom sheet: pinned to
@@ -41,9 +41,7 @@
         calc(var(--sk-radius) + 0.5rem * (var(--sk-radius) / var(--sk-radius))) 0 0;
       padding-block-end: env(safe-area-inset-bottom, 0px);
       transform: translateY(0);
-      transition:
-        transform 220ms ease-out,
-        opacity 220ms ease-out;
+      transition: opacity 220ms var(--sk-ease-out);
       will-change: transform;
 
       &[data-starting-style],
@@ -53,8 +51,10 @@
         scale: 1;
       }
 
-      @media (prefers-reduced-motion: reduce) {
-        transition: none;
+      @media (prefers-reduced-motion: no-preference) {
+        transition:
+          transform 220ms var(--sk-ease-out),
+          opacity 220ms var(--sk-ease-out);
       }
     }
   }
@@ -74,7 +74,7 @@
     color: var(--sk-foreground);
     font-family: inherit;
     font-size: 0.9375rem;
-    outline: none;
+    outline: 2px solid transparent;
 
     &::placeholder {
       color: var(--sk-muted-foreground);

@@ -26,7 +26,7 @@ type SkeletonElement = ReactElement<{
 function startShimmer(element: HTMLElement | null): void {
   if (element == null || element.dataset["skeletonShimmer"] === "started") return;
   if (typeof element.animate !== "function") return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
 
   element.dataset["skeletonShimmer"] = "started";
   const rawDuration = getComputedStyle(element).getPropertyValue("--_skeleton-duration").trim();

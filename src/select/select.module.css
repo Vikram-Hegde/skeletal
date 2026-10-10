@@ -52,14 +52,13 @@
     display: inline-flex;
     flex-shrink: 0;
     color: var(--sk-muted-foreground);
-    transition: transform 150ms ease-out;
 
     &[data-popup-open] {
       transform: rotate(180deg);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition: transform 150ms var(--sk-ease-out);
     }
   }
 
@@ -72,7 +71,7 @@
     inset: 0;
     z-index: 40;
     background-color: light-dark(oklch(0 0 0 / 25%), oklch(0 0 0 / 50%));
-    transition: opacity 200ms ease-out;
+    transition: opacity 200ms var(--sk-ease-out);
 
     @supports (-webkit-touch-callout: none) {
       position: absolute;
@@ -82,15 +81,11 @@
     &[data-ending-style] {
       opacity: 0;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
   }
 
   .select__positioner {
     z-index: 50;
-    outline: none;
+    outline: 2px solid transparent;
   }
 
   .select__popup {
@@ -104,9 +99,7 @@
     color: var(--sk-popover-foreground);
     box-shadow: var(--sk-shadow-md);
     transform-origin: var(--transform-origin);
-    transition:
-      scale 150ms ease-out,
-      opacity 150ms ease-out;
+    transition: opacity 150ms var(--sk-ease-out);
 
     &[data-starting-style],
     &[data-ending-style] {
@@ -123,8 +116,10 @@
       min-inline-size: max(calc(var(--anchor-width) + 1.75rem), 13rem);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 150ms var(--sk-ease-out),
+        opacity 150ms var(--sk-ease-out);
     }
   }
 
@@ -157,7 +152,7 @@
     text-align: start;
     cursor: pointer;
     user-select: none;
-    outline: none;
+    outline: 2px solid transparent;
 
     &[data-highlighted] {
       background: var(--sk-accent);
@@ -180,9 +175,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition:
-      scale 100ms ease-out,
-      opacity 100ms ease-out;
+    transition: opacity 100ms var(--sk-ease-out);
 
     &[data-starting-style],
     &[data-ending-style] {
@@ -190,8 +183,10 @@
       opacity: 0;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 100ms var(--sk-ease-out),
+        opacity 100ms var(--sk-ease-out);
     }
   }
 

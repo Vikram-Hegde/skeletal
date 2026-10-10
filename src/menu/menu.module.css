@@ -4,7 +4,7 @@
     inset: 0;
     z-index: 40;
     background-color: light-dark(oklch(0 0 0 / 25%), oklch(0 0 0 / 50%));
-    transition: opacity 200ms ease-out;
+    transition: opacity 200ms var(--sk-ease-out);
 
     @supports (-webkit-touch-callout: none) {
       position: absolute;
@@ -14,10 +14,6 @@
     &[data-ending-style] {
       opacity: 0;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
   }
 
   .menu__portal {
@@ -26,7 +22,7 @@
 
   .menu__positioner {
     z-index: 50;
-    outline: none;
+    outline: 2px solid transparent;
     /* Base UI sets --positioner-width/height to the measured popup size.
        Use them to freeze the positioner when a shared Viewport animates
        between different trigger payloads; otherwise they resolve to the
@@ -57,9 +53,7 @@
     color: var(--sk-popover-foreground);
     box-shadow: var(--sk-shadow-md);
     transform-origin: var(--transform-origin);
-    transition:
-      scale 150ms ease-out,
-      opacity 150ms ease-out;
+    transition: opacity 150ms var(--sk-ease-out);
 
     &[data-starting-style],
     &[data-ending-style] {
@@ -67,8 +61,10 @@
       opacity: 0;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 150ms var(--sk-ease-out),
+        opacity 150ms var(--sk-ease-out);
     }
   }
 
@@ -95,7 +91,7 @@
     text-align: start;
     cursor: pointer;
     user-select: none;
-    outline: none;
+    outline: 2px solid transparent;
 
     &[data-highlighted] {
       background: var(--sk-accent);
@@ -193,7 +189,7 @@
     font-family: inherit;
     font-size: 0.875rem;
     line-height: 1.25;
-    outline: none;
+    outline: 2px solid transparent;
 
     &::placeholder {
       color: var(--sk-muted-foreground);
@@ -221,13 +217,22 @@
     color: var(--sk-muted-foreground);
     cursor: pointer;
 
-    &:hover {
-      color: var(--sk-foreground);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--sk-foreground);
+      }
     }
 
     &:focus-visible {
       outline: 2px solid var(--sk-ring);
       outline-offset: -2px;
+    }
+
+    /* Hit area grows to 44px without changing the visual size. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: min(0px, (100% - 44px) / 2);
     }
   }
 
@@ -246,7 +251,7 @@
     grid-template-columns: subgrid;
     max-block-size: min(22rem, var(--available-height));
     overflow-y: auto;
-    outline: none;
+    outline: 2px solid transparent;
     scroll-padding-block: 0.25rem;
   }
 
@@ -277,9 +282,7 @@
     align-items: center;
     justify-content: center;
     color: var(--sk-muted-foreground);
-    transition:
-      scale 100ms ease-out,
-      opacity 100ms ease-out;
+    transition: opacity 100ms var(--sk-ease-out);
 
     &[data-checked] {
       color: var(--sk-foreground);
@@ -291,8 +294,10 @@
       opacity: 0;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 100ms var(--sk-ease-out),
+        opacity 100ms var(--sk-ease-out);
     }
   }
 

@@ -21,7 +21,7 @@
 @layer skeletal {
   .scroll-area {
     position: relative;
-    overflow: hidden;
+    overflow: clip;
   }
 
   .scroll-area__viewport {
@@ -29,7 +29,7 @@
     block-size: 100%;
     overflow: scroll;
     scrollbar-width: none;
-    outline: none;
+    outline: 2px solid transparent;
   }
 
   .scroll-area__viewport::-webkit-scrollbar {
@@ -134,10 +134,6 @@
     --_scroll-area-fade-scale: 1;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    /* No animation needed — mask tracks scroll position via CSS vars. */
-  }
-
   .scroll-area__content {
     /* Keep content at natural size; Root/Viewport control clipping. */
     display: block;
@@ -150,7 +146,7 @@
     background-color: transparent;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 150ms ease-out;
+    transition: opacity 150ms var(--sk-ease-out);
     user-select: none;
     touch-action: none;
   }
@@ -194,8 +190,10 @@
     position: relative;
   }
 
-  .scroll-area__thumb:hover {
-    background-color: var(--sk-scrollbar-thumb-hover);
+  @media (hover: hover) and (pointer: fine) {
+    .scroll-area__thumb:hover {
+      background-color: var(--sk-scrollbar-thumb-hover);
+    }
   }
 
   .scroll-area__thumb[data-orientation="vertical"] {
@@ -215,11 +213,5 @@
     inline-size: var(--scroll-area-corner-width);
     block-size: var(--scroll-area-corner-height);
     background-color: transparent;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-area__scrollbar {
-      transition: none;
-    }
   }
 }

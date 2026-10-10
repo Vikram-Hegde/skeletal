@@ -26,11 +26,13 @@
     color: var(--sk-primary-foreground);
     cursor: pointer;
     transition:
-      background-color 100ms ease-out,
-      border-color 100ms ease-out;
+      background-color 100ms var(--sk-ease-out),
+      border-color 100ms var(--sk-ease-out);
 
-    &[data-unchecked]:hover:not([data-disabled]) {
-      border-color: var(--sk-ring);
+    @media (hover: hover) and (pointer: fine) {
+      &[data-unchecked]:hover:not([data-disabled]) {
+        border-color: var(--sk-ring);
+      }
     }
 
     &[data-checked] {
@@ -54,8 +56,11 @@
       outline-offset: 2px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    /* Hit area grows to 44px without changing the visual size. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: min(0px, (100% - 44px) / 2);
     }
   }
 
@@ -82,8 +87,10 @@
       opacity: 0;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 160ms cubic-bezier(0.2, 0.7, 0.3, 1),
+        opacity 140ms var(--sk-ease-out);
     }
   }
 }

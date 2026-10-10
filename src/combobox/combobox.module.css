@@ -50,8 +50,8 @@
     color: var(--sk-foreground);
     cursor: text;
     transition:
-      border-color 150ms ease-out,
-      box-shadow 150ms ease-out;
+      border-color 150ms var(--sk-ease-out),
+      box-shadow 150ms var(--sk-ease-out);
 
     /* Ring on keyboard-driven focus only: text inputs always match
        `:focus-visible` (even pointer-focused), while the embedded Clear /
@@ -72,10 +72,6 @@
     &[data-invalid] {
       border-color: var(--sk-destructive);
       box-shadow: 0 0 0 1px var(--sk-destructive);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
     }
 
     /* The trigger and clear are composed from `Button`; shrink them into
@@ -150,7 +146,7 @@
     font-family: inherit;
     font-size: 0.875rem;
     line-height: 1.25;
-    outline: none;
+    outline: 2px solid transparent;
 
     &::placeholder {
       color: var(--sk-muted-foreground);
@@ -166,10 +162,9 @@
     align-items: center;
     justify-content: center;
     color: var(--sk-muted-foreground);
-    transition: transform 150ms ease-out;
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition: transform 150ms var(--sk-ease-out);
     }
   }
 
@@ -199,7 +194,7 @@
     line-height: 1.25;
     cursor: default;
     user-select: none;
-    outline: none;
+    outline: 2px solid transparent;
 
     &[data-disabled] {
       opacity: 0.5;
@@ -212,6 +207,7 @@
   }
 
   .combobox__chip-remove {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -224,14 +220,19 @@
     color: inherit;
     cursor: pointer;
     opacity: 0.7;
-    transition: opacity 100ms ease-out;
+    transition: opacity 100ms var(--sk-ease-out);
 
-    &:hover {
-      opacity: 1;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        opacity: 1;
+      }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    /* Hit area grows to 44px without changing the visual size. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: min(0px, (100% - 44px) / 2);
     }
   }
 
@@ -244,7 +245,7 @@
     inset: 0;
     z-index: 40;
     background-color: light-dark(oklch(0 0 0 / 25%), oklch(0 0 0 / 50%));
-    transition: opacity 200ms ease-out;
+    transition: opacity 200ms var(--sk-ease-out);
 
     @supports (-webkit-touch-callout: none) {
       position: absolute;
@@ -254,15 +255,11 @@
     &[data-ending-style] {
       opacity: 0;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
   }
 
   .combobox__positioner {
     z-index: 50;
-    outline: none;
+    outline: 2px solid transparent;
   }
 
   .combobox__popup {
@@ -276,9 +273,7 @@
     color: var(--sk-popover-foreground);
     box-shadow: var(--sk-shadow-md);
     transform-origin: var(--transform-origin);
-    transition:
-      scale 150ms ease-out,
-      opacity 150ms ease-out;
+    transition: opacity 150ms var(--sk-ease-out);
 
     &[data-starting-style],
     &[data-ending-style] {
@@ -286,8 +281,10 @@
       opacity: 0;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 150ms var(--sk-ease-out),
+        opacity 150ms var(--sk-ease-out);
     }
   }
 
@@ -307,7 +304,7 @@
     overflow-block: auto;
     overscroll-behavior: contain;
     scroll-padding-block: 0.25rem;
-    outline: 0;
+    outline: 2px solid transparent;
   }
 
   .combobox__item {
@@ -331,7 +328,7 @@
     text-align: start;
     cursor: pointer;
     user-select: none;
-    outline: none;
+    outline: 2px solid transparent;
 
     &[data-highlighted] {
       background: var(--sk-accent);
@@ -365,9 +362,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition:
-      scale 100ms ease-out,
-      opacity 100ms ease-out;
+    transition: opacity 100ms var(--sk-ease-out);
 
     &[data-starting-style],
     &[data-ending-style] {
@@ -375,8 +370,10 @@
       opacity: 0;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 100ms var(--sk-ease-out),
+        opacity 100ms var(--sk-ease-out);
     }
   }
 

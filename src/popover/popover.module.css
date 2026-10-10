@@ -8,7 +8,7 @@
     inset: 0;
     z-index: 40;
     background-color: light-dark(oklch(0 0 0 / 25%), oklch(0 0 0 / 50%));
-    transition: opacity 200ms ease-out;
+    transition: opacity 200ms var(--sk-ease-out);
 
     @supports (-webkit-touch-callout: none) {
       position: absolute;
@@ -18,15 +18,11 @@
     &[data-ending-style] {
       opacity: 0;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
   }
 
   .popover__positioner {
     z-index: 50;
-    outline: none;
+    outline: 2px solid transparent;
     /* Freeze to measured size when Viewport animates (shared popups). */
     inline-size: var(--positioner-width);
     block-size: var(--positioner-height);
@@ -51,10 +47,8 @@
     color: var(--sk-popover-foreground);
     box-shadow: var(--sk-shadow-md);
     transform-origin: var(--transform-origin);
-    outline: none;
-    transition:
-      scale 150ms ease-out,
-      opacity 150ms ease-out;
+    outline: 2px solid transparent;
+    transition: opacity 150ms var(--sk-ease-out);
 
     &[data-starting-style],
     &[data-ending-style] {
@@ -66,8 +60,10 @@
       transition: none;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        scale 150ms var(--sk-ease-out),
+        opacity 150ms var(--sk-ease-out);
     }
   }
 
@@ -77,6 +73,7 @@
     font-weight: 600;
     line-height: 1.4;
     color: var(--sk-foreground);
+    text-wrap: balance;
   }
 
   .popover__description {
@@ -84,6 +81,7 @@
     font-size: 0.875rem;
     line-height: 1.5;
     color: var(--sk-muted-foreground);
+    text-wrap: pretty;
   }
 
   .popover__arrow {

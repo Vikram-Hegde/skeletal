@@ -29,9 +29,9 @@
     font-weight: 400;
     line-height: 1.25rem;
     transition:
-      border-color 150ms ease-out,
-      box-shadow 150ms ease-out,
-      background-color 150ms ease-out;
+      border-color 150ms var(--sk-ease-out),
+      box-shadow 150ms var(--sk-ease-out),
+      background-color 150ms var(--sk-ease-out);
 
     &::placeholder {
       color: var(--sk-muted-foreground);
@@ -42,15 +42,17 @@
       line-height: 1.5rem;
     }
 
-    &:hover:not([data-disabled]):not([data-invalid]) {
-      border-color: var(--_input-hover-border, var(--sk-ring));
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not([data-disabled]):not([data-invalid]) {
+        border-color: var(--_input-hover-border, var(--sk-ring));
+      }
     }
 
     /* When wrapped in Field, Base UI sets these data attributes. */
     &[data-focused]:not([data-invalid]) {
       border-color: var(--sk-ring);
       box-shadow: 0 0 0 1px var(--sk-ring);
-      outline: none;
+      outline: 2px solid transparent;
     }
 
     &[data-invalid] {
@@ -68,10 +70,6 @@
     &:focus-visible {
       outline: 2px solid var(--sk-ring);
       outline-offset: 1px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
     }
   }
 
