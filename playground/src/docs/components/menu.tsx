@@ -1,4 +1,4 @@
-import { Check, Trash } from "@phosphor-icons/react";
+import { Check, Trash, X } from "@phosphor-icons/react";
 import { Icon, Menu } from "@skeletal";
 import { useState } from "react";
 import type { Doc } from "@/docs/types";
@@ -122,6 +122,37 @@ function CheckboxMenu() {
   );
 }
 
+const FILTER_ACTIONS = ["New file", "Open file", "Save", "Save as", "Duplicate", "Rename"];
+
+function FilterMenu() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Menu.FilterProvider>
+      <Menu.Root open={open} onOpenChange={setOpen}>
+        <Menu.Trigger variant="outline">Actions</Menu.Trigger>
+        <Menu.Portal>
+          <Menu.Positioner sideOffset={8} align="start">
+            <Menu.Popup>
+              <Menu.Input aria-label="Filter actions" placeholder="Filter actions" />
+              <Menu.Clear aria-label="Clear filter">
+                <Icon name={X} size={14} />
+              </Menu.Clear>
+              <Menu.Empty>No actions found.</Menu.Empty>
+              <Menu.List>
+                {FILTER_ACTIONS.map((action) => (
+                  <Menu.Item key={action} onClick={() => setOpen(false)}>
+                    {action}
+                  </Menu.Item>
+                ))}
+              </Menu.List>
+            </Menu.Popup>
+          </Menu.Positioner>
+        </Menu.Portal>
+      </Menu.Root>
+    </Menu.FilterProvider>
+  );
+}
+
 export const menuDoc: Doc = {
   id: "menu",
   group: "Components",
@@ -203,6 +234,31 @@ export const menuDoc: Doc = {
 </Menu.Group>`,
       demo: <CheckboxMenu />,
     },
+    {
+      title: "Filterable",
+      code: `<Menu.FilterProvider>
+  <Menu.Root>
+    <Menu.Trigger>Actions</Menu.Trigger>
+    <Menu.Portal>
+      <Menu.Positioner sideOffset={8} align="start">
+        <Menu.Popup>
+          <Menu.Input aria-label="Filter actions" placeholder="Filter actions" />
+          <Menu.Clear aria-label="Clear filter">
+            <Icon name={X} size={14} />
+          </Menu.Clear>
+          <Menu.Empty>No actions found.</Menu.Empty>
+          <Menu.List>
+            <Menu.Item>New file</Menu.Item>
+            <Menu.Item>Open file</Menu.Item>
+            <Menu.Item>Save</Menu.Item>
+          </Menu.List>
+        </Menu.Popup>
+      </Menu.Positioner>
+    </Menu.Portal>
+  </Menu.Root>
+</Menu.FilterProvider>`,
+      demo: <FilterMenu />,
+    },
   ],
   props: [
     {
@@ -246,6 +302,18 @@ export const menuDoc: Doc = {
       type: "boolean",
       default: "false",
       description: "Destructive styling for irreversible actions.",
+    },
+    {
+      name: "FilterProvider.filter",
+      type: "(text, query) => boolean | null",
+      default: "case- and accent-insensitive contains",
+      description: "Matches items against the filter query. Pass null to filter items yourself.",
+    },
+    {
+      name: "FilterProvider.autoHighlight",
+      type: "boolean | 'always'",
+      default: "false",
+      description: "Highlight the first matching item while the query is non-empty ('always' also when empty).",
     },
     {
       name: "Item.closeOnClick",

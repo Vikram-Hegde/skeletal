@@ -2,6 +2,11 @@ import { MenuArrow } from "./menu-arrow";
 import { MenuBackdrop } from "./menu-backdrop";
 import { MenuCheckboxItem } from "./menu-checkbox-item";
 import { MenuCheckboxItemIndicator } from "./menu-checkbox-item-indicator";
+import { MenuClear } from "./menu-clear";
+import { MenuEmpty } from "./menu-empty";
+import { MenuFilterProvider } from "./menu-filter-provider";
+import { MenuInput } from "./menu-input";
+import { MenuList } from "./menu-list";
 import { MenuGroup } from "./menu-group";
 import { MenuGroupLabel } from "./menu-group-label";
 import { MenuItem } from "./menu-item";
@@ -70,12 +75,22 @@ export const Menu = {
   CheckboxItemIndicator: MenuCheckboxItemIndicator,
   Arrow: MenuArrow,
   Viewport: MenuViewport,
+  FilterProvider: MenuFilterProvider,
+  Input: MenuInput,
+  Clear: MenuClear,
+  Empty: MenuEmpty,
+  List: MenuList,
 };
 
 export type { MenuArrowProps } from "./menu-arrow";
 export type { MenuBackdropProps } from "./menu-backdrop";
 export type { MenuCheckboxItemProps } from "./menu-checkbox-item";
 export type { MenuCheckboxItemIndicatorProps } from "./menu-checkbox-item-indicator";
+export type { MenuClearProps } from "./menu-clear";
+export type { MenuEmptyProps } from "./menu-empty";
+export type { MenuFilterProviderProps } from "./menu-filter-provider";
+export type { MenuInputProps } from "./menu-input";
+export type { MenuListProps } from "./menu-list";
 export type { MenuGroupProps } from "./menu-group";
 export type { MenuGroupLabelProps } from "./menu-group-label";
 export type { MenuItemProps } from "./menu-item";
