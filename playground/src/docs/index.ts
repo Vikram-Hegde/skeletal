@@ -2,6 +2,7 @@ import { alertDialogDoc } from "@/docs/components/alert-dialog";
 import { badgeDoc } from "@/docs/components/badge";
 import { buttonDoc } from "@/docs/components/button";
 import { checkboxDoc } from "@/docs/components/checkbox";
+import { collapsibleDoc } from "@/docs/components/collapsible";
 import { comboboxDoc } from "@/docs/components/combobox";
 import { commandPaletteDoc } from "@/docs/components/command-palette";
 import { dialogDoc } from "@/docs/components/dialog";
@@ -40,6 +41,7 @@ const RAW_DOCS: [Doc, ...Doc[]] = [
   dialogDoc,
   drawerDoc,
   alertDialogDoc,
+  collapsibleDoc,
   comboboxDoc,
   commandPaletteDoc,
   menuDoc,

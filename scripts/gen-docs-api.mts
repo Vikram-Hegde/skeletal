@@ -49,6 +49,7 @@ const REGISTRY: Record<string, { file: string; interface: string }> = {
   tooltip: { file: "src/tooltip/tooltip-root.tsx", interface: "TooltipProps" },
   popover: { file: "src/popover/popover-root.tsx", interface: "PopoverProps" },
   checkbox: { file: "src/checkbox/checkbox-root.tsx", interface: "CheckboxProps" },
+  collapsible: { file: "src/collapsible/collapsible-root.tsx", interface: "CollapsibleProps" },
   radio: { file: "src/radio/radio-root.tsx", interface: "RadioProps" },
   switch: { file: "src/switch/switch-root.tsx", interface: "SwitchProps" },
   "scroll-area": { file: "src/scroll-area/scroll-area-viewport.tsx", interface: "ScrollAreaViewportProps" },

@@ -13,6 +13,12 @@ export type {
 } from "@skeletal/checkbox";
 export { Checkbox } from "@skeletal/checkbox";
 export type {
+  CollapsiblePanelProps,
+  CollapsibleProps,
+  CollapsibleTriggerProps,
+} from "@skeletal/collapsible";
+export { Collapsible } from "@skeletal/collapsible";
+export type {
   ComboboxArrowProps,
   ComboboxBackdropProps,
   ComboboxChipProps,

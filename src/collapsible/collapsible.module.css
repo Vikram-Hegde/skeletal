@@ -1,0 +1,41 @@
+@layer skeletal {
+  .collapsible__trigger {
+    &[data-panel-open] > .collapsible__indicator {
+      transform: translateY(25%) rotate(-135deg);
+    }
+  }
+
+  .collapsible__indicator {
+    flex-shrink: 0;
+    margin-inline-start: auto;
+    inline-size: 0.4375rem;
+    block-size: 0.4375rem;
+    border-block-end: 1.5px solid currentColor;
+    border-inline-end: 1.5px solid currentColor;
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform 150ms ease-out;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .collapsible__panel {
+    overflow: hidden;
+    block-size: var(--collapsible-panel-height);
+    transition: block-size 150ms ease-out;
+
+    &[hidden]:not([hidden="until-found"]) {
+      display: none;
+    }
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      block-size: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
