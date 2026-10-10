@@ -50,8 +50,8 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "@vitest/browser-playwright": "^4.1.10",
-    "playwright": "1.62.1",
     "bumpp": "^11.1.0",
+    "playwright": "1.62.1",
     "rangi": "^2.2.0",
     "tsdown": "^0.22.5",
     "tsx": "^4.19.0",
@@ -62,7 +62,7 @@
     "vitest-browser-react": "^2.2.0"
   },
   "dependencies": {
-    "@base-ui/react": "^1.8.0",
+    "@base-ui/react": "^1.9.0",
     "clsx": "^2.1.1"
   },
   "packageManager": "pnpm@11.17.0",
